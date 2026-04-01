@@ -1,0 +1,68 @@
+
+PUPA QUIZ + GOOGLE SHEETS SETUP
+
+1) Create the Google Sheet
+- Open Google Sheets.
+- Create a brand new spreadsheet.
+- Name it something like: Pupa Quiz Database.
+
+2) Open Apps Script
+- In that sheet, click Extensions > Apps Script.
+- Delete any starter code in Code.gs.
+- Paste in the full code from the file: pupa_google_apps_script.gs
+- Click Save.
+
+3) Deploy the script as a web app
+- Click Deploy > New deployment.
+- For Select type, choose Web app.
+- Description: Pupa quiz logger.
+- Execute as: Me.
+- Who has access: Anyone.
+- Click Deploy.
+- Authorize the script when Google asks.
+- Copy the Web app URL after deployment.
+
+4) Paste the Web app URL into the HTML
+- Open the HTML file.
+- Find this line:
+  const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwEOXIx2KLubsPjsGVHDvsMhYC8SgNLzTsNff3hHJ64vJECzrLKg9uKvw7NPQ_ldLwJ/exec';
+- Replace the placeholder text with your real deployed Web app URL.
+- Save the HTML.
+
+5) Upload/paste the HTML into your site
+- Replace your current embed with the new HTML.
+- Publish/update your site.
+
+6) Test the full flow
+- Open the quiz page.
+- Start Quiz 1.
+- Complete it.
+- Enter an email.
+- Choose whether to take the second quiz.
+- Answer the referral question.
+- Click the Pupa button.
+- Go back to your Google Sheet and confirm:
+  - The Quiz_Log tab was created automatically.
+  - The Summary tab was created automatically.
+  - New rows are being appended.
+
+7) What gets logged
+- quiz_started
+- email_captured
+- quiz_completed
+- next_quiz_clicked
+- next_quiz_skipped
+- exit_feedback
+- website_click
+- website_declined
+
+8) If you edit the Apps Script later
+- Open Apps Script.
+- Click Deploy > Manage deployments.
+- Edit the web app deployment.
+- Deploy the new version.
+- Keep using the latest Web app URL if Google gives you a new one.
+
+9) Important note
+- Logging only starts after you paste the deployed Web app URL into the HTML.
+- If you leave the placeholder in place, the quiz still works, but Google Sheets logging stays off.
