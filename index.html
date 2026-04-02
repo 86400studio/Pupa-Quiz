@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -318,6 +319,14 @@
     inset:0;
     background:linear-gradient(180deg, rgba(15,23,42,.08) 0%, rgba(15,23,42,.24) 100%);
     pointer-events:none;
+  }
+
+  .landing-main-title{
+    font-size:clamp(2rem, 4.4vw, 3.2rem);
+    line-height:1.08;
+    letter-spacing:-.04em;
+    margin:0 0 18px;
+    max-width:30ch;
   }
 
   .panel h2{
@@ -646,23 +655,23 @@
 <div class="pupa-wrap">
   <div class="pupa-shell">
 
-    <section id="screen-hub" class="screen active" aria-label="Pupa quiz hub">
+    <section id="screen-hub" class="screen" aria-label="Pupa quiz hub">
       <div class="hub-head">
         <div class="brand-row">
           <img src="https://static.wixstatic.com/shapes/d1daaa_70d588d61ad94dafb9274c7e8af7178c.svg" alt="Pupa" />
         </div>
-        <h1 class="hub-title">Answer 5 quick questions and we&rsquo;ll tell you something surprisingly accurate about yourself.</h1>
+        <h1 class="hub-title">Answer 10 quick questions and we&rsquo;ll tell you something surprisingly accurate about yourself.</h1>
       </div>
       <div id="quizGrid" class="card-grid"></div>
     </section>
 
-    <section id="screen-flow" class="screen" aria-label="Quiz flow">
+    <section id="screen-flow" class="screen active" aria-label="Quiz flow">
       <div class="progress-wrap">
         <div class="progress"><div id="progressBar" class="bar"></div></div>
       </div>
 
       <div class="flow-wrap">
-        <div class="flow-top">
+        <div class="flow-top hidden">
           <button id="backToHubBtn" class="back-btn" type="button">&larr; Back to quizzes</button>
         </div>
 
@@ -726,6 +735,8 @@
   const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwEOXIx2KLubsPjsGVHDvsMhYC8SgNLzTsNff3hHJ64vJECzrLKg9uKvw7NPQ_ldLwJ/exec';
   const PUPA_WEBSITE_QUIZ_URL = 'https://www.letspupa.com/quiz';
   const MAILCHIMP_POST_JSON_URL = 'https://thefalafeltheory.us22.list-manage.com/subscribe/post-json?u=44c6260e44554e7b992e09185&id=083452c971';
+  const ENTRY_QUIZ_ID = 'career-animal';
+  const LANDING_TITLE = 'Answer 10 quick questions and we’ll tell you something surprisingly accurate about yourself.';
   const QUIZZES = [
   {
     "id": "career-animal",
@@ -1238,10 +1249,7 @@
   }
 
   function showHub() {
-    hideFlowPanels();
-    screenFlow.classList.remove('active');
-    screenHub.classList.add('active');
-    progressBar.style.width = '0%';
+    openQuiz(ENTRY_QUIZ_ID);
   }
 
   function showFlow() {
@@ -1324,7 +1332,9 @@
     hideFlowPanels();
     screenIntro.classList.remove('hidden');
     progressBar.style.width = '0%';
+    const showLandingTitle = currentQuiz && currentQuiz.id === ENTRY_QUIZ_ID;
     screenIntro.innerHTML = '' +
+      (showLandingTitle ? '<h1 class="landing-main-title">' + escapeHTML(LANDING_TITLE) + '</h1>' : '') +
       '<div class="quiz-hero">' +
         '<img src="' + escapeHTML(currentQuiz.image) + '" alt="' + escapeHTML(currentQuiz.title) + ' hero image" />' +
       '</div>' +
@@ -1863,7 +1873,7 @@
     showHub();
   });
 
-  renderHub();
+  openQuiz(ENTRY_QUIZ_ID);
 })();
 </script>
 </body>
