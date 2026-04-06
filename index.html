@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pupa Quiz Hub</title>
+<title>Pupa Quiz Funnel</title>
 <style>
   :root{
     --navy:#000080;
@@ -34,12 +34,18 @@
     color:var(--text);
     font-family:var(--font);
     font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
   }
 
   *{ box-sizing:border-box; }
 
+  body{
+    min-height:100vh;
+  }
+
   .pupa-wrap{
-    max-width:980px;
+    max-width:880px;
     margin:0 auto;
     padding:18px;
   }
@@ -54,185 +60,7 @@
 
   .screen{ display:none; }
   .screen.active{ display:block; }
-
-  .hub-head{
-    padding:22px 22px 10px;
-  }
-
-  .brand-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:14px;
-  }
-
-  .brand-row img{
-    height:22px;
-    width:auto;
-    display:block;
-  }
-
-  .hub-title{
-    font-size:clamp(1.9rem, 4vw, 2.9rem);
-    line-height:1.08;
-    letter-spacing:-.04em;
-    margin:0;
-    max-width:24ch;
-  }
-
-  .hub-sub{
-    margin:8px 0 0;
-    color:var(--muted);
-    line-height:1.55;
-    max-width:52ch;
-    font-size:15px;
-  }
-
-  .card-grid{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:16px;
-    padding:14px 22px 22px;
-  }
-
-  .hub-card{
-    appearance:none;
-    width:100%;
-    padding:0;
-    border:1px solid var(--line);
-    background:#fff;
-    border-radius:24px;
-    overflow:hidden;
-    box-shadow:var(--shadow-card);
-    cursor:pointer;
-    text-align:left;
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    display:flex;
-    flex-direction:column;
-    min-height:390px;
-  }
-
-  .hub-card:hover,
-  .hub-card:focus-visible{
-    transform:translateY(-2px);
-    box-shadow:0 16px 34px rgba(15,23,42,.12);
-    border-color:#d8dcf0;
-    outline:none;
-  }
-
-  .hub-card-media{
-    position:relative;
-    min-height:240px;
-    flex:0 0 240px;
-    overflow:hidden;
-    background:#f3f5ff;
-  }
-
-  .hub-card-media img{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-    object-position:center;
-  }
-
-  .hub-card-media::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(180deg, rgba(15,23,42,.02) 0%, rgba(15,23,42,.18) 100%);
-    pointer-events:none;
-  }
-
-  .hub-card-chip{
-    position:absolute;
-    top:14px;
-    left:14px;
-    z-index:1;
-    display:inline-flex;
-    align-items:center;
-    padding:8px 12px;
-    border-radius:999px;
-    background:rgba(255,255,255,.88);
-    color:var(--text);
-    font-size:12px;
-    font-weight:800;
-    backdrop-filter:blur(8px);
-    box-shadow:0 8px 18px rgba(15,23,42,.08);
-  }
-
-  .hub-card-body{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    padding:16px;
-    flex:1 1 auto;
-  }
-
-  .hub-card-meta{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
-  .hub-card-number,
-  .hub-card-time{
-    font-size:12px;
-    line-height:1;
-    font-weight:800;
-    color:var(--muted);
-  }
-
-  .hub-card-copy{
-    min-height:76px;
-  }
-
-  .hub-card-title{
-    font-size:20px;
-    line-height:1.1;
-    letter-spacing:-.03em;
-    font-weight:800;
-    margin:0 0 6px;
-    color:var(--text);
-  }
-
-  .hub-card-sub{
-    margin:0;
-    font-size:14px;
-    line-height:1.5;
-    color:var(--muted);
-  }
-
-  .hub-card-foot{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-top:auto;
-  }
-
-  .hub-card-note{
-    font-size:12px;
-    line-height:1.4;
-    color:var(--muted);
-  }
-
-  .hub-card-cta{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-height:42px;
-    padding:0 16px;
-    border-radius:999px;
-    background:linear-gradient(135deg, var(--primary) 0%, var(--navy) 100%);
-    color:#fff;
-    font-size:13px;
-    font-weight:800;
-    white-space:nowrap;
-    box-shadow:0 12px 24px rgba(108,99,254,.18);
-  }
+  .hidden{ display:none !important; }
 
   .progress-wrap{
     padding:18px 22px 0;
@@ -253,39 +81,22 @@
   }
 
   .flow-wrap{
-    max-width:760px;
+    max-width:720px;
     margin:0 auto;
-    padding:18px 22px 24px;
+    padding:18px 22px 28px;
   }
 
-  .flow-top{
+  .brand-row{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:12px;
-    margin-bottom:12px;
-    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:14px;
   }
 
-  .back-btn{
-    appearance:none;
-    border:none;
-    background:transparent;
-    color:var(--muted);
-    font-weight:700;
-    padding:0;
-    cursor:pointer;
-  }
-
-  .pill{
-    display:inline-flex;
-    align-items:center;
-    padding:8px 12px;
-    border-radius:999px;
-    background:var(--soft);
-    color:var(--navy);
-    font-size:12px;
-    font-weight:700;
+  .brand-row img{
+    height:22px;
+    width:auto;
+    display:block;
   }
 
   .quiz-hero{
@@ -301,7 +112,7 @@
   .quiz-hero::before{
     content:"";
     display:block;
-    padding-top:46%;
+    padding-top:50%;
   }
 
   .quiz-hero img{
@@ -317,37 +128,60 @@
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, rgba(15,23,42,.08) 0%, rgba(15,23,42,.24) 100%);
+    background:linear-gradient(180deg, rgba(15,23,42,.06) 0%, rgba(15,23,42,.24) 100%);
     pointer-events:none;
   }
 
-  .landing-main-title{
-    font-size:clamp(2rem, 4.4vw, 3.2rem);
-    line-height:1.08;
-    letter-spacing:-.04em;
-    margin:0 0 18px;
-    max-width:30ch;
-  }
-
-  .panel h2{
-    font-size:clamp(1.9rem, 4vw, 2.9rem);
-    line-height:1.03;
+  .landing-main-title,
+  .panel h1,
+  .panel h2,
+  .result-title,
+  .cta-title{
+    font-size:clamp(2rem, 4.2vw, 3rem);
+    line-height:1.05;
     letter-spacing:-.04em;
     margin:0;
-    max-width:16ch;
+    max-width:18ch;
   }
 
-  .panel p{
+  .panel p,
+  .result-sub,
+  .cta-sub{
     margin:10px 0 0;
     color:var(--muted);
     line-height:1.6;
     font-size:15px;
-    max-width:60ch;
+    max-width:56ch;
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 12px;
+    border-radius:999px;
+    background:var(--soft);
+    color:var(--navy);
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:12px;
+  }
+
+  .intro-stack,
+  .result-stack{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .intro-copy{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
   }
 
   .field{
     width:100%;
-    min-height:50px;
+    min-height:52px;
     padding:14px 16px;
     border:1px solid var(--line);
     border-radius:16px;
@@ -366,8 +200,8 @@
   .inline-row{
     display:flex;
     gap:12px;
-    margin-top:18px;
     align-items:center;
+    margin-top:8px;
   }
 
   .grow{ flex:1; }
@@ -377,7 +211,7 @@
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    min-height:50px;
+    min-height:52px;
     padding:14px 18px;
     border-radius:14px;
     border:1px solid transparent;
@@ -387,6 +221,7 @@
     text-align:center;
     white-space:nowrap;
     text-decoration:none;
+    font-size:15px;
   }
 
   .btn.primary{
@@ -406,9 +241,78 @@
 
   .btn.secondary:hover{ background:var(--soft); }
 
+  .btn.ghost{
+    background:transparent;
+    color:var(--muted);
+    border-color:transparent;
+    box-shadow:none;
+  }
+
   .btn:disabled{
     opacity:.55;
     cursor:not-allowed;
+  }
+
+  .question-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:12px;
+  }
+
+  .back-btn{
+    appearance:none;
+    border:none;
+    background:transparent;
+    color:var(--muted);
+    font-weight:700;
+    padding:0;
+    cursor:pointer;
+  }
+
+  .q-title{
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    line-height:1.08;
+    letter-spacing:-.04em;
+    margin:8px 0 0;
+    max-width:16ch;
+  }
+
+  .question-media,
+  .result-media{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:#f5f7ff;
+  }
+
+  .question-media{
+    margin-top:16px;
+  }
+
+  .result-media{
+    margin:14px 0 0;
+  }
+
+  .question-media::before,
+  .result-media::before{
+    content:"";
+    display:block;
+    padding-top:58%;
+  }
+
+  .question-media img,
+  .result-media img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
   }
 
   .choices{
@@ -420,18 +324,21 @@
   .option{
     display:flex;
     gap:12px;
-    align-items:flex-start;
+    align-items:center;
     padding:16px;
     border:1.5px solid var(--line);
     border-radius:18px;
     background:#fff;
     cursor:pointer;
     transition:.18s ease;
+    text-align:left;
   }
 
-  .option:hover{
+  .option:hover,
+  .option:focus-visible{
     border-color:#cfd5ea;
     background:#fcfcff;
+    outline:none;
   }
 
   .option.selected{
@@ -444,7 +351,6 @@
     height:18px;
     border:1.8px solid #cfd5ea;
     border-radius:50%;
-    margin-top:2px;
     flex:0 0 auto;
     position:relative;
     background:#fff;
@@ -463,9 +369,9 @@
   }
 
   .option-copy{
-    font-size:15px;
-    font-weight:700;
-    line-height:1.45;
+    font-size:16px;
+    font-weight:800;
+    line-height:1.35;
   }
 
   .question-actions{
@@ -474,6 +380,31 @@
     gap:12px;
     margin-top:16px;
     align-items:center;
+  }
+
+  .email-card,
+  .result-card,
+  .cta-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:18px;
+    box-shadow:var(--shadow-card);
+  }
+
+  #resultActionArea{
+    margin-top:18px;
+  }
+
+  .email-eyebrow,
+  .result-eyebrow,
+  .cta-eyebrow{
+    font-size:12px;
+    font-weight:800;
+    color:var(--navy);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-bottom:10px;
   }
 
   .consent{
@@ -512,78 +443,55 @@
 
   .muted{ color:var(--muted); }
 
-  .result-title{
-    font-size:clamp(2rem, 4vw, 2.9rem);
-    font-weight:800;
-    line-height:1.06;
-    letter-spacing:-.04em;
-    margin:12px 0 6px;
+  .result-sub{
+    margin-top:8px;
   }
 
-  .result-block{
-    background:#fff;
-    border:1px solid var(--line);
-    border-left:4px solid var(--primary);
-    padding:14px 16px;
-    border-radius:14px;
-    margin:12px 0;
-    line-height:1.6;
-    color:var(--text);
-  }
-
-  .result-block strong{ color:#0b1732; }
-
-  .followup-card{
-    background:var(--soft);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:18px;
+  .result-lines{
+    display:grid;
+    gap:10px;
     margin-top:18px;
   }
 
-  .followup-card h3{
-    margin:0;
-    font-size:1.2rem;
-    line-height:1.3;
-    letter-spacing:-.02em;
-  }
-
-  .followup-card p{
-    margin:8px 0 0;
-    font-size:14px;
-  }
-
-  .choice-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:14px;
-  }
-
-  .choice-chip{
-    appearance:none;
+  .result-line{
+    padding:14px 16px;
     border:1px solid var(--line);
+    border-radius:16px;
     background:#fff;
-    color:var(--text);
-    border-radius:999px;
-    padding:12px 16px;
-    font-weight:800;
-    cursor:pointer;
-    transition:.18s ease;
+    font-size:16px;
+    font-weight:700;
+    line-height:1.45;
   }
 
-  .choice-chip:hover,
-  .choice-chip.active{
-    border-color:var(--primary);
+  .result-line.emphasis{
+    background:var(--soft);
+    border-color:#d9ddfb;
+  }
+
+  .blend-grid{
+    display:grid;
+    gap:14px;
+    margin-top:18px;
+  }
+
+  .blend-card{
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:16px;
     background:#fff;
-    box-shadow:0 0 0 4px var(--ring);
+  }
+
+  .blend-title{
+    font-size:1.15rem;
+    font-weight:800;
+    margin:0 0 8px;
   }
 
   .dual-actions{
     display:flex;
     flex-wrap:wrap;
     gap:12px;
-    margin-top:16px;
+    margin-top:18px;
   }
 
   .tiny-note{
@@ -592,19 +500,11 @@
     color:var(--muted);
   }
 
-  .hidden{ display:none !important; }
-
   @media (max-width:720px){
     .pupa-wrap{
       padding:12px;
     }
 
-    .card-grid{
-      grid-template-columns:1fr;
-      padding:12px 16px 18px;
-    }
-
-    .hub-head,
     .progress-wrap,
     .flow-wrap{
       padding-left:16px;
@@ -613,40 +513,32 @@
 
     .inline-row,
     .question-actions,
-    .hub-card-foot,
     .dual-actions{
       flex-direction:column;
       align-items:stretch;
     }
 
-    .btn,
-    .hub-card-cta,
-    .choice-chip{
+    .btn{
       width:100%;
       justify-content:center;
     }
 
-    .hub-card{
-      min-height:unset;
-    }
-
-    .hub-card-media{
-      min-height:260px;
-      flex-basis:260px;
-    }
-
-    .hub-card-copy{
-      min-height:auto;
-    }
-
-    .hub-title,
+    .landing-main-title,
+    .panel h1,
     .panel h2,
-    .result-title{
+    .result-title,
+    .cta-title,
+    .q-title{
       max-width:none;
     }
 
     .quiz-hero::before{
-      padding-top:58%;
+      padding-top:64%;
+    }
+
+    .question-media::before,
+    .result-media::before{
+      padding-top:66%;
     }
   }
 </style>
@@ -654,55 +546,49 @@
 <body>
 <div class="pupa-wrap">
   <div class="pupa-shell">
-
-    <section id="screen-hub" class="screen" aria-label="Pupa quiz hub">
-      <div class="hub-head">
-        <div class="brand-row">
-          <img src="https://static.wixstatic.com/shapes/d1daaa_70d588d61ad94dafb9274c7e8af7178c.svg" alt="Pupa" />
-        </div>
-        <h1 class="hub-title">Answer 10 quick questions and we&rsquo;ll tell you something surprisingly accurate about yourself.</h1>
-      </div>
-      <div id="quizGrid" class="card-grid"></div>
-    </section>
-
-    <section id="screen-flow" class="screen active" aria-label="Quiz flow">
+    <section id="screen-flow" class="screen active" aria-label="Pupa quiz flow">
       <div class="progress-wrap">
         <div class="progress"><div id="progressBar" class="bar"></div></div>
       </div>
 
       <div class="flow-wrap">
-        <div class="flow-top hidden">
-          <button id="backToHubBtn" class="back-btn" type="button">&larr; Back to quizzes</button>
-        </div>
-
         <section id="screen-intro" class="panel"></section>
 
-        <section id="screen-q" class="panel hidden" aria-live="polite">
-          <div class="pill">Question <span id="stepNum">1</span> of <span id="stepTotal">10</span></div>
-          <h2 id="qText" style="margin-top:12px;">Question</h2>
+        <section id="screen-question" class="panel hidden" aria-live="polite">
+          <div class="question-top">
+            <button id="prevBtn" class="back-btn" type="button">&larr; Back</button>
+            <div class="pill">Question <span id="stepNum">1</span> of <span id="stepTotal">7</span></div>
+          </div>
+          <h2 id="qText" class="q-title">Question</h2>
+          <div id="questionImageWrap"></div>
           <div id="choicesWrap" class="choices"></div>
           <div class="question-actions">
-            <button id="prevBtn" class="btn secondary" type="button">Back</button>
-            <button id="nextBtn" class="btn primary" type="button" disabled>Next</button>
+            <div class="tiny-note" id="quizMetaNote">Go with your first instinct.</div>
+            <button id="nextBtn" class="btn secondary" type="button" disabled>Next</button>
           </div>
         </section>
 
         <section id="screen-email" class="panel hidden" aria-labelledby="gateTitle">
-          <h2 id="gateTitle">Enter your email to see your result</h2>
-          <form id="mcForm" novalidate style="margin-top:18px;">
-            <input type="email" id="emailInput" class="field" placeholder="Email address" required>
-            <div class="consent">
-              <input type="checkbox" id="consent" required>
-              <label for="consent">I agree to receive emails from <strong>Pupa</strong>. I can unsubscribe anytime.</label>
-            </div>
-            <input type="hidden" id="mcFname" name="FNAME" value="">
-            <input type="text" id="hp" class="hidden" name="b_44c6260e44554e7b992e09185_083452c971" value="">
-            <div class="inline-row">
-              <div class="grow"></div>
-              <button id="seeResultsBtn" class="btn primary" type="submit">See my result</button>
-            </div>
-            <div id="mcMsg" class="msg muted" role="status" aria-live="polite"></div>
-          </form>
+          <div class="email-card">
+            <div class="email-eyebrow">Almost there</div>
+            <h2 id="gateTitle">You&rsquo;re 1 step away 👇</h2>
+            <p>Your result is ready.<br>This might surprise you.</p>
+
+            <form id="mcForm" novalidate style="margin-top:18px;">
+              <input type="email" id="emailInput" class="field" placeholder="Email address" required>
+              <div class="consent">
+                <input type="checkbox" id="consent" required>
+                <label for="consent">I agree to receive emails from <strong>Pupa</strong>. I can unsubscribe anytime.</label>
+              </div>
+              <input type="hidden" id="mcFname" name="FNAME" value="">
+              <input type="text" id="hp" class="hidden" name="b_44c6260e44554e7b992e09185_083452c971" value="">
+              <div class="inline-row">
+                <div class="grow"></div>
+                <button id="seeResultsBtn" class="btn primary" type="submit">Show my result</button>
+              </div>
+              <div id="mcMsg" class="msg muted" role="status" aria-live="polite"></div>
+            </form>
+          </div>
 
           <iframe id="mc_iframe" name="mc_iframe" class="hidden"></iframe>
           <form id="mcFallbackForm" class="hidden"
@@ -718,10 +604,6 @@
         <section id="screen-result" class="panel hidden" aria-live="polite">
           <div id="resultContainer"></div>
           <div id="resultActionArea"></div>
-          <div class="inline-row">
-            <div class="grow"></div>
-            <button id="restartBtn" class="btn secondary" type="button">Restart</button>
-          </div>
         </section>
       </div>
     </section>
@@ -735,468 +617,251 @@
   const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwEOXIx2KLubsPjsGVHDvsMhYC8SgNLzTsNff3hHJ64vJECzrLKg9uKvw7NPQ_ldLwJ/exec';
   const PUPA_WEBSITE_QUIZ_URL = 'https://www.letspupa.com/quiz';
   const MAILCHIMP_POST_JSON_URL = 'https://thefalafeltheory.us22.list-manage.com/subscribe/post-json?u=44c6260e44554e7b992e09185&id=083452c971';
-  const ENTRY_QUIZ_ID = 'career-animal';
-  const LANDING_TITLE = 'Answer 10 quick questions and we’ll tell you something surprisingly accurate about yourself.';
-  const QUIZZES = [
-  {
-    "id": "career-animal",
-    "number": "01",
-    "time": "2 min",
-    "title": "Career Animal",
-    "cardTitle": "Career Animal",
-    "subtitle": "10 quick questions. One spirit animal.",
-    "image": "https://static.wixstatic.com/media/d1daaa_277ed06c52bc4eb9be24f6eacdf78d68~mv2.png",
-    "introTitle": "What Animal Matches Your Career Personality?",
-    "introCopy": "10 quick questions. One spirit animal. Your future self is waiting. \ud83c\udf3f",
-    "cta": "Start quiz",
-    "kind": "animal",
-    "resultPromptTitle": "Do you want to know what kind of energy you bring into a room?",
-    "resultPromptButton": "Yes, show me the energy quiz",
-    "secondaryPromptButton": "Maybe later",
-    "mailchimpTags": {
-      "lion": "",
-      "wolf": "",
-      "fox": "",
-      "elephant": "",
-      "monkey": "",
-      "hawk": "",
-      "dolphin": ""
-    },
-    "questions": [
-      {
-        "q": "A wild new challenge drops in your lap. You:",
-        "options": {
-          "A": "Step forward immediately - you were made for this \ud83e\udd81",
-          "B": "Rally the team and build a game plan together",
-          "C": "Start working the angles - there's always a smarter way",
-          "D": "Take a breath, think it through, then move with confidence",
-          "E": "Get excited and start exploring every possibility",
-          "F": "Zoom out and look at what this means long-term",
-          "G": "Check in with the people involved first"
-        }
-      },
-      {
-        "q": "Your team leans on you to be the one who:",
-        "options": {
-          "A": "Takes charge and makes the call",
-          "B": "Builds trust and keeps the group moving as one",
-          "C": "Finds the clever solution nobody else spotted",
-          "D": "Stays rock-solid when everything else is shaky",
-          "E": "Brings the energy and fresh ideas",
-          "F": "Knows where you're all headed - and why",
-          "G": "Makes sure everyone feels heard and included"
-        }
-      },
-      {
-        "q": "Your dream career vibe is:",
-        "options": {
-          "A": "High-stakes, fast-paced, and centre-stage",
-          "B": "Collaborative, trust-driven, and purposeful",
-          "C": "Creative problem-solving with real independence",
-          "D": "Meaningful, stable, and built on deep expertise",
-          "E": "Exciting, varied - never the same day twice",
-          "F": "Strategic, ambitious, and aimed at something big",
-          "G": "People-first, warm, and genuinely making a difference"
-        }
-      },
-      {
-        "q": "The whole plan falls apart. You:",
-        "options": {
-          "A": "Take the wheel - someone has to lead, and that's you",
-          "B": "Gather the team and figure it out together",
-          "C": "Pivot fast - you already see three other ways to do this",
-          "D": "Stay calm, hold steady, and work through it methodically",
-          "E": "Flip it - a shake-up might actually be exciting",
-          "F": "Reassess the strategy from the top",
-          "G": "Make sure everyone's okay before making any move"
-        }
-      },
-      {
-        "q": "The thing that truly drives you is:",
-        "options": {
-          "A": "Winning - and being recognised for it",
-          "B": "Building something together that nobody could do alone",
-          "C": "Cracking the problems that stump everyone else",
-          "D": "Creating something lasting through patience and depth",
-          "E": "Learning something new every single day",
-          "F": "Turning a bold vision into reality",
-          "G": "Knowing your work genuinely helped someone"
-        }
-      },
-      {
-        "q": "Big decision time. How do you move?",
-        "options": {
-          "A": "Decisively - hesitation isn't really your style",
-          "B": "Collaboratively - you want the team aligned before moving",
-          "C": "Cleverly - you consider angles others wouldn't even think of",
-          "D": "Carefully - you weigh it up and commit with conviction",
-          "E": "Curiously - try a few things and see what sticks",
-          "F": "Strategically - what does this look like in five years?",
-          "G": "Thoughtfully - how does this affect the people around you?"
-        }
-      },
-      {
-        "q": "Be honest - which one actually sounds like you?",
-        "options": {
-          "A": "\"I speak up and take the lead. Always.\"",
-          "B": "\"I'm nothing without my people - and I build great teams.\"",
-          "C": "\"Give me a tricky problem. I live for it.\"",
-          "D": "\"Slow and steady. I've never lost because I was patient.\"",
-          "E": "\"I'm always chasing the next thing to learn.\"",
-          "F": "\"I see the destination when everyone else just sees the road.\"",
-          "G": "\"I make people feel like they matter. Because they do.\""
-        }
-      },
-      {
-        "q": "You're learning something brand new. You prefer to:",
-        "options": {
-          "A": "Jump straight in and lead the charge from day one",
-          "B": "Learn alongside others - shared progress hits different",
-          "C": "Play around with it until something brilliant clicks",
-          "D": "Go step by step and build real mastery",
-          "E": "Experiment freely - mistakes are just data",
-          "F": "Understand the full picture before diving into detail",
-          "G": "Learn through conversations and connecting with people"
-        }
-      },
-      {
-        "q": "When everything's uncertain, your move is to:",
-        "options": {
-          "A": "Step forward and own the moment",
-          "B": "Keep the team close and move together",
-          "C": "Find the hidden opportunity - it's always there",
-          "D": "Be the calm that others anchor to",
-          "E": "Stay curious - uncertainty just means uncharted territory",
-          "F": "Find the pattern and map what's coming next",
-          "G": "Check on your people before anything else"
-        }
-      },
-      {
-        "q": "When people think of you, you want them to think:",
-        "options": {
-          "A": "Fearless. A born leader. Someone who shows up.",
-          "B": "Loyal. Trustworthy. The heart of every great team.",
-          "C": "Sharp. Creative. Always finds a way.",
-          "D": "Solid. Dependable. Wise beyond their years.",
-          "E": "Curious. Energetic. Lights up the room.",
-          "F": "Visionary. Strategic. Sees what others can't.",
-          "G": "Warm. Genuine. Makes everyone feel like they belong."
-        }
-      }
-    ],
-    "resultOrder": [
-      "lion",
-      "wolf",
-      "fox",
-      "elephant",
-      "monkey",
-      "hawk",
-      "dolphin"
-    ],
-    "letterToResult": {
-      "A": "lion",
-      "B": "wolf",
-      "C": "fox",
-      "D": "elephant",
-      "E": "monkey",
-      "F": "hawk",
-      "G": "dolphin"
-    },
-    "hybridLabels": {
-      "lion|wolf": "Dominant Force",
-      "fox|hawk": "Strategic Genius",
-      "dolphin|elephant": "Wise Anchor",
-      "fox|monkey": "Creative Problem-Solver"
-    },
-    "results": {
-      "lion": {
-        "title": "Lion",
-        "emoji": "\ud83e\udd81",
-        "description": "You walk into a room and people notice. Commanding, courageous, and built for high-pressure moments, you don't just want to succeed - you want to lead. You're energised by responsibility and thrive when the stakes are high. Your confidence is magnetic, and when you speak, people listen.",
-        "superpowerLabel": "Your superpowers",
-        "superpowerText": "Commanding presence \u00b7 Bold decision-making \u00b7 Natural authority \u00b7 High performance under pressure",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Slowing down to listen - the best leaders know when to follow too"
-      },
-      "wolf": {
-        "title": "Wolf",
-        "emoji": "\ud83d\udc3a",
-        "description": "You're not a lone wolf - you're the one who builds the pack. Strategic, loyal, and deeply instinct-driven, you lead through trust rather than title. You work best when you're invested in the people around you, and you make teams genuinely better. People follow you because they want to, not because they have to.",
-        "superpowerLabel": "Your superpowers",
-        "superpowerText": "Team leadership \u00b7 Strategic thinking \u00b7 Loyalty \u00b7 Earning trust",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Stepping into the spotlight more - your instincts deserve a bigger stage"
-      },
-      "fox": {
-        "title": "Fox",
-        "emoji": "\ud83e\udd8a",
-        "description": "Problems don't stress you out - they light you up. You think fast, pivot faster, and find angles that leave everyone else scratching their heads. You're clever without being arrogant, adaptable without being inconsistent, and resourceful in a way that makes you quietly invaluable in any team.",
-        "superpowerLabel": "Your superpowers",
-        "superpowerText": "Sharp problem-solving \u00b7 Adaptability \u00b7 Quick thinking \u00b7 Creative resourcefulness",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Trusting simple solutions - not every problem needs a genius move"
-      },
-      "elephant": {
-        "title": "Elephant",
-        "emoji": "\ud83d\udc18",
-        "description": "Quietly, you're one of the most powerful people in any room. You don't need the spotlight - your consistency, patience, and wisdom speak louder than any title. When things fall apart, everyone looks for you. You build trust slowly and completely, and the things you create last.",
-        "superpowerLabel": "Your superpowers",
-        "superpowerText": "Deep reliability \u00b7 Patience \u00b7 Wisdom \u00b7 Unshakeable calm under pressure",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Embracing change - your adaptability is stronger than you think"
-      },
-      "monkey": {
-        "title": "Monkey",
-        "emoji": "\ud83d\udc12",
-        "description": "You are powered by curiosity, and it shows. You learn fast, get bored faster, and bring a kind of electric energy that makes any team more alive. You're the one who asks the questions nobody else thought to ask - and then actually goes and finds the answer. You make everything more exciting just by being in it.",
-        "superpowerLabel": "Your superpowers",
-        "superpowerText": "Rapid learning \u00b7 Curiosity \u00b7 Creative energy \u00b7 Infectious enthusiasm",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Going deep on one thing - mastery is your next unlock"
-      },
-      "hawk": {
-        "title": "Hawk",
-        "emoji": "\ud83e\udd85",
-        "description": "While everyone else is in the weeds, you're reading the whole map. You see patterns, anticipate problems, and understand direction in a way that genuinely shapes where teams go. Your strategic clarity is rare - and in a world that's always changing, the ability to see what's coming is one of the most valuable skills there is.",
-        "superpowerLabel": "Your superpowers",
-        "superpowerText": "Vision \u00b7 Strategic clarity \u00b7 Pattern recognition \u00b7 Long-term focus",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Staying connected to the ground level - your team needs you present, not just far-sighted"
-      },
-      "dolphin": {
-        "title": "Dolphin",
-        "emoji": "\ud83d\udc2c",
-        "description": "You have a gift that's rarer than people realise: you make others feel genuinely seen. Empathetic, socially intelligent, and naturally collaborative, you're the reason teams actually work. You read the room instinctively, build bridges between people, and bring a warmth that turns a group of individuals into something that actually functions.",
-        "superpowerLabel": "Your superpowers",
-        "superpowerText": "Emotional intelligence \u00b7 Collaboration \u00b7 Communication \u00b7 Building genuine connection",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Holding your ground - your ideas are worth fighting for too"
-      }
-    }
-  },
-  {
-    "id": "team-energy",
-    "number": "02",
-    "time": "2 min",
-    "title": "Team Energy",
-    "cardTitle": "Team Energy",
-    "subtitle": "Find out how you show up for the people around you.",
-    "image": "https://static.wixstatic.com/media/d1daaa_c49b11689454474f96c70bc9235adbf4~mv2.png",
-    "introTitle": "What Energy Do You Bring to a Team?",
-    "introCopy": "You know your animal. Now find out exactly how you show up for the people around you. This quiz is about your team energy - the invisible force you bring to every group, project, and workplace you're part of.",
-    "cta": "Start quiz",
-    "kind": "energy",
-    "resultPromptTitle": "Do you want to find out what animal matches your career personality?",
-    "resultPromptButton": "Yes, show me my career animal",
-    "secondaryPromptButton": "Maybe later",
-    "mailchimpTags": {
-      "igniter": "",
-      "foundation": "",
-      "weaver": "",
-      "finisher": "",
-      "clarifier": ""
-    },
-    "questions": [
-      {
-        "q": "Your team kicks off a brand new project. What's your first move?",
-        "options": {
-          "A": "Get everyone pumped - energy first, details second \u26a1",
-          "B": "Make sure the foundation is solid before anyone moves",
-          "C": "Check that everyone's on the same page and feels involved",
-          "D": "Get straight to the tasks - what needs to be done, by when?",
-          "E": "Start asking questions - what's the actual goal here?"
-        }
-      },
-      {
-        "q": "The team hits a wall and energy is low. You instinctively:",
-        "options": {
-          "A": "Pick up the vibe and remind everyone why this matters",
-          "B": "Stay steady - your calm is more useful than anyone realises",
-          "C": "Reach out to the people who seem most drained",
-          "D": "Redirect focus to the next small win to get momentum back",
-          "E": "Dig into what's actually blocking progress and name it clearly"
-        }
-      },
-      {
-        "q": "A teammate is struggling and falling behind. You:",
-        "options": {
-          "A": "Encourage them loudly - sometimes people just need a boost",
-          "B": "Offer to take something off their plate so they can recover",
-          "C": "Check in properly - beyond 'you okay?' - and actually listen",
-          "D": "Help them break their tasks down so they can start moving again",
-          "E": "Try to understand what's really going on and help them see it clearly"
-        }
-      },
-      {
-        "q": "Your team has a big disagreement. How do you show up?",
-        "options": {
-          "A": "Inject some lightness - tension is the enemy of progress",
-          "B": "Stay grounded and neutral - you're not adding fuel to this",
-          "C": "Work the room quietly to understand both sides",
-          "D": "Push for a decision - disagreement without resolution wastes time",
-          "E": "Reframe the issue - usually people are arguing about the wrong thing"
-        }
-      },
-      {
-        "q": "What does your team actually rely on you for, if you're honest?",
-        "options": {
-          "A": "Keeping the energy and belief alive when things get hard",
-          "B": "Being the consistent, dependable presence everyone takes for granted - in a good way",
-          "C": "Making sure nobody feels left out or unheard",
-          "D": "Making sure things actually get done",
-          "E": "Making sense of situations that feel confusing or stuck"
-        }
-      },
-      {
-        "q": "A project is going off the rails. Your contribution is:",
-        "options": {
-          "A": "Rallying everyone - a team that believes in itself finds a way",
-          "B": "Holding the line - not panicking when others do",
-          "C": "Making sure the team stays connected through the chaos",
-          "D": "Taking ownership of what needs doing and doing it",
-          "E": "Diagnosing what actually went wrong and what to fix first"
-        }
-      },
-      {
-        "q": "What do people say about you after a tough team project?",
-        "options": {
-          "A": "\"Honestly, they kept us going when we wanted to quit.\"",
-          "B": "\"They were just... solid. We could always count on them.\"",
-          "C": "\"They made sure nobody got left behind.\"",
-          "D": "\"Things actually got finished because of them.\"",
-          "E": "\"They helped us see what we were missing.\""
-        }
-      },
-      {
-        "q": "In a meeting that's going nowhere, you:",
-        "options": {
-          "A": "Try to inject some energy and get people re-engaged",
-          "B": "Keep showing up - sometimes consistency is the contribution",
-          "C": "Watch the dynamics and quietly make sure everyone gets heard",
-          "D": "Push for clear actions and owners before anyone leaves the room",
-          "E": "Reframe what the meeting is actually trying to solve"
-        }
-      },
-      {
-        "q": "What does a team with your energy look like at its best?",
-        "options": {
-          "A": "Alive, motivated, and genuinely excited about what they're building",
-          "B": "Stable, reliable, and delivering on what they said they would",
-          "C": "Close-knit, trusting, and working like they actually know each other",
-          "D": "Productive, focused, and finishing what they start",
-          "E": "Clear-headed, aligned, and solving the right problems"
-        }
-      },
-      {
-        "q": "If your team energy had a tagline, which one fits?",
-        "options": {
-          "A": "\"We make it exciting.\" \u26a1",
-          "B": "\"We make it reliable.\" \ud83e\uddf1",
-          "C": "\"We make it human.\" \ud83d\udd17",
-          "D": "\"We make it happen.\" \ud83c\udfaf",
-          "E": "\"We make it make sense.\" \ud83d\udd0d"
-        }
-      }
-    ],
-    "resultOrder": [
-      "igniter",
-      "foundation",
-      "weaver",
-      "finisher",
-      "clarifier"
-    ],
-    "letterToResult": {
-      "A": "igniter",
-      "B": "foundation",
-      "C": "weaver",
-      "D": "finisher",
-      "E": "clarifier"
-    },
-    "hybridLabels": {
-      "finisher|igniter": "Unstoppable Momentum",
-      "clarifier|weaver": "Culture Architect",
-      "clarifier|foundation": "Steady Strategist",
-      "foundation|weaver": "The Team's Beating Heart"
-    },
-    "results": {
-      "igniter": {
-        "title": "The Igniter",
-        "emoji": "\u26a1",
-        "description": "You are the reason teams believe they can do it. You show up with energy that's impossible to ignore - and on the days when everything feels hard, you're the one who reminds people why they started. You generate momentum out of nothing. That's not a small thing. That's one of the rarest and most needed forces in any team.",
-        "superpowerLabel": "Your team superpower",
-        "superpowerText": "Firing people up \u00b7 Creating belief \u00b7 Starting momentum \u00b7 Making the work feel exciting",
-        "worksBestLabel": "You work best with",
-        "worksBestText": "A Finisher (to convert your energy into outcomes) and a Foundation (to catch things you set in motion)",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Following through - your launches are electric, but crossing the finish line makes you legendary"
-      },
-      "foundation": {
-        "title": "The Foundation",
-        "emoji": "\ud83e\uddf1",
-        "description": "You are the reason things don't fall apart. Not glamorous - but irreplaceable. Your consistency, reliability, and quiet steadiness create the safe ground that everyone else performs on. Teams with a strong Foundation can take risks, move fast, and fail forward - because they know you're holding the base. You are more powerful than you probably give yourself credit for.",
-        "superpowerLabel": "Your team superpower",
-        "superpowerText": "Consistency \u00b7 Reliability \u00b7 Calm under pressure \u00b7 Creating psychological safety",
-        "worksBestLabel": "You work best with",
-        "worksBestText": "An Igniter (to keep energy high) and a Finisher (to drive outcomes you've made sustainable)",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Speaking up more - your perspective carries enormous weight, and the team needs to hear it"
-      },
-      "weaver": {
-        "title": "The Weaver",
-        "emoji": "\ud83d\udd17",
-        "description": "You're the invisible glue. Teams with a Weaver feel different - warmer, more connected, more human. You notice the person who's checked out, bridge the gap between the two people who aren't clicking, and make sure that everyone feels like they're actually part of something. Without you, groups are just a collection of people. With you, they become a team.",
-        "superpowerLabel": "Your team superpower",
-        "superpowerText": "Building connection \u00b7 Reading the room \u00b7 Bridging personalities \u00b7 Creating real team culture",
-        "worksBestLabel": "You work best with",
-        "worksBestText": "A Clarifier (to give your empathy direction) and a Finisher (to channel team cohesion into results)",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Holding your ground in conflict - keeping the peace is great, but sometimes the team needs you to name the hard thing"
-      },
-      "finisher": {
-        "title": "The Finisher",
-        "emoji": "\ud83c\udfaf",
-        "description": "You get things done - and in a world full of great ideas and stalled projects, that makes you invaluable. You bring urgency, focus, and a results-first mentality that turns talk into action. You're the reason deadlines get met, projects get shipped, and teams actually deliver what they promised. People might not always say it, but they deeply depend on you.",
-        "superpowerLabel": "Your team superpower",
-        "superpowerText": "Execution \u00b7 Drive \u00b7 Accountability \u00b7 Making things actually happen",
-        "worksBestLabel": "You work best with",
-        "worksBestText": "A Weaver (to smooth the edges your pace creates) and a Clarifier (to make sure you're solving the right problem)",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Slowing down just enough to bring people with you - your pace is your power, but inclusion multiplies it"
-      },
-      "clarifier": {
-        "title": "The Clarifier",
-        "emoji": "\ud83d\udd0d",
-        "description": "You make sense of things. When everyone's confused, overwhelmed, or arguing in circles, you're the one who cuts through and names what's actually happening. You ask the questions that unlock everything, and you help teams understand not just what they're doing - but why it matters. Your clarity is a gift that most people don't have, and every team desperately needs.",
-        "superpowerLabel": "Your team superpower",
-        "superpowerText": "Cutting through complexity \u00b7 Asking the right questions \u00b7 Creating shared understanding \u00b7 Strategic insight",
-        "worksBestLabel": "You work best with",
-        "worksBestText": "An Igniter (to act on your insights) and a Weaver (to communicate your clarity with warmth)",
-        "levelUpLabel": "Level up",
-        "levelUpText": "Moving into action sooner - perfect clarity is beautiful, but done is better than overthought"
-      }
-    }
-  }
-];
-  const CARD_TAGLINE = 'Tap start to reveal what this says about you.';
   const STORAGE_KEY = 'pupa_quiz_session_id';
 
-  const $ = (s, r=document) => r.querySelector(s);
-  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const QUIZZES = [
+    {
+      id: 'career-animal',
+      kind: 'animal',
+      number: '01',
+      title: 'Career Animal',
+      image: 'https://static.wixstatic.com/media/d1daaa_825b37bd3bbc41d2bee78bc42da8d5d7~mv2.png',
+      landingTitle: 'Find out what people don’t tell you about yourself.',
+      landingSub: 'This might surprise you.',
+      introTitle: 'What kind of person are you at work? 🐾',
+      introSub: 'Be honest. Don’t overthink.',
+      cta: 'Start',
+      transitionTitle: 'But this is just you.',
+      transitionSub: 'Want to see how people actually experience you?',
+      transitionButton: 'Show me my team energy ⚡',
+      transitionSkip: 'Maybe later',
+      mailchimpTags: {
+        lion: '',
+        hawk: '',
+        dolphin: ''
+      },
+      questions: [
+        {
+          q: 'In a group, you:',
+          image: 'https://static.wixstatic.com/media/d1daaa_2f5632486c6a4b72907c716a5fb242f6~mv2.jpg',
+          options: [
+            { key: 'A', text: 'Take control', result: 'lion' },
+            { key: 'B', text: 'Read people', result: 'dolphin' },
+            { key: 'C', text: 'Think first', result: 'hawk' }
+          ]
+        },
+        {
+          q: 'What annoys you most?',
+          image: 'https://static.wixstatic.com/media/d1daaa_da19a5c55f914c1f90aa9569e2ee7615~mv2.jpg',
+          options: [
+            { key: 'A', text: 'Bad vibes', result: 'dolphin' },
+            { key: 'B', text: 'Slow people', result: 'lion' },
+            { key: 'C', text: 'Bad ideas', result: 'hawk' }
+          ]
+        },
+        {
+          q: 'When things go wrong:',
+          image: 'https://static.wixstatic.com/media/d1daaa_2d80c0803fec446bae651ee5c989a81c~mv2.jpg',
+          options: [
+            { key: 'A', text: 'Think deeper', result: 'hawk' },
+            { key: 'B', text: 'Support others', result: 'dolphin' },
+            { key: 'C', text: 'Act fast', result: 'lion' }
+          ]
+        },
+        {
+          q: 'What feels best?',
+          image: 'https://static.wixstatic.com/media/d1daaa_335aad35a2954e55a2a604a5f63f0b6a~mv2.jpg',
+          options: [
+            { key: 'A', text: 'Being trusted', result: 'dolphin' },
+            { key: 'B', text: 'Being right', result: 'hawk' },
+            { key: 'C', text: 'Being in charge', result: 'lion' }
+          ]
+        },
+        {
+          q: 'People see you as:',
+          image: 'https://static.wixstatic.com/media/d1daaa_91032f88aea94443bf1ceb2bde383490~mv2.png',
+          options: [
+            { key: 'A', text: 'The smart one', result: 'hawk' },
+            { key: 'B', text: 'The leader', result: 'lion' },
+            { key: 'C', text: 'The nice one', result: 'dolphin' }
+          ]
+        },
+        {
+          q: 'Your weakness?',
+          image: 'https://static.wixstatic.com/media/d1daaa_dac59c4abdaa44699943f4fa90d3bfff~mv2.png',
+          options: [
+            { key: 'A', text: 'Care too much', result: 'dolphin' },
+            { key: 'B', text: 'Too intense', result: 'lion' },
+            { key: 'C', text: 'Overthinking', result: 'hawk' }
+          ]
+        },
+        {
+          q: 'Your instinct:',
+          image: 'https://static.wixstatic.com/media/d1daaa_a56598d973a74cd7880b975c639502ca~mv2.png',
+          options: [
+            { key: 'A', text: 'Think it through', result: 'hawk' },
+            { key: 'B', text: 'Ask others', result: 'dolphin' },
+            { key: 'C', text: 'Just do it', result: 'lion' }
+          ]
+        }
+      ],
+      tieLabel: 'Blend',
+      results: {
+        lion: {
+          title: 'Lion',
+          emoji: '🦁',
+          image: 'https://static.wixstatic.com/media/d1daaa_efd7275a198b4a7ebabcfd16885ca227~mv2.png',
+          line1: 'You move first.',
+          line2: 'People follow.',
+          line3: 'Yeah… you can be intense.'
+        },
+        hawk: {
+          title: 'Hawk',
+          emoji: '🦅',
+          image: 'https://static.wixstatic.com/media/d1daaa_9f3e663833b04a5f95bb95c164a5448e~mv2.png',
+          line1: 'You see things early.',
+          line2: 'You think deeper.',
+          line3: 'Just don’t overthink everything.'
+        },
+        dolphin: {
+          title: 'Dolphin',
+          emoji: '🐬',
+          image: 'https://static.wixstatic.com/media/d1daaa_0d446c4670284418ae233a3702f095b7~mv2.png',
+          line1: 'You read people fast.',
+          line2: 'You build trust.',
+          line3: 'Just don’t forget yourself.'
+        }
+      }
+    },
+    {
+      id: 'team-energy',
+      kind: 'energy',
+      number: '02',
+      title: 'Team Energy',
+      image: 'https://static.wixstatic.com/media/d1daaa_c49b11689454474f96c70bc9235adbf4~mv2.png',
+      introTitle: 'What energy do you bring to a team? ⚡',
+      introSub: 'Be real. This is how people experience you.',
+      cta: 'Start',
+      finalTitle: 'This is just the surface.',
+      finalSub: 'We can show you exactly where this leads — your strengths, your path, and what to do next.',
+      finalButton: 'Show me my path 🚀',
+      finalSkip: 'Maybe later',
+      mailchimpTags: {
+        igniter: '',
+        anchor: '',
+        empath: ''
+      },
+      questions: [
+        {
+          q: 'In a team, you:',
+          image: 'https://static.wixstatic.com/media/d1daaa_9c39a455eb4840318fca36a9410556e1~mv2.png',
+          options: [
+            { key: 'A', text: 'Stay steady', result: 'anchor' },
+            { key: 'B', text: 'Bring energy', result: 'igniter' },
+            { key: 'C', text: 'Read people', result: 'empath' }
+          ]
+        },
+        {
+          q: 'When things feel off:',
+          image: 'https://static.wixstatic.com/media/d1daaa_e0b6f2adf2034898bbb5dc0ca53d32fc~mv2.png',
+          options: [
+            { key: 'A', text: 'Check others', result: 'empath' },
+            { key: 'B', text: 'Lift mood', result: 'igniter' },
+            { key: 'C', text: 'Stay calm', result: 'anchor' }
+          ]
+        },
+        {
+          q: 'In conflict, you:',
+          image: 'https://static.wixstatic.com/media/d1daaa_4a4f2e9ffccd4a1b84657a1f6b3638db~mv2.png',
+          options: [
+            { key: 'A', text: 'Hear everyone', result: 'empath' },
+            { key: 'B', text: 'Ease tension', result: 'igniter' },
+            { key: 'C', text: 'Hold ground', result: 'anchor' }
+          ]
+        },
+        {
+          q: 'Your role is:',
+          image: 'https://static.wixstatic.com/media/d1daaa_faf5c7401e114dc4992a315341bf15f5~mv2.png',
+          options: [
+            { key: 'A', text: 'Hype team', result: 'igniter' },
+            { key: 'B', text: 'Hold people', result: 'empath' },
+            { key: 'C', text: 'Keep track', result: 'anchor' }
+          ]
+        },
+        {
+          q: 'Someone struggling:',
+          image: 'https://static.wixstatic.com/media/d1daaa_847244915cf94af79485a66da0d5b8ae~mv2.png',
+          options: [
+            { key: 'A', text: 'Guide steps', result: 'anchor' },
+            { key: 'B', text: 'Listen first', result: 'empath' },
+            { key: 'C', text: 'Motivate them', result: 'igniter' }
+          ]
+        },
+        {
+          q: 'Your strength:',
+          image: 'https://static.wixstatic.com/media/d1daaa_70bedaa07ae04f59b77500f86af6e8c7~mv2.png',
+          options: [
+            { key: 'A', text: 'Build trust', result: 'empath' },
+            { key: 'B', text: 'Drive energy', result: 'igniter' },
+            { key: 'C', text: 'Stay reliable', result: 'anchor' }
+          ]
+        },
+        {
+          q: 'People say:',
+          image: 'https://static.wixstatic.com/media/d1daaa_fe15a4e02e564acbb3eae58225f89804~mv2.png',
+          options: [
+            { key: 'A', text: 'Always solid', result: 'anchor' },
+            { key: 'B', text: 'Feels like home', result: 'empath' },
+            { key: 'C', text: 'Keeps us going', result: 'igniter' }
+          ]
+        }
+      ],
+      tieLabel: 'Blend',
+      results: {
+        igniter: {
+          title: 'Igniter',
+          emoji: '⚡',
+          image: 'https://static.wixstatic.com/media/d1daaa_0a949f0441ee4b80b8305fecc103624f~mv2.png',
+          line1: 'You bring the spark.',
+          line2: 'You make things move.',
+          line3: 'Just… don’t disappear halfway.'
+        },
+        anchor: {
+          title: 'Anchor',
+          emoji: '🧱',
+          image: 'https://static.wixstatic.com/media/d1daaa_1dfdcb345c3f44a39e4fd4077c01152a~mv2.png',
+          line1: 'You hold things steady.',
+          line2: 'People rely on you.',
+          line3: 'Just don’t carry everything alone.'
+        },
+        empath: {
+          title: 'Empath',
+          emoji: '🫀',
+          image: 'https://static.wixstatic.com/media/d1daaa_4f80469237304f9ba752ab7f2a070c66~mv2.png',
+          line1: 'You make people feel seen.',
+          line2: 'You build real teams.',
+          line3: 'Protect your energy too.'
+        }
+      }
+    }
+  ];
 
-  const screenHub = $('#screen-hub');
-  const screenFlow = $('#screen-flow');
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const $$ = (selector, root=document) => Array.from(root.querySelectorAll(selector));
+
   const screenIntro = $('#screen-intro');
-  const screenQ = $('#screen-q');
+  const screenQuestion = $('#screen-question');
   const screenEmail = $('#screen-email');
   const screenResult = $('#screen-result');
   const progressBar = $('#progressBar');
-  const quizGrid = $('#quizGrid');
   const qText = $('#qText');
   const stepNum = $('#stepNum');
   const stepTotal = $('#stepTotal');
   const choicesWrap = $('#choicesWrap');
+  const questionImageWrap = $('#questionImageWrap');
   const prevBtn = $('#prevBtn');
   const nextBtn = $('#nextBtn');
+  const quizMetaNote = $('#quizMetaNote');
   const emailInput = $('#emailInput');
   const consent = $('#consent');
   const mcMsg = $('#mcMsg');
@@ -1211,12 +876,11 @@
   const fbTags = $('#fb_TAGS');
   const fbHp = $('#fb_hp');
 
-  let currentQuiz = null;
+  let currentQuizIndex = 0;
   let currentQuestionIndex = 0;
   let answers = [];
   let autoTimer = null;
   let lastComputedResult = null;
-  let completionLoggedForQuizId = null;
 
   const journey = {
     sessionId: getOrCreateSessionId(),
@@ -1224,440 +888,393 @@
     email: '',
     consent: false,
     completedQuizIds: [],
-    recommendation: '',
-    websiteClicked: false,
     hasSubmittedMailchimp: false,
-    quizOrder: []
+    finalCtaClicked: false
   };
 
   function getOrCreateSessionId() {
     try {
       const existing = window.localStorage.getItem(STORAGE_KEY);
-      if(existing) return existing;
+      if (existing) return existing;
       const created = 'pupa_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
       window.localStorage.setItem(STORAGE_KEY, created);
       return created;
-    } catch (e) {
+    } catch (error) {
       return 'pupa_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
     }
   }
 
+  function currentQuiz() {
+    return QUIZZES[currentQuizIndex];
+  }
+
   function escapeHTML(value) {
     return String(value || '').replace(/[&<>"']/g, function(ch) {
-      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]);
+      return ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]);
     });
   }
 
-  function showHub() {
-    openQuiz(ENTRY_QUIZ_ID);
-  }
-
-  function showFlow() {
-    screenHub.classList.remove('active');
-    screenFlow.classList.add('active');
-  }
-
-  function hideFlowPanels() {
+  function hidePanels() {
     screenIntro.classList.add('hidden');
-    screenQ.classList.add('hidden');
+    screenQuestion.classList.add('hidden');
     screenEmail.classList.add('hidden');
     screenResult.classList.add('hidden');
   }
 
-  function getQuizById(id) {
-    return QUIZZES.find(function(quiz) { return quiz.id === id; }) || QUIZZES[0];
-  }
-
-  function getOtherQuizId(id) {
-    const other = QUIZZES.find(function(quiz) { return quiz.id !== id; });
-    return other ? other.id : '';
-  }
-
   function resetQuizState() {
     currentQuestionIndex = 0;
-    answers = [];
+    answers = Array(currentQuiz().questions.length).fill(null);
     autoTimer = null;
     lastComputedResult = null;
-    completionLoggedForQuizId = null;
     nextBtn.disabled = true;
-  }
-
-  function openQuiz(id) {
-    currentQuiz = getQuizById(id);
-    resetQuizState();
-    answers = Array(currentQuiz.questions.length).fill(null);
-    emailInput.value = journey.email || '';
-    consent.checked = !!journey.consent;
-    mcFname.value = journey.firstName || '';
-    mcMsg.textContent = '';
-    mcMsg.className = 'msg muted';
-    renderIntro();
-    showFlow();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function renderHub() {
-    quizGrid.innerHTML = QUIZZES.map(function(quiz) {
-      return '' +
-        '<button class="hub-card" data-quiz="' + escapeHTML(quiz.id) + '" type="button" aria-label="' + escapeHTML(quiz.title) + ' quiz">' +
-          '<div class="hub-card-media">' +
-            '<img src="' + escapeHTML(quiz.image) + '" alt="' + escapeHTML(quiz.title) + '" loading="lazy" />' +
-            '<span class="hub-card-chip">' + escapeHTML(quiz.cardTitle || quiz.title) + '</span>' +
-          '</div>' +
-          '<div class="hub-card-body">' +
-            '<div class="hub-card-meta">' +
-              '<span class="hub-card-number">Quiz ' + escapeHTML(quiz.number) + '</span>' +
-              '<span class="hub-card-time">' + escapeHTML(quiz.time) + '</span>' +
-            '</div>' +
-            '<div class="hub-card-copy">' +
-              '<h3 class="hub-card-title">' + escapeHTML(quiz.cardTitle || quiz.title) + '</h3>' +
-              '<p class="hub-card-sub">' + escapeHTML(quiz.subtitle) + '</p>' +
-            '</div>' +
-            '<div class="hub-card-foot">' +
-              '<span class="hub-card-note">' + escapeHTML(CARD_TAGLINE) + '</span>' +
-              '<span class="hub-card-cta">' + escapeHTML(quiz.cta || 'Start quiz') + '</span>' +
-            '</div>' +
-          '</div>' +
-        '</button>';
-    }).join('');
-
-    $$('.hub-card', quizGrid).forEach(function(card) {
-      card.addEventListener('click', function() {
-        openQuiz(card.getAttribute('data-quiz'));
-      });
-    });
-  }
-
-  function renderIntro() {
-    hideFlowPanels();
-    screenIntro.classList.remove('hidden');
-    progressBar.style.width = '0%';
-    const showLandingTitle = currentQuiz && currentQuiz.id === ENTRY_QUIZ_ID;
-    screenIntro.innerHTML = '' +
-      (showLandingTitle ? '<h1 class="landing-main-title">' + escapeHTML(LANDING_TITLE) + '</h1>' : '') +
-      '<div class="quiz-hero">' +
-        '<img src="' + escapeHTML(currentQuiz.image) + '" alt="' + escapeHTML(currentQuiz.title) + ' hero image" />' +
-      '</div>' +
-      '<div class="pill">' + escapeHTML(currentQuiz.title) + '</div>' +
-      '<h2 style="margin-top:12px;">' + escapeHTML(currentQuiz.introTitle || currentQuiz.title) + '</h2>' +
-      '<p>' + escapeHTML(currentQuiz.introCopy) + '</p>' +
-      '<div class="inline-row">' +
-        '<div class="grow">' +
-          '<input id="nameInput" class="field" type="text" placeholder="First name (optional)" autocomplete="given-name" value="' + escapeHTML(journey.firstName) + '" />' +
-        '</div>' +
-        '<button id="startBtn" class="btn primary" type="button">' + escapeHTML(currentQuiz.cta || 'Start quiz') + '</button>' +
-      '</div>';
-
-    $('#startBtn', screenIntro).addEventListener('click', function() {
-      const input = $('#nameInput', screenIntro);
-      journey.firstName = (input.value || '').trim();
-      mcFname.value = journey.firstName;
-      if(journey.quizOrder.indexOf(currentQuiz.id) === -1) {
-        journey.quizOrder.push(currentQuiz.id);
-      }
-      logEvent('quiz_started', buildBasePayload({ note: 'Quiz intro started' }));
-      currentQuestionIndex = 0;
-      loadQuestion(currentQuestionIndex);
-      screenIntro.classList.add('hidden');
-      screenQ.classList.remove('hidden');
-    });
+    stepTotal.textContent = String(currentQuiz().questions.length);
   }
 
   function updateProgress() {
-    const total = currentQuiz.questions.length;
-    const pct = total ? (currentQuestionIndex / total) * 100 : 0;
-    progressBar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+    const total = currentQuiz().questions.length;
+    if (!total) {
+      progressBar.style.width = '0%';
+      return;
+    }
+
+    let progressValue = 0;
+    if (!screenQuestion.classList.contains('hidden')) {
+      progressValue = ((currentQuestionIndex + 1) / total) * 100;
+    } else if (!screenEmail.classList.contains('hidden') || !screenResult.classList.contains('hidden')) {
+      progressValue = 100;
+    }
+
+    progressBar.style.width = Math.max(0, Math.min(100, progressValue)) + '%';
   }
 
-  function renderChoiceOption(optionKey, optionText, selectedKey) {
+  function renderIntro() {
+    hidePanels();
+    screenIntro.classList.remove('hidden');
+
+    const quiz = currentQuiz();
+    const isFirstQuiz = currentQuizIndex === 0;
+    const heading = isFirstQuiz ? quiz.landingTitle : quiz.introTitle;
+    const sub = isFirstQuiz ? quiz.landingSub : quiz.introSub;
+
+    screenIntro.innerHTML = '' +
+      '<div class="intro-stack">' +
+        '<div class="brand-row">' +
+          '<img src="https://static.wixstatic.com/shapes/d1daaa_70d588d61ad94dafb9274c7e8af7178c.svg" alt="Pupa" />' +
+        '</div>' +
+        '<div class="quiz-hero">' +
+          '<img src="' + escapeHTML(quiz.image) + '" alt="' + escapeHTML(quiz.title) + ' image" />' +
+        '</div>' +
+        '<div class="intro-copy">' +
+          '<div class="pill">Quiz ' + escapeHTML(quiz.number) + '</div>' +
+          '<h1 class="landing-main-title">' + escapeHTML(heading) + '</h1>' +
+          '<p>' + escapeHTML(sub) + '</p>' +
+        '</div>' +
+        '<div class="inline-row">' +
+          '<div class="grow">' +
+            (isFirstQuiz
+              ? '<input id="nameInput" class="field" type="text" placeholder="First name (optional)" autocomplete="given-name" value="' + escapeHTML(journey.firstName) + '" />'
+              : '<div class="tiny-note">Quick. Honest. Done in under a minute.</div>') +
+          '</div>' +
+          '<button id="startBtn" class="btn primary" type="button">' + escapeHTML(quiz.cta) + '</button>' +
+        '</div>' +
+      '</div>';
+
+    $('#startBtn', screenIntro).addEventListener('click', function() {
+      if (isFirstQuiz) {
+        const input = $('#nameInput', screenIntro);
+        journey.firstName = (input.value || '').trim();
+        mcFname.value = journey.firstName;
+      }
+      logEvent('quiz_started', buildBasePayload({ note: 'Quiz intro started' }));
+      loadQuestion(0);
+    });
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderChoiceOption(option, selectedKey) {
     return '' +
-      '<button class="option' + (selectedKey === optionKey ? ' selected' : '') + '" type="button" data-choice="' + escapeHTML(optionKey) + '">' +
+      '<button class="option' + (selectedKey === option.key ? ' selected' : '') + '" type="button" data-choice="' + escapeHTML(option.key) + '">' +
         '<span class="bullet"></span>' +
-        '<span class="option-copy">' + escapeHTML(optionText) + '</span>' +
+        '<span class="option-copy">' + escapeHTML(option.text) + '</span>' +
       '</button>';
   }
 
   function loadQuestion(index) {
-    const item = currentQuiz.questions[index];
-    if(!item) return;
-    stepNum.textContent = String(index + 1);
-    stepTotal.textContent = String(currentQuiz.questions.length);
-    qText.textContent = item.q;
-    const selected = answers[index];
-    choicesWrap.innerHTML = Object.keys(item.options).map(function(key) {
-      return renderChoiceOption(key, item.options[key], selected);
-    }).join('');
-    nextBtn.disabled = !selected;
-    prevBtn.disabled = (index === 0);
-    updateProgress();
+    hidePanels();
+    screenQuestion.classList.remove('hidden');
+    currentQuestionIndex = index;
 
-    $$('.option', choicesWrap).forEach(function(optionBtn) {
-      optionBtn.addEventListener('click', function() {
-        if(autoTimer) {
+    const question = currentQuiz().questions[index];
+    const selected = answers[index];
+    stepNum.textContent = String(index + 1);
+    qText.textContent = question.q;
+    quizMetaNote.textContent = currentQuizIndex === 0 ? 'Go with your first instinct.' : 'Pick what feels most like you.';
+    questionImageWrap.innerHTML = question.image
+      ? '<div class="question-media"><img src="' + escapeHTML(question.image) + '" alt="' + escapeHTML(question.q) + '" loading="lazy" /></div>'
+      : '';
+
+    choicesWrap.innerHTML = question.options.map(function(option) {
+      return renderChoiceOption(option, selected);
+    }).join('');
+
+    nextBtn.disabled = !selected;
+    nextBtn.textContent = index === currentQuiz().questions.length - 1 ? 'Finish' : 'Next';
+
+    $$('.option', choicesWrap).forEach(function(button) {
+      button.addEventListener('click', function() {
+        if (autoTimer) {
           clearTimeout(autoTimer);
           autoTimer = null;
         }
-        const choice = optionBtn.getAttribute('data-choice');
-        answers[currentQuestionIndex] = choice;
+
+        const choiceKey = button.getAttribute('data-choice');
+        answers[currentQuestionIndex] = choiceKey;
         lastComputedResult = null;
-        $$('.option', choicesWrap).forEach(function(btn) { btn.classList.remove('selected'); });
-        optionBtn.classList.add('selected');
+
+        $$('.option', choicesWrap).forEach(function(item) {
+          item.classList.remove('selected');
+        });
+        button.classList.add('selected');
         nextBtn.disabled = false;
-        nextBtn.disabled = true;
+
         autoTimer = setTimeout(function() {
           autoAdvanceOrFinish();
           autoTimer = null;
         }, 180);
       });
     });
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function autoAdvanceOrFinish() {
-    const total = currentQuiz.questions.length;
-    if(currentQuestionIndex < total - 1) {
-      currentQuestionIndex += 1;
-      loadQuestion(currentQuestionIndex);
-    } else {
-      finishQuestionFlow();
+    const total = currentQuiz().questions.length;
+    if (currentQuestionIndex < total - 1) {
+      loadQuestion(currentQuestionIndex + 1);
+      return;
     }
+    finishQuestionFlow();
   }
 
   function finishQuestionFlow() {
-    hideFlowPanels();
-    if(journey.email && journey.consent) {
-      progressBar.style.width = '100%';
+    if (journey.email && journey.consent) {
       showResult();
       return;
     }
+    showEmailGate();
+  }
+
+  function showEmailGate() {
+    hidePanels();
     screenEmail.classList.remove('hidden');
-    progressBar.style.width = '100%';
+    emailInput.value = journey.email || '';
+    consent.checked = !!journey.consent;
+    mcFname.value = journey.firstName || '';
+    mcMsg.textContent = '';
+    mcMsg.className = 'msg muted';
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function getAnswerText(questionIndex, answerKey) {
-    const question = currentQuiz.questions[questionIndex];
-    if(!question || !answerKey) return '';
-    return question.options[answerKey] || '';
-  }
-
-  function buildHybridKey(ids) {
-    const order = currentQuiz.resultOrder || [];
-    return ids.slice().sort(function(a, b) { return order.indexOf(a) - order.indexOf(b); }).join('|');
+  function getSelectedOption(questionIndex, answerKey) {
+    const question = currentQuiz().questions[questionIndex];
+    if (!question) return null;
+    return question.options.find(function(option) { return option.key === answerKey; }) || null;
   }
 
   function computeResult() {
-    if(lastComputedResult) return lastComputedResult;
+    if (lastComputedResult) return lastComputedResult;
+
     const counts = {};
-    Object.keys(currentQuiz.results).forEach(function(resultId) { counts[resultId] = 0; });
-    answers.forEach(function(letter) {
-      const resultId = currentQuiz.letterToResult[letter];
-      if(resultId && Object.prototype.hasOwnProperty.call(counts, resultId)) {
-        counts[resultId] += 1;
+    Object.keys(currentQuiz().results).forEach(function(resultKey) {
+      counts[resultKey] = 0;
+    });
+
+    answers.forEach(function(answerKey, index) {
+      const selected = getSelectedOption(index, answerKey);
+      if (selected && Object.prototype.hasOwnProperty.call(counts, selected.result)) {
+        counts[selected.result] += 1;
       }
     });
-    const max = Math.max.apply(null, Object.keys(counts).map(function(key) { return counts[key]; }));
-    const winners = currentQuiz.resultOrder.filter(function(resultId) { return counts[resultId] === max; });
-    const single = winners.length === 1;
-    const primaryId = winners[0];
-    const hybridLabel = single ? '' : (currentQuiz.hybridLabels[buildHybridKey(winners)] || 'Hybrid Match');
+
+    const max = Math.max.apply(null, Object.values(counts));
+    const winners = Object.keys(counts).filter(function(resultKey) {
+      return counts[resultKey] === max;
+    });
+
     lastComputedResult = {
       counts: counts,
       winners: winners,
-      single: single,
-      primaryId: primaryId,
-      primary: currentQuiz.results[primaryId],
-      hybridLabel: hybridLabel,
-      title: single ? currentQuiz.results[primaryId].title : hybridLabel,
-      resultKey: single ? primaryId : winners.join('+')
+      single: winners.length === 1,
+      primaryId: winners[0],
+      primary: currentQuiz().results[winners[0]],
+      title: winners.length === 1 ? currentQuiz().results[winners[0]].title : currentQuiz().tieLabel,
+      resultKey: winners.join('+')
     };
+
     return lastComputedResult;
-  }
-
-  function getMailchimpTagForResult(resultInfo) {
-    const tags = currentQuiz.mailchimpTags || {};
-    if(resultInfo.single) {
-      return tags[resultInfo.primaryId] || '';
-    }
-    return '';
-  }
-
-  function getSingleResultHeadline(name, resultInfo) {
-    const safeName = escapeHTML(name || 'Friend');
-    if(currentQuiz.kind === 'animal') {
-      return safeName + ", you're the " + escapeHTML(resultInfo.primary.title) + '.';
-    }
-    return safeName + ', your team energy is ' + escapeHTML(resultInfo.primary.title) + '.';
-  }
-
-  function getHybridHeadline(name, resultInfo) {
-    const safeName = escapeHTML(name || 'Friend');
-    if(currentQuiz.kind === 'animal') {
-      return safeName + ", you're a rare hybrid: " + escapeHTML(resultInfo.hybridLabel || 'Hybrid Match') + '.';
-    }
-    return safeName + ', your team energy is a powerful blend: ' + escapeHTML(resultInfo.hybridLabel || 'Hybrid Match') + '.';
-  }
-
-  function renderProfileCard(profile) {
-    let html = '';
-    html += '<div class="result-block"><strong>' + escapeHTML(profile.emoji + ' ' + profile.title) + '</strong><br>' + escapeHTML(profile.description) + '</div>';
-    html += '<div class="result-block"><strong>' + escapeHTML(profile.superpowerLabel) + ':</strong><br>' + escapeHTML(profile.superpowerText) + '</div>';
-    if(profile.worksBestText) {
-      html += '<div class="result-block"><strong>' + escapeHTML(profile.worksBestLabel) + ':</strong><br>' + escapeHTML(profile.worksBestText) + '</div>';
-    }
-    html += '<div class="result-block"><strong>' + escapeHTML(profile.levelUpLabel) + ':</strong><br>' + escapeHTML(profile.levelUpText) + '</div>';
-    return html;
   }
 
   function buildAnswerPayload() {
     const payload = { answers_json: JSON.stringify(answers) };
     answers.forEach(function(answerKey, index) {
+      const selected = getSelectedOption(index, answerKey);
       payload['answer_' + (index + 1) + '_key'] = answerKey || '';
-      payload['answer_' + (index + 1) + '_text'] = getAnswerText(index, answerKey);
+      payload['answer_' + (index + 1) + '_text'] = selected ? selected.text : '';
+      payload['answer_' + (index + 1) + '_result'] = selected ? selected.result : '';
     });
     return payload;
   }
 
   function buildBasePayload(extra) {
-    const canUseResult = !!lastComputedResult || (answers.length > 0 && answers.every(function(answer) { return !!answer; }));
-    const resultInfo = canUseResult ? computeResult() : null;
-    const payload = {
+    const hasCompletedAnswers = answers.length > 0 && answers.every(function(answer) { return !!answer; });
+    const resultInfo = hasCompletedAnswers ? computeResult() : null;
+
+    return Object.assign({
       session_id: journey.sessionId,
-      flow_stage: screenResult.classList.contains('hidden') ? 'in_progress' : 'result',
-      quiz_id: currentQuiz ? currentQuiz.id : '',
-      quiz_title: currentQuiz ? currentQuiz.title : '',
-      quiz_number: currentQuiz ? currentQuiz.number : '',
+      quiz_id: currentQuiz().id,
+      quiz_title: currentQuiz().title,
+      quiz_number: currentQuiz().number,
+      flow_stage: !screenResult.classList.contains('hidden') ? 'result' : (!screenEmail.classList.contains('hidden') ? 'email_gate' : (!screenQuestion.classList.contains('hidden') ? 'question' : 'intro')),
       result_key: resultInfo ? resultInfo.resultKey : '',
       result_label: resultInfo ? resultInfo.title : '',
-      tied_result_keys: resultInfo && !resultInfo.single ? resultInfo.winners.join('|') : '',
-      journey_quiz_order: journey.quizOrder.join(' > '),
-      prompt_target_quiz_id: currentQuiz ? getOtherQuizId(currentQuiz.id) : '',
-      recommend_to_friends: journey.recommendation || '',
       email: journey.email || '',
       first_name: journey.firstName || '',
       consent: journey.consent ? 'Yes' : 'No',
       page_url: window.location.href,
       referrer: document.referrer || '',
       user_agent: navigator.userAgent || ''
-    };
-    return Object.assign(payload, extra || {});
+    }, extra || {});
   }
 
   function markQuizCompleted() {
-    if(!currentQuiz || completionLoggedForQuizId === currentQuiz.id) return;
-    const resultInfo = computeResult();
-    completionLoggedForQuizId = currentQuiz.id;
-    if(journey.completedQuizIds.indexOf(currentQuiz.id) === -1) {
-      journey.completedQuizIds.push(currentQuiz.id);
+    if (journey.completedQuizIds.indexOf(currentQuiz().id) === -1) {
+      journey.completedQuizIds.push(currentQuiz().id);
     }
-    logEvent('quiz_completed', Object.assign(buildBasePayload({ flow_stage: 'completed' }), buildAnswerPayload(), {
-      result_key: resultInfo.resultKey,
-      result_label: resultInfo.title,
-      tied_result_keys: resultInfo.single ? '' : resultInfo.winners.join('|')
-    }));
+    logEvent('quiz_completed', Object.assign(buildBasePayload({ flow_stage: 'completed' }), buildAnswerPayload()));
+  }
+
+  function renderSingleResult(profile) {
+    return '' +
+      '<div class="result-card">' +
+        '<div class="result-eyebrow">Your result</div>' +
+        '<h2 class="result-title">' + escapeHTML(profile.emoji + ' ' + profile.title) + '</h2>' +
+        '<p class="result-sub">This feels true for more people than they admit.</p>' +
+        (profile.image ? '<div class="result-media"><img src="' + escapeHTML(profile.image) + '" alt="' + escapeHTML(profile.title) + '" loading="lazy" /></div>' : '') +
+        '<div class="result-lines">' +
+          '<div class="result-line">' + escapeHTML(profile.line1) + '</div>' +
+          '<div class="result-line">' + escapeHTML(profile.line2) + '</div>' +
+          '<div class="result-line emphasis">' + escapeHTML(profile.line3) + '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function renderBlendResult(winners) {
+    return '' +
+      '<div class="result-card">' +
+        '<div class="result-eyebrow">Your result</div>' +
+        '<h2 class="result-title">You&rsquo;re a blend.</h2>' +
+        '<p class="result-sub">You don&rsquo;t fit in one box — and that&rsquo;s the point.</p>' +
+        '<div class="blend-grid">' +
+          winners.map(function(resultKey) {
+            const profile = currentQuiz().results[resultKey];
+            return '' +
+              '<div class="blend-card">' +
+                '<h3 class="blend-title">' + escapeHTML(profile.emoji + ' ' + profile.title) + '</h3>' +
+                (profile.image ? '<div class="result-media"><img src="' + escapeHTML(profile.image) + '" alt="' + escapeHTML(profile.title) + '" loading="lazy" /></div>' : '') +
+                '<div class="result-lines">' +
+                  '<div class="result-line">' + escapeHTML(profile.line1) + '</div>' +
+                  '<div class="result-line">' + escapeHTML(profile.line2) + '</div>' +
+                  '<div class="result-line emphasis">' + escapeHTML(profile.line3) + '</div>' +
+                '</div>' +
+              '</div>';
+          }).join('') +
+        '</div>' +
+      '</div>';
   }
 
   function showResult() {
-    const resultInfo = computeResult();
-    hideFlowPanels();
+    hidePanels();
     screenResult.classList.remove('hidden');
+    const resultInfo = computeResult();
 
-    let html = '<div class="pill">Your Result</div>';
-    html += '<div class="result-title">' + (resultInfo.single ? getSingleResultHeadline(journey.firstName, resultInfo) : getHybridHeadline(journey.firstName, resultInfo)) + '</div>';
+    resultContainer.innerHTML = resultInfo.single
+      ? renderSingleResult(resultInfo.primary)
+      : renderBlendResult(resultInfo.winners);
 
-    if(resultInfo.single) {
-      html += renderProfileCard(resultInfo.primary);
-    } else {
-      resultInfo.winners.forEach(function(resultId) {
-        html += renderProfileCard(currentQuiz.results[resultId]);
-      });
-    }
-
-    resultContainer.innerHTML = html;
     markQuizCompleted();
     renderResultActions();
-  }
-
-  function renderTransitionPrompt() {
-    const otherQuizId = getOtherQuizId(currentQuiz.id);
-    resultActionArea.innerHTML = '' +
-      '<div class="followup-card">' +
-        '<h3>' + escapeHTML(currentQuiz.resultPromptTitle) + '</h3>' +
-        '<div class="dual-actions">' +
-          '<button id="takeOtherQuizBtn" class="btn primary" type="button">' + escapeHTML(currentQuiz.resultPromptButton) + '</button>' +
-          '<button id="skipOtherQuizBtn" class="btn secondary" type="button">' + escapeHTML(currentQuiz.secondaryPromptButton || 'Maybe later') + '</button>' +
-        '</div>' +
-      '</div>';
-
-    $('#takeOtherQuizBtn', resultActionArea).addEventListener('click', function() {
-      logEvent('next_quiz_clicked', buildBasePayload({ note: 'User accepted cross-quiz prompt', prompt_target_quiz_id: otherQuizId }));
-      openQuiz(otherQuizId);
-    });
-
-    $('#skipOtherQuizBtn', resultActionArea).addEventListener('click', function() {
-      logEvent('next_quiz_skipped', buildBasePayload({ note: 'User skipped cross-quiz prompt', prompt_target_quiz_id: otherQuizId }));
-      renderExitPrompt();
-    });
-  }
-
-  function renderExitPrompt() {
-    const recommendationChosen = !!journey.recommendation;
-    resultActionArea.innerHTML = '' +
-      '<div class="followup-card">' +
-        '<h3>Would you recommend this quiz to your friends?</h3>' +
-        '<div class="choice-buttons">' +
-          '<button class="choice-chip' + (journey.recommendation === 'Yes' ? ' active' : '') + '" type="button" data-recommend="Yes">Yes</button>' +
-          '<button class="choice-chip' + (journey.recommendation === 'Maybe' ? ' active' : '') + '" type="button" data-recommend="Maybe">Maybe</button>' +
-          '<button class="choice-chip' + (journey.recommendation === 'No' ? ' active' : '') + '" type="button" data-recommend="No">No</button>' +
-        '</div>' +
-      '</div>' +
-      '<div class="followup-card ' + (recommendationChosen ? '' : 'hidden') + '" id="websitePromptCard">' +
-        '<h3>Would you like to know your potential?</h3>' +
-        '<div class="dual-actions">' +
-          '<a id="goToPupaBtn" class="btn primary" href="' + escapeHTML(PUPA_WEBSITE_QUIZ_URL) + '" target="_blank" rel="noopener noreferrer">Yes, take me to Pupa</a>' +
-          '<button id="stayHereBtn" class="btn secondary" type="button">Maybe later</button>' +
-        '</div>' +
-      '</div>';
-
-    $$('[data-recommend]', resultActionArea).forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        journey.recommendation = btn.getAttribute('data-recommend');
-        logEvent('exit_feedback', buildBasePayload({ recommend_to_friends: journey.recommendation, note: 'Referral answer captured' }));
-        renderExitPrompt();
-      });
-    });
-
-    const websiteBtn = $('#goToPupaBtn', resultActionArea);
-    if(websiteBtn) {
-      websiteBtn.addEventListener('click', function() {
-        journey.websiteClicked = true;
-        logEvent('website_click', buildBasePayload({ note: 'User clicked through to Pupa website' }));
-      });
-    }
-
-    const stayBtn = $('#stayHereBtn', resultActionArea);
-    if(stayBtn) {
-      stayBtn.addEventListener('click', function() {
-        logEvent('website_declined', buildBasePayload({ note: 'User declined website click for now' }));
-      });
-    }
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function renderResultActions() {
-    const otherQuizId = getOtherQuizId(currentQuiz.id);
-    const shouldOfferOtherQuiz = otherQuizId && journey.completedQuizIds.indexOf(otherQuizId) === -1;
-    if(shouldOfferOtherQuiz) {
-      renderTransitionPrompt();
+    if (currentQuizIndex === 0) {
+      const nextQuiz = QUIZZES[1];
+      resultActionArea.innerHTML = '' +
+        '<div class="cta-card">' +
+          '<div class="cta-eyebrow">Next</div>' +
+          '<h3 class="cta-title">' + escapeHTML(currentQuiz().transitionTitle) + '</h3>' +
+          '<p class="cta-sub">' + escapeHTML(currentQuiz().transitionSub) + '</p>' +
+          '<div class="dual-actions">' +
+            '<button id="goToNextQuizBtn" class="btn primary" type="button">' + escapeHTML(currentQuiz().transitionButton) + '</button>' +
+            '<a class="btn secondary" href="' + escapeHTML(PUPA_WEBSITE_QUIZ_URL) + '" target="_blank" rel="noopener noreferrer" id="skipToPupaBtn">' + escapeHTML(currentQuiz().transitionSkip) + '</a>' +
+          '</div>' +
+        '</div>';
+
+      $('#goToNextQuizBtn', resultActionArea).addEventListener('click', function() {
+        logEvent('next_quiz_clicked', buildBasePayload({ note: 'Moved from quiz 1 to quiz 2', prompt_target_quiz_id: nextQuiz.id }));
+        currentQuizIndex = 1;
+        resetQuizState();
+        renderIntro();
+      });
+
+      $('#skipToPupaBtn', resultActionArea).addEventListener('click', function() {
+        journey.finalCtaClicked = true;
+        logEvent('website_click', buildBasePayload({ note: 'Skipped quiz 2 and clicked to Pupa' }));
+      });
+
       return;
     }
-    renderExitPrompt();
+
+    const quiz = currentQuiz();
+    resultActionArea.innerHTML = '' +
+      '<div class="cta-card">' +
+        '<div class="cta-eyebrow">What next</div>' +
+        '<h3 class="cta-title">' + escapeHTML(quiz.finalTitle) + '</h3>' +
+        '<p class="cta-sub">' + escapeHTML(quiz.finalSub) + '</p>' +
+        '<div class="dual-actions">' +
+          '<a id="finalCtaBtn" class="btn primary" href="' + escapeHTML(PUPA_WEBSITE_QUIZ_URL) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(quiz.finalButton) + '</a>' +
+          '<button id="restartBtn" class="btn secondary" type="button">Restart</button>' +
+        '</div>' +
+      '</div>';
+
+    $('#finalCtaBtn', resultActionArea).addEventListener('click', function() {
+      journey.finalCtaClicked = true;
+      logEvent('website_click', buildBasePayload({ note: 'Clicked final Pupa CTA' }));
+    });
+
+    $('#restartBtn', resultActionArea).addEventListener('click', function() {
+      restartFlow();
+    });
+  }
+
+  function getMailchimpTagForResult(resultInfo) {
+    const tags = currentQuiz().mailchimpTags || {};
+    if (!resultInfo.single) return '';
+    return tags[resultInfo.primaryId] || '';
   }
 
   function flattenPayload(payload) {
     const output = {};
     Object.keys(payload || {}).forEach(function(key) {
       const value = payload[key];
-      if(value === undefined || value === null) {
+      if (value === undefined || value === null) {
         output[key] = '';
-      } else if(typeof value === 'object') {
+      } else if (typeof value === 'object') {
         output[key] = JSON.stringify(value);
       } else {
         output[key] = String(value);
@@ -1673,18 +1290,20 @@
   function sendViaHiddenForm(url, params) {
     const iframeName = 'sheet_log_iframe';
     let iframe = document.getElementById(iframeName);
-    if(!iframe) {
+    if (!iframe) {
       iframe = document.createElement('iframe');
       iframe.id = iframeName;
       iframe.name = iframeName;
       iframe.className = 'hidden';
       document.body.appendChild(iframe);
     }
+
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = url;
     form.target = iframeName;
     form.className = 'hidden';
+
     Object.keys(params).forEach(function(key) {
       const input = document.createElement('input');
       input.type = 'hidden';
@@ -1692,15 +1311,17 @@
       input.value = params[key];
       form.appendChild(input);
     });
+
     document.body.appendChild(form);
     form.submit();
     setTimeout(function() {
-      try { form.remove(); } catch (e) {}
+      try { form.remove(); } catch (error) {}
     }, 1500);
   }
 
   function logEvent(eventType, payload) {
-    if(!sheetsEnabled()) return;
+    if (!sheetsEnabled()) return;
+
     const params = flattenPayload(Object.assign({
       event_type: eventType,
       timestamp_iso_client: new Date().toISOString()
@@ -1714,7 +1335,7 @@
       }).catch(function() {
         sendViaHiddenForm(GOOGLE_SHEETS_WEB_APP_URL, params);
       });
-    } catch (e) {
+    } catch (error) {
       sendViaHiddenForm(GOOGLE_SHEETS_WEB_APP_URL, params);
     }
   }
@@ -1723,15 +1344,25 @@
     return new Promise(function(resolve, reject) {
       const callbackName = 'mc_cb_' + Math.random().toString(36).slice(2);
       let timedOut = false;
+      let cleaned = false;
+      const script = document.createElement('script');
+      let timer = null;
+
+      function cleanup() {
+        if (cleaned) return;
+        cleaned = true;
+        try { delete window[callbackName]; } catch (error) {}
+        try { script.remove(); } catch (error) {}
+        if (timer) clearTimeout(timer);
+      }
+
       window[callbackName] = function(response) {
-        if(timedOut) return;
+        if (timedOut) return;
         cleanup();
         resolve(response);
       };
 
-      const url = MAILCHIMP_POST_JSON_URL + '&' + new URLSearchParams(params).toString() + '&c=' + callbackName;
-      const script = document.createElement('script');
-      script.src = url;
+      script.src = MAILCHIMP_POST_JSON_URL + '&' + new URLSearchParams(params).toString() + '&c=' + callbackName;
       script.async = true;
       script.onerror = function() {
         cleanup();
@@ -1739,57 +1370,76 @@
       };
       document.body.appendChild(script);
 
-      const timer = setTimeout(function() {
+      timer = setTimeout(function() {
         timedOut = true;
         cleanup();
         reject(new Error('Timeout'));
       }, timeoutMs || 12000);
-
-      function cleanup() {
-        try { delete window[callbackName]; } catch (e) {}
-        try { script.remove(); } catch (e) {}
-        clearTimeout(timer);
-      }
     });
   }
 
+  function restartFlow() {
+    if (autoTimer) {
+      clearTimeout(autoTimer);
+      autoTimer = null;
+    }
+
+    currentQuizIndex = 0;
+    journey.firstName = '';
+    journey.email = '';
+    journey.consent = false;
+    journey.completedQuizIds = [];
+    journey.hasSubmittedMailchimp = false;
+    journey.finalCtaClicked = false;
+
+    emailInput.value = '';
+    consent.checked = false;
+    mcFname.value = '';
+    mcMsg.textContent = '';
+    resultContainer.innerHTML = '';
+    resultActionArea.innerHTML = '';
+
+    resetQuizState();
+    renderIntro();
+  }
+
   nextBtn.addEventListener('click', function() {
-    const selected = answers[currentQuestionIndex];
-    if(!selected) return;
+    if (!answers[currentQuestionIndex]) return;
     autoAdvanceOrFinish();
   });
 
   prevBtn.addEventListener('click', function() {
-    if(autoTimer) {
+    if (autoTimer) {
       clearTimeout(autoTimer);
       autoTimer = null;
     }
-    if(currentQuestionIndex === 0) {
+
+    if (currentQuestionIndex === 0) {
       renderIntro();
       return;
     }
-    currentQuestionIndex -= 1;
-    loadQuestion(currentQuestionIndex);
+
+    loadQuestion(currentQuestionIndex - 1);
   });
 
-  $('#mcForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+  $('#mcForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
     mcMsg.className = 'msg muted';
     mcMsg.textContent = '';
 
-    if((hpInput.value || '').trim() !== '') {
+    if ((hpInput.value || '').trim() !== '') {
       showResult();
       return;
     }
 
     const email = (emailInput.value || '').trim();
-    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       mcMsg.className = 'msg error';
       mcMsg.textContent = 'Please enter a valid email address.';
       return;
     }
 
-    if(!consent.checked) {
+    if (!consent.checked) {
       mcMsg.className = 'msg error';
       mcMsg.textContent = 'Please tick the consent box to continue.';
       return;
@@ -1814,7 +1464,7 @@
     try {
       const response = await submitMailchimpJSONP(params, 12000);
       journey.hasSubmittedMailchimp = true;
-      if(response && response.result === 'success') {
+      if (response && response.result === 'success') {
         mcMsg.className = 'msg success';
         mcMsg.textContent = 'Success! Check your inbox in a few minutes.';
       } else {
@@ -1823,57 +1473,29 @@
       }
       logEvent('email_captured', Object.assign(buildBasePayload({ note: 'Email captured at gate' }), { email: journey.email, consent: 'Yes' }));
       showResult();
-    } catch (err) {
+    } catch (error) {
       try {
         fbEmail.value = journey.email;
         fbFname.value = journey.firstName;
         fbTags.value = tagId;
         fbHp.value = '';
         fbForm.submit();
-      } catch (_err) {}
+      } catch (fallbackError) {}
+
       journey.hasSubmittedMailchimp = true;
       logEvent('email_captured', Object.assign(buildBasePayload({ note: 'Email captured via fallback path' }), { email: journey.email, consent: 'Yes' }));
       mcMsg.className = 'msg muted';
-      mcMsg.textContent = 'Connection was spotty - proceeding anyway.';
-      setTimeout(function() { showResult(); }, 900);
+      mcMsg.textContent = 'Connection was spotty — proceeding anyway.';
+      setTimeout(function() {
+        showResult();
+      }, 900);
     } finally {
       seeResultsBtn.removeAttribute('disabled');
     }
   });
 
-  $('#restartBtn').addEventListener('click', function() {
-    if(autoTimer) {
-      clearTimeout(autoTimer);
-      autoTimer = null;
-    }
-    currentQuiz = null;
-    journey.firstName = '';
-    journey.email = '';
-    journey.consent = false;
-    journey.completedQuizIds = [];
-    journey.recommendation = '';
-    journey.websiteClicked = false;
-    journey.hasSubmittedMailchimp = false;
-    journey.quizOrder = [];
-    emailInput.value = '';
-    consent.checked = false;
-    mcFname.value = '';
-    mcMsg.textContent = '';
-    resultContainer.innerHTML = '';
-    resultActionArea.innerHTML = '';
-    resetQuizState();
-    showHub();
-  });
-
-  $('#backToHubBtn').addEventListener('click', function() {
-    if(autoTimer) {
-      clearTimeout(autoTimer);
-      autoTimer = null;
-    }
-    showHub();
-  });
-
-  openQuiz(ENTRY_QUIZ_ID);
+  resetQuizState();
+  renderIntro();
 })();
 </script>
 </body>
