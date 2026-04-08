@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -619,6 +620,7 @@
   const MAILCHIMP_POST_JSON_URL = 'https://thefalafeltheory.us22.list-manage.com/subscribe/post-json?u=44c6260e44554e7b992e09185&id=083452c971';
   const STORAGE_KEY = 'pupa_quiz_session_id';
 
+
   const QUIZZES = [
     {
       id: 'career-animal',
@@ -637,99 +639,163 @@
       transitionSkip: 'Maybe later',
       mailchimpTags: {
         lion: '',
+        wolf: '',
+        fox: '',
+        elephant: '',
+        monkey: '',
         hawk: '',
         dolphin: ''
       },
       questions: [
         {
-          q: 'In a group, you:',
-          image: 'https://static.wixstatic.com/media/d1daaa_2f5632486c6a4b72907c716a5fb242f6~mv2.jpg',
+          q: 'Something unexpected comes up at work. What do you do?',
+          image: 'https://static.wixstatic.com/media/d1daaa_6cc58846f2654efcb536a0d795ab65ea~mv2.jpg',
           options: [
-            { key: 'A', text: 'Take control', result: 'lion' },
-            { key: 'B', text: 'Read people', result: 'dolphin' },
-            { key: 'C', text: 'Think first', result: 'hawk' }
+            { key: 'A', text: 'I step up and handle it.', scores: { lion: 3, wolf: 2, fox: 1 } },
+            { key: 'B', text: 'I slow down and think of the best plan.', scores: { hawk: 3, elephant: 2, fox: 1 } },
+            { key: 'C', text: 'I get curious and explore different ideas.', scores: { monkey: 3, dolphin: 2, wolf: 1 } }
           ]
         },
         {
-          q: 'What annoys you most?',
-          image: 'https://static.wixstatic.com/media/d1daaa_da19a5c55f914c1f90aa9569e2ee7615~mv2.jpg',
+          q: 'In a team, what do people usually rely on you for?',
+          image: 'https://static.wixstatic.com/media/d1daaa_4ec1d4ce7ebf4b29aacd45443255258a~mv2.jpg',
           options: [
-            { key: 'A', text: 'Bad vibes', result: 'dolphin' },
-            { key: 'B', text: 'Slow people', result: 'lion' },
-            { key: 'C', text: 'Bad ideas', result: 'hawk' }
+            { key: 'A', text: 'Leading, deciding, and keeping things on track.', scores: { wolf: 3, lion: 2, dolphin: 1 } },
+            { key: 'B', text: 'Thinking ahead and finding smart solutions.', scores: { hawk: 3, fox: 2, elephant: 1 } },
+            { key: 'C', text: 'Supporting people and keeping the team connected.', scores: { dolphin: 3, monkey: 2, wolf: 1 } }
           ]
         },
         {
-          q: 'When things go wrong:',
-          image: 'https://static.wixstatic.com/media/d1daaa_2d80c0803fec446bae651ee5c989a81c~mv2.jpg',
+          q: 'What kind of job feels most exciting to you?',
+          image: 'https://static.wixstatic.com/media/d1daaa_41ddede8fcd14fb0acd64c49e965cb5c~mv2.png',
           options: [
-            { key: 'A', text: 'Think deeper', result: 'hawk' },
-            { key: 'B', text: 'Support others', result: 'dolphin' },
-            { key: 'C', text: 'Act fast', result: 'lion' }
+            { key: 'A', text: 'A high-pressure role where my decisions matter.', scores: { lion: 3, fox: 2, wolf: 1 } },
+            { key: 'B', text: 'A stable role where I can build deep expertise.', scores: { elephant: 3, hawk: 2, fox: 1 } },
+            { key: 'C', text: 'A people-focused role with variety and learning.', scores: { dolphin: 3, monkey: 2, elephant: 1 } }
           ]
         },
         {
-          q: 'What feels best?',
-          image: 'https://static.wixstatic.com/media/d1daaa_335aad35a2954e55a2a604a5f63f0b6a~mv2.jpg',
+          q: 'Your team hits a big setback. What do you do?',
+          image: 'https://static.wixstatic.com/media/d1daaa_3ec2a3232bc94416a70e03b9013dce7e~mv2.jpg',
           options: [
-            { key: 'A', text: 'Being trusted', result: 'dolphin' },
-            { key: 'B', text: 'Being right', result: 'hawk' },
-            { key: 'C', text: 'Being in charge', result: 'lion' }
+            { key: 'A', text: 'I take charge and lead through it.', scores: { lion: 3, wolf: 2, fox: 1 } },
+            { key: 'B', text: 'I find a smart new way forward.', scores: { fox: 3, hawk: 2, elephant: 1 } },
+            { key: 'C', text: 'I make sure the team stays together first.', scores: { dolphin: 3, elephant: 2, monkey: 1 } }
           ]
         },
         {
-          q: 'People see you as:',
-          image: 'https://static.wixstatic.com/media/d1daaa_91032f88aea94443bf1ceb2bde383490~mv2.png',
+          q: 'What makes work feel meaningful to you?',
+          image: 'https://static.wixstatic.com/media/d1daaa_261c0d0b1c654237a6b1d8ce0e0baf7c~mv2.png',
           options: [
-            { key: 'A', text: 'The smart one', result: 'hawk' },
-            { key: 'B', text: 'The leader', result: 'lion' },
-            { key: 'C', text: 'The nice one', result: 'dolphin' }
+            { key: 'A', text: 'Winning, making an impact, and being recognised.', scores: { lion: 3, wolf: 2, hawk: 1 } },
+            { key: 'B', text: 'Learning, discovering, and solving hard problems.', scores: { monkey: 3, fox: 2, hawk: 1 } },
+            { key: 'C', text: 'Helping people and making the team better.', scores: { dolphin: 3, elephant: 2, wolf: 1 } }
           ]
         },
         {
-          q: 'Your weakness?',
-          image: 'https://static.wixstatic.com/media/d1daaa_dac59c4abdaa44699943f4fa90d3bfff~mv2.png',
+          q: 'How would your friends describe you?',
+          image: 'https://static.wixstatic.com/media/d1daaa_0248a881b6874420a2fa55cf499f1430~mv2.png',
           options: [
-            { key: 'A', text: 'Care too much', result: 'dolphin' },
-            { key: 'B', text: 'Too intense', result: 'lion' },
-            { key: 'C', text: 'Overthinking', result: 'hawk' }
+            { key: 'A', text: 'Someone who gets things done and leads naturally.', scores: { wolf: 3, lion: 2, fox: 1 } },
+            { key: 'B', text: 'Someone thoughtful, careful, and smart.', scores: { elephant: 3, hawk: 2, fox: 1 } },
+            { key: 'C', text: 'Someone kind who makes people feel comfortable.', scores: { dolphin: 3, monkey: 2, elephant: 1 } }
           ]
         },
         {
-          q: 'Your instinct:',
-          image: 'https://static.wixstatic.com/media/d1daaa_a56598d973a74cd7880b975c639502ca~mv2.png',
+          q: 'At the end of a hard week, what feels most rewarding?',
+          image: 'https://static.wixstatic.com/media/d1daaa_29fcef40c0ce46a5a83c64cc7a2f0c56~mv2.jpg',
           options: [
-            { key: 'A', text: 'Think it through', result: 'hawk' },
-            { key: 'B', text: 'Ask others', result: 'dolphin' },
-            { key: 'C', text: 'Just do it', result: 'lion' }
+            { key: 'A', text: 'I reached my goal and proved I could do it.', scores: { lion: 3, wolf: 2, fox: 1 } },
+            { key: 'B', text: 'I made a smart move that will matter later.', scores: { hawk: 3, elephant: 2, fox: 1 } },
+            { key: 'C', text: 'I helped someone feel stronger or more included.', scores: { dolphin: 3, monkey: 2, wolf: 1 } }
           ]
         }
       ],
       tieLabel: 'Blend',
       results: {
         lion: {
-          title: 'Lion',
+          title: 'The Lion',
           emoji: '🦁',
           image: 'https://static.wixstatic.com/media/d1daaa_efd7275a198b4a7ebabcfd16885ca227~mv2.png',
-          line1: 'You move first.',
-          line2: 'People follow.',
-          line3: 'Yeah… you can be intense.'
+          subtitle: 'You are confident, brave, and naturally take charge. When something needs to get done, you do not wait around for someone else to step in. You are the kind of person who likes action, responsibility, and real results. People often look to you when decisions need to be made or when things feel uncertain.',
+          details: [
+            { text: '“I’ll handle it.”', emphasis: true },
+            { text: 'You bring: leadership, courage, strong decisions' },
+            { text: 'Career sweet spot: leadership, entrepreneurship, sales, high-pressure roles' },
+            { text: 'Level up by: remembering that great leaders also support and grow others' }
+          ]
+        },
+        wolf: {
+          title: 'The Wolf',
+          emoji: '🐺',
+          image: 'https://static.wixstatic.com/media/d1daaa_fedc120c0a884337a083ebd67b94e5b7~mv2.png',
+          subtitle: 'You are loyal, steady, and strong in teams. You may not always lead in a loud way, but people trust you and respect your instincts. You know how to bring people together, build trust, and help a group move in the same direction. You care about teamwork and connection, and that makes your leadership powerful.',
+          details: [
+            { text: '“We do this together.”', emphasis: true },
+            { text: 'You bring: loyalty, trust, teamwork, strong instincts' },
+            { text: 'Career sweet spot: team leadership, project management, community-building roles' },
+            { text: 'Level up by: stepping forward more often and trusting your voice' }
+          ]
+        },
+        fox: {
+          title: 'The Fox',
+          emoji: '🦊',
+          image: 'https://static.wixstatic.com/media/d1daaa_c7d8e24df61049759c6eeff6e22064ef~mv2.png',
+          subtitle: 'You are smart, flexible, and quick at solving problems. When others feel stuck, you usually spot a new path forward. You think fast, adapt easily, and often come up with ideas that others did not see. You bring creative thinking and resourcefulness into every space you enter.',
+          details: [
+            { text: '“There’s always another way.”', emphasis: true },
+            { text: 'You bring: problem-solving, creativity, adaptability' },
+            { text: 'Career sweet spot: innovation, consulting, technology, creative strategy' },
+            { text: 'Level up by: remembering that simple solutions can sometimes work best' }
+          ]
+        },
+        elephant: {
+          title: 'The Elephant',
+          emoji: '🐘',
+          image: 'https://static.wixstatic.com/media/d1daaa_f3f7f2aaaef54537b8053a512d712cea~mv2.png',
+          subtitle: 'You are calm, wise, and dependable. You do not rush, panic, or make careless choices. Instead, you think carefully and build things that last. People trust you because you are steady, thoughtful, and reliable. Even if you are not always the loudest person, your presence makes others feel safe and supported.',
+          details: [
+            { text: '“Let’s do it properly.”', emphasis: true },
+            { text: 'You bring: patience, stability, wisdom, reliability' },
+            { text: 'Career sweet spot: research, education, law, medicine, finance' },
+            { text: 'Level up by: being more open to change when needed' }
+          ]
+        },
+        monkey: {
+          title: 'The Monkey',
+          emoji: '🐒',
+          image: 'https://static.wixstatic.com/media/d1daaa_7598151e096e410da871eeb774ae6156~mv2.png',
+          subtitle: 'You are curious, energetic, and full of ideas. You learn quickly, ask great questions, and bring fresh energy into a team. You enjoy exploring, testing, and trying new things. Your excitement can lift the people around you and make work feel more interesting and alive.',
+          details: [
+            { text: '“What if we try this instead?”', emphasis: true },
+            { text: 'You bring: curiosity, creativity, fast learning, energy' },
+            { text: 'Career sweet spot: media, design, tech, startups, research' },
+            { text: 'Level up by: focusing deeply on one skill or area and growing it fully' }
+          ]
         },
         hawk: {
-          title: 'Hawk',
+          title: 'The Hawk',
           emoji: '🦅',
           image: 'https://static.wixstatic.com/media/d1daaa_9f3e663833b04a5f95bb95c164a5448e~mv2.png',
-          line1: 'You see things early.',
-          line2: 'You think deeper.',
-          line3: 'Just don’t overthink everything.'
+          subtitle: 'You are a big-picture thinker. You notice patterns, spot future problems, and understand direction better than most people. While others focus only on what is happening now, you are already thinking ahead. Your ideas help people see the bigger goal and understand what really matters.',
+          details: [
+            { text: '“I can see where this is going.”', emphasis: true },
+            { text: 'You bring: vision, strategy, pattern recognition' },
+            { text: 'Career sweet spot: strategy, data, policy, systems thinking, architecture' },
+            { text: 'Level up by: staying connected to the people and details on the ground' }
+          ]
         },
         dolphin: {
-          title: 'Dolphin',
+          title: 'The Dolphin',
           emoji: '🐬',
           image: 'https://static.wixstatic.com/media/d1daaa_0d446c4670284418ae233a3702f095b7~mv2.png',
-          line1: 'You read people fast.',
-          line2: 'You build trust.',
-          line3: 'Just don’t forget yourself.'
+          subtitle: 'You are caring, emotionally aware, and naturally good with people. You notice how others feel, you build trust easily, and you help teams feel connected. You are often the person who makes others feel included, understood, and supported. In many ways, you are the heart of the group.',
+          details: [
+            { text: '“How is everyone doing?”', emphasis: true },
+            { text: 'You bring: empathy, connection, emotional intelligence' },
+            { text: 'Career sweet spot: HR, counselling, teaching, community work, social impact' },
+            { text: 'Level up by: speaking up more confidently for your own ideas' }
+          ]
         }
       }
     },
@@ -749,98 +815,149 @@
       mailchimpTags: {
         igniter: '',
         anchor: '',
-        empath: ''
+        empath: '',
+        finisher: '',
+        clarifier: '',
+        grower: ''
       },
       questions: [
         {
-          q: 'In a team, you:',
-          image: 'https://static.wixstatic.com/media/d1daaa_9c39a455eb4840318fca36a9410556e1~mv2.png',
+          q: 'Your team starts a new project, but the energy is unsure. What do you do first?',
+          image: 'https://static.wixstatic.com/media/d1daaa_5b6f387bc37c498c90c7f76e738458ea~mv2.png',
           options: [
-            { key: 'A', text: 'Stay steady', result: 'anchor' },
-            { key: 'B', text: 'Bring energy', result: 'igniter' },
-            { key: 'C', text: 'Read people', result: 'empath' }
+            { key: 'A', text: 'I get people excited and motivated.', scores: { igniter: 3, finisher: 2, anchor: 1 } },
+            { key: 'B', text: 'I make sure there is a clear plan.', scores: { anchor: 3, clarifier: 2, finisher: 1 } },
+            { key: 'C', text: 'I read the room and see who needs support.', scores: { empath: 3, grower: 2, clarifier: 1 } }
           ]
         },
         {
-          q: 'When things feel off:',
-          image: 'https://static.wixstatic.com/media/d1daaa_e0b6f2adf2034898bbb5dc0ca53d32fc~mv2.png',
+          q: 'The team has had a rough few weeks. What do you do?',
+          image: 'https://static.wixstatic.com/media/d1daaa_1c8c2964a1e94e6ba06051a1e074d413~mv2.png',
           options: [
-            { key: 'A', text: 'Check others', result: 'empath' },
-            { key: 'B', text: 'Lift mood', result: 'igniter' },
-            { key: 'C', text: 'Stay calm', result: 'anchor' }
+            { key: 'A', text: 'I lift the mood and change the energy.', scores: { igniter: 3, empath: 2, anchor: 1 } },
+            { key: 'B', text: 'I stay steady and consistent.', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
+            { key: 'C', text: 'I check on the people struggling most.', scores: { empath: 3, grower: 2, anchor: 1 } }
           ]
         },
         {
-          q: 'In conflict, you:',
-          image: 'https://static.wixstatic.com/media/d1daaa_4a4f2e9ffccd4a1b84657a1f6b3638db~mv2.png',
+          q: 'There is conflict in the team. What do you do?',
+          image: 'https://static.wixstatic.com/media/d1daaa_cf4d65f252cd40c08f147e0bee580d7f~mv2.png',
           options: [
-            { key: 'A', text: 'Hear everyone', result: 'empath' },
-            { key: 'B', text: 'Ease tension', result: 'igniter' },
-            { key: 'C', text: 'Hold ground', result: 'anchor' }
+            { key: 'A', text: 'I push for a decision and resolution.', scores: { finisher: 3, igniter: 2, anchor: 1 } },
+            { key: 'B', text: 'I stay calm and keep things from getting worse.', scores: { anchor: 3, clarifier: 2, finisher: 1 } },
+            { key: 'C', text: 'I make sure everyone feels heard.', scores: { grower: 3, empath: 2, clarifier: 1 } }
           ]
         },
         {
-          q: 'Your role is:',
-          image: 'https://static.wixstatic.com/media/d1daaa_faf5c7401e114dc4992a315341bf15f5~mv2.png',
+          q: 'What does your team rely on you for most?',
+          image: 'https://static.wixstatic.com/media/d1daaa_44f13c91e32445bab22fafb41d99b86e~mv2.png',
           options: [
-            { key: 'A', text: 'Hype team', result: 'igniter' },
-            { key: 'B', text: 'Hold people', result: 'empath' },
-            { key: 'C', text: 'Keep track', result: 'anchor' }
+            { key: 'A', text: 'Keeping hope and energy alive.', scores: { igniter: 3, empath: 2, grower: 1 } },
+            { key: 'B', text: 'Being dependable and consistent.', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
+            { key: 'C', text: 'Making sure no one is left out.', scores: { clarifier: 3, empath: 2, grower: 1 } }
           ]
         },
         {
-          q: 'Someone struggling:',
-          image: 'https://static.wixstatic.com/media/d1daaa_847244915cf94af79485a66da0d5b8ae~mv2.png',
+          q: 'A teammate is falling behind and feeling stressed. What do you do?',
+          image: 'https://static.wixstatic.com/media/d1daaa_8fe2a4cf8d58463593c13c9052dec4fe~mv2.png',
           options: [
-            { key: 'A', text: 'Guide steps', result: 'anchor' },
-            { key: 'B', text: 'Listen first', result: 'empath' },
-            { key: 'C', text: 'Motivate them', result: 'igniter' }
+            { key: 'A', text: 'I help them focus and break things into steps.', scores: { finisher: 3, igniter: 2, anchor: 1 } },
+            { key: 'B', text: 'I try to understand what is really going on.', scores: { grower: 3, empath: 2, clarifier: 1 } },
+            { key: 'C', text: 'I listen and make sure they feel heard.', scores: { clarifier: 3, anchor: 2, empath: 1 } }
           ]
         },
         {
-          q: 'Your strength:',
-          image: 'https://static.wixstatic.com/media/d1daaa_70bedaa07ae04f59b77500f86af6e8c7~mv2.png',
+          q: 'After a successful team project, what are you most proud of?',
+          image: 'https://static.wixstatic.com/media/d1daaa_65bdc83d80b04072b419efe4e81c5028~mv2.png',
           options: [
-            { key: 'A', text: 'Build trust', result: 'empath' },
-            { key: 'B', text: 'Drive energy', result: 'igniter' },
-            { key: 'C', text: 'Stay reliable', result: 'anchor' }
+            { key: 'A', text: 'I helped lift the team at the right moment.', scores: { igniter: 3, empath: 2, grower: 1 } },
+            { key: 'B', text: 'I delivered exactly what I promised.', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
+            { key: 'C', text: 'Someone grew more confident because of the experience.', scores: { grower: 3, empath: 2, clarifier: 1 } }
           ]
         },
         {
-          q: 'People say:',
-          image: 'https://static.wixstatic.com/media/d1daaa_fe15a4e02e564acbb3eae58225f89804~mv2.png',
+          q: 'What would your teammates say you bring to a team?',
+          image: 'https://static.wixstatic.com/media/d1daaa_9692e11a01aa4f1589d12f684c5842d9~mv2.png',
           options: [
-            { key: 'A', text: 'Always solid', result: 'anchor' },
-            { key: 'B', text: 'Feels like home', result: 'empath' },
-            { key: 'C', text: 'Keeps us going', result: 'igniter' }
+            { key: 'A', text: '“They keep us going.”', scores: { igniter: 3, finisher: 2, anchor: 1 } },
+            { key: 'B', text: '“They are always reliable.”', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
+            { key: 'C', text: '“They make sure no one gets left behind.”', scores: { empath: 3, grower: 2, clarifier: 1 } }
           ]
         }
       ],
       tieLabel: 'Blend',
       results: {
         igniter: {
-          title: 'Igniter',
+          title: 'The Igniter',
           emoji: '⚡',
           image: 'https://static.wixstatic.com/media/d1daaa_0a949f0441ee4b80b8305fecc103624f~mv2.png',
-          line1: 'You bring the spark.',
-          line2: 'You make things move.',
-          line3: 'Just… don’t disappear halfway.'
+          subtitle: 'You bring excitement, momentum, and belief. When energy is low or a team feels stuck, you help people move again. You make things feel possible and help others feel motivated to take action. Your energy is powerful, and it can completely change the mood of a team.',
+          details: [
+            { text: '“Let’s go for it.”', emphasis: true },
+            { text: 'You bring: momentum, belief, motivation' },
+            { text: 'Dream team combo: Anchor + Finisher' },
+            { text: 'Level up by: following through all the way to the finish' }
+          ]
         },
         anchor: {
-          title: 'Anchor',
+          title: 'The Anchor',
           emoji: '🧱',
           image: 'https://static.wixstatic.com/media/d1daaa_1dfdcb345c3f44a39e4fd4077c01152a~mv2.png',
-          line1: 'You hold things steady.',
-          line2: 'People rely on you.',
-          line3: 'Just don’t carry everything alone.'
+          subtitle: 'You are steady, calm, and dependable. You help teams feel secure because people know they can count on you. You may not always be the loudest person in the room, but your consistency is a huge strength. You are often the reason things do not fall apart under pressure.',
+          details: [
+            { text: '“I said I’d do it, so I will.”', emphasis: true },
+            { text: 'You bring: reliability, calm, stability' },
+            { text: 'Dream team combo: Igniter + Clarifier' },
+            { text: 'Level up by: sharing your thoughts more, because your voice matters' }
+          ]
         },
         empath: {
-          title: 'Empath',
+          title: 'The Empath',
           emoji: '🫀',
           image: 'https://static.wixstatic.com/media/d1daaa_4f80469237304f9ba752ab7f2a070c66~mv2.png',
-          line1: 'You make people feel seen.',
-          line2: 'You build real teams.',
-          line3: 'Protect your energy too.'
+          subtitle: 'You bring care, trust, and emotional awareness. You notice when someone is struggling, when tension is rising, or when something feels off. You help people feel seen and understood, which makes teams healthier and stronger. You remind everyone that people matter, not just results.',
+          details: [
+            { text: '“Is everyone okay?”', emphasis: true },
+            { text: 'You bring: empathy, trust, human connection' },
+            { text: 'Dream team combo: Finisher + Clarifier' },
+            { text: 'Level up by: protecting your own energy while caring for others' }
+          ]
+        },
+        finisher: {
+          title: 'The Finisher',
+          emoji: '🎯',
+          image: 'https://static.wixstatic.com/media/d1daaa_f261053389a540d4a31fd7660901d41b~mv2.png',
+          subtitle: 'You bring focus, discipline, and action. You help teams move from ideas to real results. While others may keep talking, you make sure things actually happen. You are driven, reliable under pressure, and often the reason a team delivers what it promised.',
+          details: [
+            { text: '“Let’s get it done.”', emphasis: true },
+            { text: 'You bring: execution, accountability, results' },
+            { text: 'Dream team combo: Empath + Clarifier' },
+            { text: 'Level up by: slowing down just enough to bring others with you' }
+          ]
+        },
+        clarifier: {
+          title: 'The Clarifier',
+          emoji: '💡',
+          image: 'https://static.wixstatic.com/media/d1daaa_96afcb787cff46059e3c17e002af7d65~mv2.png',
+          subtitle: 'You bring understanding and direction. When things feel messy, confusing, or too complicated, you help people see the real issue. You ask smart questions, cut through the noise, and help the team focus on what really matters. Your clarity can save people a lot of wasted time and effort.',
+          details: [
+            { text: '“Let’s make this clear first.”', emphasis: true },
+            { text: 'You bring: insight, clarity, strong questions' },
+            { text: 'Dream team combo: Igniter + Grower' },
+            { text: 'Level up by: moving into action a little sooner' }
+          ]
+        },
+        grower: {
+          title: 'The Grower',
+          emoji: '🌱',
+          image: 'https://static.wixstatic.com/media/d1daaa_840446dabcaf48a18355f193cebe3c06~mv2.png',
+          subtitle: 'You bring growth, encouragement, and belief in others. You notice potential in people and help them build confidence. Teams with you do not just complete tasks — they improve over time. You have a quiet but powerful impact because you help others become stronger, better, and more capable.',
+          details: [
+            { text: '“I want to help people become better.”', emphasis: true },
+            { text: 'You bring: development, confidence, growth' },
+            { text: 'Dream team combo: Finisher + Clarifier' },
+            { text: 'Level up by: giving yourself the same care and growth you give to others' }
+          ]
         }
       }
     }
@@ -1085,33 +1202,60 @@
     return question.options.find(function(option) { return option.key === answerKey; }) || null;
   }
 
+  function getSortedScoreEntries(scores) {
+    return Object.entries(scores || {}).sort(function(a, b) {
+      if (b[1] !== a[1]) return b[1] - a[1];
+      return a[0].localeCompare(b[0]);
+    });
+  }
+
+  function getTopScoreKeys(scores) {
+    const entries = getSortedScoreEntries(scores);
+    if (!entries.length) return [];
+    const max = entries[0][1];
+    return entries.filter(function(entry) {
+      return entry[1] === max;
+    }).map(function(entry) {
+      return entry[0];
+    });
+  }
+
   function computeResult() {
     if (lastComputedResult) return lastComputedResult;
 
-    const counts = {};
+    const totals = {};
     Object.keys(currentQuiz().results).forEach(function(resultKey) {
-      counts[resultKey] = 0;
+      totals[resultKey] = 0;
     });
 
     answers.forEach(function(answerKey, index) {
       const selected = getSelectedOption(index, answerKey);
-      if (selected && Object.prototype.hasOwnProperty.call(counts, selected.result)) {
-        counts[selected.result] += 1;
-      }
+      if (!selected || !selected.scores) return;
+
+      Object.keys(selected.scores).forEach(function(resultKey) {
+        if (!Object.prototype.hasOwnProperty.call(totals, resultKey)) {
+          totals[resultKey] = 0;
+        }
+        totals[resultKey] += Number(selected.scores[resultKey] || 0);
+      });
     });
 
-    const max = Math.max.apply(null, Object.values(counts));
-    const winners = Object.keys(counts).filter(function(resultKey) {
-      return counts[resultKey] === max;
+    const sortedEntries = getSortedScoreEntries(totals);
+    const max = sortedEntries.length ? sortedEntries[0][1] : 0;
+    const winners = sortedEntries.filter(function(entry) {
+      return entry[1] === max;
+    }).map(function(entry) {
+      return entry[0];
     });
 
     lastComputedResult = {
-      counts: counts,
+      counts: totals,
       winners: winners,
+      sortedEntries: sortedEntries,
       single: winners.length === 1,
-      primaryId: winners[0],
-      primary: currentQuiz().results[winners[0]],
-      title: winners.length === 1 ? currentQuiz().results[winners[0]].title : currentQuiz().tieLabel,
+      primaryId: winners[0] || '',
+      primary: winners.length ? currentQuiz().results[winners[0]] : null,
+      title: winners.length === 1 && currentQuiz().results[winners[0]] ? currentQuiz().results[winners[0]].title : currentQuiz().tieLabel,
       resultKey: winners.join('+')
     };
 
@@ -1124,8 +1268,12 @@
       const selected = getSelectedOption(index, answerKey);
       payload['answer_' + (index + 1) + '_key'] = answerKey || '';
       payload['answer_' + (index + 1) + '_text'] = selected ? selected.text : '';
-      payload['answer_' + (index + 1) + '_result'] = selected ? selected.result : '';
+      payload['answer_' + (index + 1) + '_weights'] = selected ? JSON.stringify(selected.scores || {}) : '';
+      payload['answer_' + (index + 1) + '_top_match'] = selected ? getTopScoreKeys(selected.scores || {}).join('+') : '';
     });
+
+    const resultInfo = answers.length > 0 && answers.every(function(answer) { return !!answer; }) ? computeResult() : null;
+    payload.result_totals = resultInfo ? JSON.stringify(resultInfo.counts || {}) : '';
     return payload;
   }
 
@@ -1157,17 +1305,23 @@
     logEvent('quiz_completed', Object.assign(buildBasePayload({ flow_stage: 'completed' }), buildAnswerPayload()));
   }
 
+  function renderProfileDetails(profile) {
+    return (profile.details || []).map(function(item) {
+      const text = typeof item === 'string' ? item : item.text;
+      const emphasis = typeof item === 'object' && !!item.emphasis;
+      return '<div class="result-line' + (emphasis ? ' emphasis' : '') + '">' + escapeHTML(text) + '</div>';
+    }).join('');
+  }
+
   function renderSingleResult(profile) {
     return '' +
       '<div class="result-card">' +
         '<div class="result-eyebrow">Your result</div>' +
         '<h2 class="result-title">' + escapeHTML(profile.emoji + ' ' + profile.title) + '</h2>' +
-        '<p class="result-sub">This feels true for more people than they admit.</p>' +
+        '<p class="result-sub">' + escapeHTML(profile.subtitle || 'This feels true for more people than they admit.') + '</p>' +
         (profile.image ? '<div class="result-media"><img src="' + escapeHTML(profile.image) + '" alt="' + escapeHTML(profile.title) + '" loading="lazy" /></div>' : '') +
         '<div class="result-lines">' +
-          '<div class="result-line">' + escapeHTML(profile.line1) + '</div>' +
-          '<div class="result-line">' + escapeHTML(profile.line2) + '</div>' +
-          '<div class="result-line emphasis">' + escapeHTML(profile.line3) + '</div>' +
+          renderProfileDetails(profile) +
         '</div>' +
       '</div>';
   }
@@ -1184,11 +1338,10 @@
             return '' +
               '<div class="blend-card">' +
                 '<h3 class="blend-title">' + escapeHTML(profile.emoji + ' ' + profile.title) + '</h3>' +
+                '<p class="result-sub">' + escapeHTML(profile.subtitle || '') + '</p>' +
                 (profile.image ? '<div class="result-media"><img src="' + escapeHTML(profile.image) + '" alt="' + escapeHTML(profile.title) + '" loading="lazy" /></div>' : '') +
                 '<div class="result-lines">' +
-                  '<div class="result-line">' + escapeHTML(profile.line1) + '</div>' +
-                  '<div class="result-line">' + escapeHTML(profile.line2) + '</div>' +
-                  '<div class="result-line emphasis">' + escapeHTML(profile.line3) + '</div>' +
+                  renderProfileDetails(profile) +
                 '</div>' +
               '</div>';
           }).join('') +
