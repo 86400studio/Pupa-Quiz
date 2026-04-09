@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pupa Quiz Funnel</title>
+<title>Pupa Quiz Funnel - Personality to Internship Match</title>
 <style>
   :root{
     --navy:#000080;
@@ -46,7 +46,7 @@
   }
 
   .pupa-wrap{
-    max-width:880px;
+    max-width:920px;
     margin:0 auto;
     padding:18px;
   }
@@ -82,9 +82,9 @@
   }
 
   .flow-wrap{
-    max-width:720px;
+    max-width:760px;
     margin:0 auto;
-    padding:18px 22px 28px;
+    padding:18px 22px 30px;
   }
 
   .brand-row{
@@ -152,7 +152,7 @@
     color:var(--muted);
     line-height:1.6;
     font-size:15px;
-    max-width:56ch;
+    max-width:60ch;
   }
 
   .pill{
@@ -165,6 +165,12 @@
     font-size:12px;
     font-weight:800;
     margin-bottom:12px;
+  }
+
+  .pill.small{
+    padding:6px 10px;
+    font-size:11px;
+    margin-bottom:10px;
   }
 
   .intro-stack,
@@ -247,6 +253,8 @@
     color:var(--muted);
     border-color:transparent;
     box-shadow:none;
+    min-height:auto;
+    padding:0;
   }
 
   .btn:disabled{
@@ -282,7 +290,8 @@
   }
 
   .question-media,
-  .result-media{
+  .result-media,
+  .recommend-media{
     position:relative;
     width:100%;
     overflow:hidden;
@@ -300,20 +309,27 @@
   }
 
   .question-media::before,
-  .result-media::before{
+  .result-media::before,
+  .recommend-media::before{
     content:"";
     display:block;
     padding-top:58%;
   }
 
   .question-media img,
-  .result-media img{
+  .result-media img,
+  .recommend-media img{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
+  }
+
+  .recommend-media{
+    border:none;
+    border-radius:0;
   }
 
   .choices{
@@ -385,12 +401,19 @@
 
   .email-card,
   .result-card,
-  .cta-card{
+  .cta-card,
+  .mini-card,
+  .recommend-card{
     background:#fff;
     border:1px solid var(--line);
     border-radius:22px;
     padding:18px;
     box-shadow:var(--shadow-card);
+  }
+
+  .recommend-card{
+    padding:0;
+    overflow:hidden;
   }
 
   #resultActionArea{
@@ -399,7 +422,8 @@
 
   .email-eyebrow,
   .result-eyebrow,
-  .cta-eyebrow{
+  .cta-eyebrow,
+  .mini-label{
     font-size:12px;
     font-weight:800;
     color:var(--navy);
@@ -459,14 +483,38 @@
     border:1px solid var(--line);
     border-radius:16px;
     background:#fff;
-    font-size:16px;
+    font-size:15px;
     font-weight:700;
-    line-height:1.45;
+    line-height:1.5;
   }
 
   .result-line.emphasis{
     background:var(--soft);
     border-color:#d9ddfb;
+  }
+
+  .pair-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:14px;
+    margin-top:18px;
+  }
+
+  .mini-card{
+    padding:16px;
+  }
+
+  .mini-title{
+    font-size:1.15rem;
+    font-weight:800;
+    margin:0;
+  }
+
+  .mini-copy{
+    margin-top:8px;
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.55;
   }
 
   .blend-grid{
@@ -488,11 +536,61 @@
     margin:0 0 8px;
   }
 
+  .recommend-grid{
+    display:grid;
+    gap:16px;
+    margin-top:18px;
+  }
+
+  .recommend-body{
+    padding:18px;
+  }
+
+  .recommend-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:7px 11px;
+    border-radius:999px;
+    background:var(--soft);
+    color:var(--navy);
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:12px;
+  }
+
+  .recommend-title{
+    font-size:clamp(1.45rem, 3vw, 1.95rem);
+    line-height:1.15;
+    letter-spacing:-.03em;
+    margin:0;
+  }
+
+  .recommend-copy{
+    margin-top:10px;
+    color:var(--muted);
+    line-height:1.65;
+    font-size:15px;
+  }
+
+  .recommend-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:18px;
+  }
+
   .dual-actions{
     display:flex;
     flex-wrap:wrap;
     gap:12px;
     margin-top:18px;
+  }
+
+  .summary-note{
+    margin-top:12px;
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.6;
   }
 
   .tiny-note{
@@ -514,14 +612,25 @@
 
     .inline-row,
     .question-actions,
-    .dual-actions{
+    .dual-actions,
+    .recommend-actions{
       flex-direction:column;
       align-items:stretch;
+    }
+
+    .pair-grid{
+      grid-template-columns:1fr;
     }
 
     .btn{
       width:100%;
       justify-content:center;
+      white-space:normal;
+    }
+
+    .btn.ghost{
+      width:auto;
+      justify-content:flex-start;
     }
 
     .landing-main-title,
@@ -538,7 +647,8 @@
     }
 
     .question-media::before,
-    .result-media::before{
+    .result-media::before,
+    .recommend-media::before{
       padding-top:66%;
     }
   }
@@ -558,7 +668,7 @@
         <section id="screen-question" class="panel hidden" aria-live="polite">
           <div class="question-top">
             <button id="prevBtn" class="back-btn" type="button">&larr; Back</button>
-            <div class="pill">Question <span id="stepNum">1</span> of <span id="stepTotal">7</span></div>
+            <div class="pill">Question <span id="stepNum">1</span> of <span id="stepTotal">10</span></div>
           </div>
           <h2 id="qText" class="q-title">Question</h2>
           <div id="questionImageWrap"></div>
@@ -616,352 +726,27 @@
   'use strict';
 
   const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwEOXIx2KLubsPjsGVHDvsMhYC8SgNLzTsNff3hHJ64vJECzrLKg9uKvw7NPQ_ldLwJ/exec';
-  const PUPA_WEBSITE_QUIZ_URL = 'https://www.letspupa.com/quiz';
   const MAILCHIMP_POST_JSON_URL = 'https://thefalafeltheory.us22.list-manage.com/subscribe/post-json?u=44c6260e44554e7b992e09185&id=083452c971';
-  const STORAGE_KEY = 'pupa_quiz_session_id';
+  const STORAGE_KEY = 'pupa_quiz_session_id_v5';
 
+  const QUIZZES = [{"id": "personality-energy", "kind": "profile", "number": "01", "title": "Work Personality & Energy", "image": "https://static.wixstatic.com/media/d1daaa_825b37bd3bbc41d2bee78bc42da8d5d7~mv2.png", "landingTitle": "Find out what people don’t tell you about yourself.", "landingSub": "This might surprise you.", "introTitle": "What kind of person are you at work?", "introSub": "10 quick questions. Honest answers only.", "cta": "Start", "transitionTitle": "Want to see where you'd actually fit?", "transitionSub": "Answer 6 quick picks and get internship matches that feel right for you.", "transitionButton": "Show my matches", "questions": [{"q": "Something unexpected comes up at work. What do you do?", "image": "https://static.wixstatic.com/media/d1daaa_6cc58846f2654efcb536a0d795ab65ea~mv2.jpg", "dimension": "animal", "options": [{"key": "A", "text": "I step up and handle it.", "scores": {"lion": 3, "wolf": 2, "fox": 1}}, {"key": "B", "text": "I slow down and think of the best plan.", "scores": {"hawk": 3, "elephant": 2, "fox": 1}}, {"key": "C", "text": "I get curious and explore different ideas.", "scores": {"monkey": 3, "dolphin": 2, "wolf": 1}}]}, {"q": "A new project begins, but the energy feels unsure. What do you do first?", "image": "https://static.wixstatic.com/media/d1daaa_5b6f387bc37c498c90c7f76e738458ea~mv2.png", "dimension": "energy", "options": [{"key": "A", "text": "I get people excited and motivated.", "scores": {"igniter": 3, "finisher": 2, "anchor": 1}}, {"key": "B", "text": "I make sure there is a clear plan.", "scores": {"anchor": 3, "clarifier": 2, "finisher": 1}}, {"key": "C", "text": "I read the room and see who needs support.", "scores": {"empath": 3, "grower": 2, "clarifier": 1}}]}, {"q": "In a team, what do people usually rely on you for?", "image": "https://static.wixstatic.com/media/d1daaa_4ec1d4ce7ebf4b29aacd45443255258a~mv2.jpg", "dimension": "animal", "options": [{"key": "A", "text": "Leading, deciding, and keeping things on track.", "scores": {"wolf": 3, "lion": 2, "dolphin": 1}}, {"key": "B", "text": "Thinking ahead and finding smart solutions.", "scores": {"hawk": 3, "fox": 2, "elephant": 1}}, {"key": "C", "text": "Supporting people and keeping the team connected.", "scores": {"dolphin": 3, "monkey": 2, "wolf": 1}}]}, {"q": "The team has had a rough few weeks. What do you do?", "image": "https://static.wixstatic.com/media/d1daaa_1c8c2964a1e94e6ba06051a1e074d413~mv2.png", "dimension": "energy", "options": [{"key": "A", "text": "I lift the mood and change the energy.", "scores": {"igniter": 3, "empath": 2, "anchor": 1}}, {"key": "B", "text": "I stay steady and consistent.", "scores": {"anchor": 3, "finisher": 2, "clarifier": 1}}, {"key": "C", "text": "I check on the people struggling most.", "scores": {"empath": 3, "grower": 2, "anchor": 1}}]}, {"q": "What kind of job feels most exciting to you?", "image": "https://static.wixstatic.com/media/d1daaa_41ddede8fcd14fb0acd64c49e965cb5c~mv2.png", "dimension": "animal", "options": [{"key": "A", "text": "A high-pressure role where my decisions matter.", "scores": {"lion": 3, "fox": 2, "wolf": 1}}, {"key": "B", "text": "A stable role where I can build deep expertise.", "scores": {"elephant": 3, "hawk": 2, "fox": 1}}, {"key": "C", "text": "A people-focused role with variety and learning.", "scores": {"dolphin": 3, "monkey": 2, "elephant": 1}}]}, {"q": "There is conflict in the team. What do you do?", "image": "https://static.wixstatic.com/media/d1daaa_cf4d65f252cd40c08f147e0bee580d7f~mv2.png", "dimension": "energy", "options": [{"key": "A", "text": "I push for a decision and resolution.", "scores": {"finisher": 3, "igniter": 2, "anchor": 1}}, {"key": "B", "text": "I stay calm and keep things from getting worse.", "scores": {"anchor": 3, "clarifier": 2, "finisher": 1}}, {"key": "C", "text": "I make sure everyone feels heard.", "scores": {"grower": 3, "empath": 2, "clarifier": 1}}]}, {"q": "What makes work feel meaningful to you?", "image": "https://static.wixstatic.com/media/d1daaa_261c0d0b1c654237a6b1d8ce0e0baf7c~mv2.png", "dimension": "animal", "options": [{"key": "A", "text": "Winning, making an impact, and being recognised.", "scores": {"lion": 3, "wolf": 2, "hawk": 1}}, {"key": "B", "text": "Learning, discovering, and solving hard problems.", "scores": {"monkey": 3, "fox": 2, "hawk": 1}}, {"key": "C", "text": "Helping people and making the team better.", "scores": {"dolphin": 3, "elephant": 2, "wolf": 1}}]}, {"q": "A teammate is falling behind and feeling stressed. What do you do?", "image": "https://static.wixstatic.com/media/d1daaa_8fe2a4cf8d58463593c13c9052dec4fe~mv2.png", "dimension": "energy", "options": [{"key": "A", "text": "I help them focus and break things into steps.", "scores": {"finisher": 3, "igniter": 2, "anchor": 1}}, {"key": "B", "text": "I try to understand what is really going on.", "scores": {"grower": 3, "empath": 2, "clarifier": 1}}, {"key": "C", "text": "I listen and make sure they feel heard.", "scores": {"clarifier": 3, "anchor": 2, "empath": 1}}]}, {"q": "At the end of a hard week, what feels most rewarding?", "image": "https://static.wixstatic.com/media/d1daaa_29fcef40c0ce46a5a83c64cc7a2f0c56~mv2.jpg", "dimension": "animal", "options": [{"key": "A", "text": "I reached my goal and proved I could do it.", "scores": {"lion": 3, "wolf": 2, "fox": 1}}, {"key": "B", "text": "I made a smart move that will matter later.", "scores": {"hawk": 3, "elephant": 2, "fox": 1}}, {"key": "C", "text": "I helped someone feel stronger or more included.", "scores": {"dolphin": 3, "monkey": 2, "wolf": 1}}]}, {"q": "After a successful team project, what are you most proud of?", "image": "https://static.wixstatic.com/media/d1daaa_65bdc83d80b04072b419efe4e81c5028~mv2.png", "dimension": "energy", "options": [{"key": "A", "text": "I helped lift the team at the right moment.", "scores": {"igniter": 3, "empath": 2, "grower": 1}}, {"key": "B", "text": "I delivered exactly what I promised.", "scores": {"anchor": 3, "finisher": 2, "clarifier": 1}}, {"key": "C", "text": "Someone grew more confident because of the experience.", "scores": {"grower": 3, "empath": 2, "clarifier": 1}}]}], "mailchimpTags": {}, "transitionNote": "Takes about 30 seconds. You'll stay right here."}, {"id": "internship-match", "kind": "match", "number": "02", "title": "Internship Match", "image": "https://static.wixstatic.com/media/d1daaa_b80228aa587a4c0d9344d0874df0a8f9~mv2.png", "introTitle": "Let's find your best-fit internships.", "introSub": "6 quick picks. Then we'll show your strongest internship matches.", "cta": "Find my matches", "finalTitle": "Your best match is ready.", "finalSub": "Open it to see the tasks, the vibe, and whether it feels right for you.", "finalButton": "See my best match", "questions": [{"q": "Which kind of task sounds most satisfying right now?", "options": [{"key": "A", "text": "Solving a technical or data problem no one else can untangle.", "scores": {"tech": 3, "analysis": 2}}, {"key": "B", "text": "Organising moving parts so everything runs smoothly.", "scores": {"coordination": 3, "execution": 2, "compliance": 1}}, {"key": "C", "text": "Convincing people, building relationships, or helping something grow.", "scores": {"persuasion": 3, "people": 2}}, {"key": "D", "text": "Turning ideas into content, visuals, or digital experiences.", "scores": {"creative": 2, "design": 2}}, {"key": "E", "text": "Working on something that helps communities, sustainability, or policy.", "scores": {"mission": 3, "people": 1, "analysis": 1}}], "image": "https://static.wixstatic.com/media/d1daaa_748513ffac6645c791cb07f72f5579ed~mv2.png"}, {"q": "What kind of environment helps you do your best work?", "options": [{"key": "A", "text": "Clear systems, checklists, and deadlines.", "scores": {"coordination": 2, "compliance": 2, "execution": 1}}, {"key": "B", "text": "Fast-moving conversations, targets, and momentum.", "scores": {"persuasion": 2, "execution": 2, "people": 1}}, {"key": "C", "text": "Deep focus, analysis, and problem-solving time.", "scores": {"analysis": 3, "tech": 1}}, {"key": "D", "text": "Creative collaboration where ideas become campaigns or designs.", "scores": {"creative": 2, "design": 2, "people": 1}}, {"key": "E", "text": "Purpose-led work where the mission matters as much as the outcome.", "scores": {"mission": 3, "people": 1}}], "image": "https://static.wixstatic.com/media/d1daaa_99fa64bffc9746bc918830cb5da792fb~mv2.png"}, {"q": "What would you rather be known for in an internship?", "options": [{"key": "A", "text": "The person who spots patterns, bugs, or insights.", "scores": {"analysis": 2, "tech": 2}}, {"key": "B", "text": "The person who keeps projects on track.", "scores": {"coordination": 3, "execution": 1}}, {"key": "C", "text": "The person who wins trust and opens doors.", "scores": {"persuasion": 3, "people": 1}}, {"key": "D", "text": "The person who makes things look, feel, and sound right.", "scores": {"design": 2, "creative": 2}}, {"key": "E", "text": "The person who helps people or organisations make a meaningful difference.", "scores": {"mission": 2, "people": 2, "service": 1}}], "image": "https://static.wixstatic.com/media/d1daaa_2ec08bb924c849b2a42409f90afc4947~mv2.png"}, {"q": "Which workday sounds closest to a good day for you?", "options": [{"key": "A", "text": "Investigating data, systems, or technical issues.", "scores": {"tech": 2, "analysis": 2}}, {"key": "B", "text": "Coordinating timelines, suppliers, logistics, or operations.", "scores": {"coordination": 3, "execution": 1}}, {"key": "C", "text": "Talking to customers, clients, or partners and moving opportunities forward.", "scores": {"persuasion": 3, "people": 1, "service": 1}}, {"key": "D", "text": "Creating content, editing, designing, or shaping a product experience.", "scores": {"creative": 2, "design": 2}}, {"key": "E", "text": "Supporting teams, communities, or people-facing experiences.", "scores": {"people": 2, "service": 2, "mission": 1}}], "image": "https://static.wixstatic.com/media/d1daaa_5d447a41c81045789334f1426256df4c~mv2.png"}, {"q": "When you’re learning something new, what pulls you in fastest?", "options": [{"key": "A", "text": "Tools, systems, dashboards, and how things work.", "scores": {"tech": 2, "analysis": 1, "coordination": 1}}, {"key": "B", "text": "Strategy, business models, and what improves performance.", "scores": {"analysis": 2, "coordination": 1, "compliance": 1}}, {"key": "C", "text": "Messaging, storytelling, and what gets people to respond.", "scores": {"creative": 2, "persuasion": 2}}, {"key": "D", "text": "Design choices, user experience, and how people interact with a product.", "scores": {"design": 3, "creative": 1, "tech": 1}}, {"key": "E", "text": "Social impact, ethics, sustainability, or community outcomes.", "scores": {"mission": 3, "analysis": 1}}], "image": "https://static.wixstatic.com/media/d1daaa_cc482c6fcc4046d0ad9a4782c990648c~mv2.png"}, {"q": "Which challenge would you most enjoy owning?", "options": [{"key": "A", "text": "A messy spreadsheet, confusing dataset, or broken system.", "scores": {"analysis": 2, "tech": 2, "compliance": 1}}, {"key": "B", "text": "A project with too many moving parts and no clear structure.", "scores": {"coordination": 3, "execution": 2}}, {"key": "C", "text": "A slow pipeline, hesitant customer, or outreach goal.", "scores": {"persuasion": 3, "execution": 1, "people": 1}}, {"key": "D", "text": "A brand, content, or product experience that needs fresh thinking.", "scores": {"creative": 2, "design": 2}}, {"key": "E", "text": "A people or mission problem that needs empathy and action.", "scores": {"people": 2, "service": 1, "mission": 2}}], "image": "https://static.wixstatic.com/media/d1daaa_c29abcf914194bcf8f1db740af5bbd1c~mv2.png"}], "mailchimpTags": {}, "introNote": "6 quick picks. Real matches. No guesswork.", "finalSecondaryButton": "Show option 2", "finalNote": "No pressure - open it first and see how it feels."}];
+  const ANIMAL_PROFILES = {"lion": {"title": "Lion", "emoji": "🦁", "image": "https://static.wixstatic.com/media/d1daaa_efd7275a198b4a7ebabcfd16885ca227~mv2.png", "subtitle": "You are confident, brave, and naturally take charge. When something needs to get done, you do not wait around for someone else to step in.", "hook": "You move toward action, responsibility, and visible impact.", "careerLine": "You usually feel most alive when your decisions matter and the pace feels real.", "details": [{"text": "“I’ll handle it.”", "emphasis": true}, {"text": "You bring: leadership, courage, strong decisions"}, {"text": "Career sweet spot: leadership, entrepreneurship, sales, high-pressure roles"}, {"text": "Level up by: remembering that great leaders also support and grow others"}]}, "wolf": {"title": "Wolf", "emoji": "🐺", "image": "https://static.wixstatic.com/media/d1daaa_fedc120c0a884337a083ebd67b94e5b7~mv2.png", "subtitle": "You are loyal, steady, and strong in teams. People trust you, respect your instincts, and feel safer when you are part of the group.", "hook": "You bring trust, loyalty, and quiet leadership.", "careerLine": "You usually do your best work when people need coordination, follow-through, and a strong team spirit.", "details": [{"text": "“We do this together.”", "emphasis": true}, {"text": "You bring: loyalty, trust, teamwork, strong instincts"}, {"text": "Career sweet spot: team leadership, project management, community-building roles"}, {"text": "Level up by: stepping forward more often and trusting your voice"}]}, "fox": {"title": "Fox", "emoji": "🦊", "image": "https://static.wixstatic.com/media/d1daaa_c7d8e24df61049759c6eeff6e22064ef~mv2.png", "subtitle": "You are smart, flexible, and quick at solving problems. When others feel stuck, you usually spot a new path forward.", "hook": "You bring adaptability, creativity, and sharp problem-solving.", "careerLine": "You usually thrive when there is something to figure out, improve, or rethink.", "details": [{"text": "“There’s always another way.”", "emphasis": true}, {"text": "You bring: problem-solving, creativity, adaptability"}, {"text": "Career sweet spot: innovation, consulting, technology, creative strategy"}, {"text": "Level up by: remembering that simple solutions can sometimes work best"}]}, "elephant": {"title": "Elephant", "emoji": "🐘", "image": "https://static.wixstatic.com/media/d1daaa_f3f7f2aaaef54537b8053a512d712cea~mv2.png", "subtitle": "You are calm, wise, and dependable. People trust you because you are steady, thoughtful, and reliable under pressure.", "hook": "You bring patience, care, and strong judgement.", "careerLine": "You usually shine where careful thinking, responsibility, and consistency matter.", "details": [{"text": "“Let’s do it properly.”", "emphasis": true}, {"text": "You bring: patience, stability, wisdom, reliability"}, {"text": "Career sweet spot: research, education, law, medicine, finance"}, {"text": "Level up by: being more open to change when needed"}]}, "monkey": {"title": "Monkey", "emoji": "🐒", "image": "https://static.wixstatic.com/media/d1daaa_7598151e096e410da871eeb774ae6156~mv2.png", "subtitle": "You are curious, energetic, and full of ideas. You learn quickly, ask great questions, and bring fresh energy into a team.", "hook": "You bring curiosity, experimentation, and fresh thinking.", "careerLine": "You usually do best in spaces where learning, variety, and creativity are part of the work.", "details": [{"text": "“What if we try this instead?”", "emphasis": true}, {"text": "You bring: curiosity, creativity, fast learning, energy"}, {"text": "Career sweet spot: media, design, tech, startups, research"}, {"text": "Level up by: focusing deeply on one skill or area and growing it fully"}]}, "hawk": {"title": "Hawk", "emoji": "🦅", "image": "https://static.wixstatic.com/media/d1daaa_9f3e663833b04a5f95bb95c164a5448e~mv2.png", "subtitle": "You are a big-picture thinker. You notice patterns, spot future problems, and understand direction better than most people.", "hook": "You bring vision, pattern recognition, and strategic thinking.", "careerLine": "You usually feel at home where smart judgement, systems thinking, and long-range thinking are useful.", "details": [{"text": "“I can see where this is going.”", "emphasis": true}, {"text": "You bring: vision, strategy, pattern recognition"}, {"text": "Career sweet spot: strategy, data, policy, systems thinking, architecture"}, {"text": "Level up by: staying connected to the people and details on the ground"}]}, "dolphin": {"title": "Dolphin", "emoji": "🐬", "image": "https://static.wixstatic.com/media/d1daaa_0d446c4670284418ae233a3702f095b7~mv2.png", "subtitle": "You are caring, emotionally aware, and naturally good with people. You build trust easily and help teams feel connected.", "hook": "You bring empathy, connection, and emotional intelligence.", "careerLine": "You usually shine where people, trust, and emotional awareness matter just as much as results.", "details": [{"text": "“How is everyone doing?”", "emphasis": true}, {"text": "You bring: empathy, connection, emotional intelligence"}, {"text": "Career sweet spot: HR, counselling, teaching, community work, social impact"}, {"text": "Level up by: speaking up more confidently for your own ideas"}]}};
+  const ENERGY_PROFILES = {"igniter": {"title": "Igniter", "emoji": "⚡", "hook": "You lift energy quickly and help people move.", "subtitle": "When a team feels hesitant or flat, you bring momentum, belief, and motivation.", "details": [{"text": "“Let’s go for it.”", "emphasis": true}, {"text": "You bring: momentum, belief, motivation"}, {"text": "Dream team combo: Anchor + Finisher"}, {"text": "Level up by: following through all the way to the finish"}]}, "anchor": {"title": "Anchor", "emoji": "🧱", "hook": "You make teams feel steady, calm, and safe to rely on.", "subtitle": "People trust your consistency. You help things stay grounded when pressure rises.", "details": [{"text": "“I said I’d do it, so I will.”", "emphasis": true}, {"text": "You bring: reliability, calm, stability"}, {"text": "Dream team combo: Igniter + Clarifier"}, {"text": "Level up by: sharing your thoughts more, because your voice matters"}]}, "empath": {"title": "Empath", "emoji": "🫀", "hook": "You notice how people are feeling before most others do.", "subtitle": "You bring care, trust, and emotional awareness into a team, especially when people feel overlooked or overwhelmed.", "details": [{"text": "“Is everyone okay?”", "emphasis": true}, {"text": "You bring: empathy, trust, human connection"}, {"text": "Dream team combo: Finisher + Clarifier"}, {"text": "Level up by: protecting your own energy while caring for others"}]}, "finisher": {"title": "Finisher", "emoji": "🎯", "hook": "You turn ideas into action and action into results.", "subtitle": "When something has to get over the line, people feel your focus, discipline, and accountability.", "details": [{"text": "“Let’s get it done.”", "emphasis": true}, {"text": "You bring: execution, accountability, results"}, {"text": "Dream team combo: Empath + Clarifier"}, {"text": "Level up by: slowing down just enough to bring others with you"}]}, "clarifier": {"title": "Clarifier", "emoji": "💡", "hook": "You help people see what actually matters.", "subtitle": "You ask smart questions, cut through noise, and bring direction when things feel messy or unclear.", "details": [{"text": "“Let’s make this clear first.”", "emphasis": true}, {"text": "You bring: insight, clarity, strong questions"}, {"text": "Dream team combo: Igniter + Grower"}, {"text": "Level up by: moving into action a little sooner"}]}, "grower": {"title": "Grower", "emoji": "🌱", "hook": "You help people become stronger, not just finish the task.", "subtitle": "You notice potential, encourage confidence, and leave teams better than you found them.", "details": [{"text": "“I want to help people become better.”", "emphasis": true}, {"text": "You bring: development, confidence, growth"}, {"text": "Dream team combo: Finisher + Clarifier"}, {"text": "Level up by: giving yourself the same care and growth you give to others"}]}};
+  const ROLE_FAMILIES = {"techData": {"title": "Tech & Data", "description": "You seem most alive when you can solve, analyse, or improve how something works.", "matchLine": "solve problems, understand systems, and make sense of complexity", "bestFor": "logic, systems, tools, and clear problem-solving"}, "opsProject": {"title": "Operations & Projects", "description": "You like turning moving parts into something clear, steady, and done.", "matchLine": "organise chaos, keep things moving, and bring structure to the work", "bestFor": "planning, coordination, logistics, and keeping things on track"}, "salesGrowth": {"title": "Sales & Growth", "description": "You get energy from conversations, momentum, and helping something move forward.", "matchLine": "build trust, create momentum, and move opportunities forward", "bestFor": "outreach, customer conversations, targets, and visible progress"}, "marketingCreative": {"title": "Marketing & Content", "description": "You like shaping messages, stories, and attention.", "matchLine": "turn ideas into clear messages that people actually care about", "bestFor": "content, campaigns, communications, and audience insight"}, "designProduct": {"title": "Design & Product", "description": "You care about how things look, feel, and work for real people.", "matchLine": "blend creative thinking with user experience and practical problem-solving", "bestFor": "visual thinking, user experience, and creative problem-solving"}, "peopleService": {"title": "People & Service", "description": "You do your best work when people feel supported, seen, and taken care of.", "matchLine": "work closely with people and help them feel guided, supported, or understood", "bestFor": "people-facing coordination, support, and relationship-building"}, "financeRisk": {"title": "Finance & Risk", "description": "You like careful thinking, trust, and getting the details right.", "matchLine": "use judgement, responsibility, and detail to protect quality and trust", "bestFor": "numbers, checks, compliance, and responsible decision-making"}, "impactResearch": {"title": "Impact & Research", "description": "You want your work to mean something and still stand up to real-world thinking.", "matchLine": "pair purpose with thoughtful analysis and real-world impact", "bestFor": "mission-led projects, research, policy, and community impact"}};
+  const INTERNSHIPS = [{"id": 1, "title": "Healthcare Technology Associate", "url": "https://www.letspupa.com/simulations/healthcare-technology-associate", "overview": "A career as a Healthcare Technology Associate offers the chance to bridge the gap between healthcare and digital innovation. In this role, you will support medical teams by managing health information systems, ensuring devices and software run smoothly, and helping improve patient outcomes through technology. It’s an exciting opportunity for those interested in both healthcare and IT, providing valuable experience in a rapidly growing field that combines technical expertise with patient-focused impact.", "overviewShort": "A career as a Healthcare Technology Associate offers the chance to bridge the gap between healthcare and digital innovation.", "tasks": "As a Healthcare Technology Associate, you will learn to operate and manage digital health systems, support clinical staff with technical tools, and troubleshoot healthcare devices. They will gain skills in data handling, electronic medical records, and understanding compliance in medical tech. The role requires attention to detail, problem-solving, and the ability to work in a healthcare environment where accuracy and efficiency are critical.", "tasksShort": "As a Healthcare Technology Associate, you will learn to operate and manage digital health systems, support clinical staff with technical tools, and troubleshoot healthcare devices.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/2cf75fe9-91cc-49f5-96c0-cc3a06c0b013/cover.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 2, "execution": 1, "service": 1}, "priority": 5, "isTestSlug": false}, {"id": 2, "title": "Junior Operations Associate", "url": "https://www.letspupa.com/simulations/test-slug-2", "overview": "A career as a Junior Operations Associate is ideal for individuals who thrive on structure, process, and problem-solving. In this role, you’ll support day-to-day business operations, assist in workflow coordination, and ensure tasks are completed efficiently across departments. Operations Associates are essential for smooth business functioning, helping improve systems, analyze performance, and support teams across an organization. This role is well suited to detail-oriented individuals who enjoy working behind the scenes to drive success.", "overviewShort": "A career as a Junior Operations Associate is ideal for individuals who thrive on structure, process, and problem-solving.", "tasks": "As a Junior Operations Associate, you will build skills in workflow optimization, data analysis, cross-functional coordination, and business reporting. You will use tools such as spreadsheets and project trackers to manage operations efficiently. The role demands attention to detail, strong communication, and the ability to solve problems quickly. You will complete tasks such as creating standard operating procedures (SOPs), identifying process improvements, and tracking team performance metrics.", "tasksShort": "As a Junior Operations Associate, you will build skills in workflow optimization, data analysis, cross-functional coordination, and business reporting.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/21a18c94-026e-40fd-b607-b44a9f0b3be3/what-you-will-do/img3.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1, "service": 1}, "priority": -10, "isTestSlug": true}, {"id": 3, "title": "Banking Product Sales Trainee", "url": "https://www.letspupa.com/simulations/banking-product-sales-trainee-call-centre", "overview": "A career as a Banking Product Sales Trainee (Call Centre) offers a dynamic opportunity for individuals starting out in financial services. In this role, you will interact directly with customers, explain banking products, and support their financial needs. The role requires strong communication, professionalism, and resilience in a fast-paced environment. This program will help you build a solid foundation in customer engagement, sales techniques, and service excellence while preparing you for long-term growth in the banking sector.", "overviewShort": "A career as a Banking Product Sales Trainee (Call Centre) offers a dynamic opportunity for individuals starting out in financial services.", "tasks": "As a Banking Product Sales Trainee, interns will practice skills in customer communication, product knowledge, objection handling, and call documentation. Gain experience delivering professional greetings, handling common queries, pitching products, and upselling responsibly. Interns will also learn how to use CRM systems, plan sales targets, and reflect on performance. The role requires focus, resilience, and customer empathy, while preparing trainees for career progression in call center sales and broader banking roles.", "tasksShort": "As a Banking Product Sales Trainee, interns will practice skills in customer communication, product knowledge, objection handling, and call documentation.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/21a18c94-026e-40fd-b607-b44a9f0b3be3/cover.jpg", "family": "salesGrowth", "tags": {"persuasion": 4, "people": 3, "execution": 1, "service": 2}, "priority": 6, "isTestSlug": false}, {"id": 4, "title": "Sustainability Analyst", "url": "https://www.letspupa.com/simulations/sustainability-analyst", "overview": "A career as a Sustainability Analyst is ideal for individuals passionate about environmental impact, corporate responsibility, and data-driven decision-making. In this role, you’ll gather and analyse environmental performance data, prepare sustainability reports, and support companies in achieving their green goals. Sustainability Analysts bridge the gap between science, business, and policy, helping organizations improve efficiency, reduce carbon footprints, and meet compliance requirements. This job offers meaningful opportunities to make a real difference in today’s world of climate action and ESG reporting.", "overviewShort": "A career as a Sustainability Analyst is ideal for individuals passionate about environmental impact, corporate responsibility, and data-driven decision-making.", "tasks": "As a Sustainability Analyst, interns will learn to collect and analyse sustainability metrics, prepare ESG and CSR reports, and recommend strategies for reducing environmental impact. They will develop skills in data analysis, stakeholder communication, and sustainability strategy alignment. Interns will be expected to research environmental regulations, benchmark industry best practices, and present actionable insights to help companies meet sustainability goals.", "tasksShort": "As a Sustainability Analyst, interns will learn to collect and analyse sustainability metrics, prepare ESG and CSR reports, and recommend strategies for reducing environmental…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/cba6b7c3-106e-4357-a268-081ddc8ffd07/cover.jpg", "family": "financeRisk", "tags": {"compliance": 4, "analysis": 4, "coordination": 1, "mission": 1, "service": 1}, "priority": 9, "isTestSlug": false}, {"id": 5, "title": "Junior Sales Rep", "url": "https://www.letspupa.com/simulations/test-slug-3", "overview": "A career as a Junior Sales Representative in the telecom industry is fast-paced, rewarding, and filled with opportunities for growth. By developing strong sales skills, staying adaptable, and focusing on customer satisfaction, you can build a successful career in telecommunications sales. Whether you aspire to become a top sales performer or move into leadership roles, this career path offers exciting prospects for motivated individuals. Welcome to the world of telecom sales—where every conversation is an opportunity to make an impact!", "overviewShort": "A career as a Junior Sales Representative in the telecom industry is fast-paced, rewarding, and filled with opportunities for growth.", "tasks": "During this virtual internship, you will: Strengthen the key skills required for a Junior Sales Representative. Work through lesson videos and practical written assignments. Complete a 5-sprint (tier) journey that guides you step-by-step. Start with the basics of sales and progress to more advanced skills. Develop abilities in negotiation, communication, and customer relationship management. Gain a clear, practical understanding of what the job is like in the telecom industry.", "tasksShort": "During this virtual internship, you will: Strengthen the key skills required for a Junior Sales Representative.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/549eb5c9-da22-4dd0-b0b1-726a246323ff/what-you-will-do/img1.jpg", "family": "salesGrowth", "tags": {"persuasion": 4, "people": 3, "execution": 1, "service": 1}, "priority": -10, "isTestSlug": true}, {"id": 6, "title": "Procurement & Purchasing Assistant", "url": "https://www.letspupa.com/simulations/procurement--purchasing-assistant", "overview": "A career as a Procurement & Purchasing Assistant is ideal for those interested in supply chain operations and business administration. In this role, you will help manage supplier relationships, process purchase orders, and ensure smooth procurement operations. It’s a great opportunity to learn how companies source products and services, negotiate with vendors, and track budgets while supporting key business functions.", "overviewShort": "A career as a Procurement & Purchasing Assistant is ideal for those interested in supply chain operations and business administration.", "tasks": "As a Procurement & Purchasing Assistant, you will gain hands-on experience in purchasing procedures, supplier communication, and inventory coordination. You will learn to prepare and process purchase orders, compare supplier quotes, and manage procurement documentation. The role requires attention to detail, good communication skills, and basic knowledge of spreadsheets and documents. By completing the jobkit, you will develop practical skills that are vital for careers in procurement and supply chain management.", "tasksShort": "As a Procurement & Purchasing Assistant, you will gain hands-on experience in purchasing procedures, supplier communication, and inventory coordination.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/898f16be-cc02-47ac-be3f-335ffb6ab0db/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1, "service": 1}, "priority": 6, "isTestSlug": false}, {"id": 7, "title": "Construction Project Assistant", "url": "https://www.letspupa.com/simulations/construction-project-assistant", "overview": "A career as a Construction Project Assistant is perfect for those interested in supporting project planning, scheduling, and documentation in the construction industry. In this role, you will assist project managers, coordinate with teams, and ensure tasks are completed on time. You will gain valuable insights into construction operations, communication, and project tracking, making it an excellent stepping stone into construction management or site supervision roles.", "overviewShort": "A career as a Construction Project Assistant is perfect for those interested in supporting project planning, scheduling, and documentation in the construction industry.", "tasks": "As a Construction Project Assistant, Interns will learn how to support project planning, prepare key documentation, and coordinate tasks across teams. They will gain skills in scheduling, communication, and report preparation while understanding safety, budgeting, and compliance requirements. Assignments will require attention to detail, organizational skills, and teamwork to ensure projects run smoothly and efficiently.", "tasksShort": "As a Construction Project Assistant, Interns will learn how to support project planning, prepare key documentation, and coordinate tasks across teams.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/f5dbddcc-79ad-4bb3-836e-d3ab160c9481/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1, "service": 1}, "priority": 0, "isTestSlug": false}, {"id": 8, "title": "Fleet & Delivery Operations Coordinator", "url": "https://www.letspupa.com/simulations/fleet--delivery-operations-coordinator", "overview": "A career as a Fleet & Delivery Operations Coordinator is ideal for individuals who enjoy managing logistics and ensuring efficient transportation. In this role, you’ll coordinate deliveries, track vehicles, and communicate with drivers to meet deadlines. Coordinators play a key role in keeping operations running smoothly by solving routing issues and ensuring customers receive goods on time. This is a great opportunity to develop organizational, communication, and problem-solving skills in the fast-paced logistics industry.", "overviewShort": "A career as a Fleet & Delivery Operations Coordinator is ideal for individuals who enjoy managing logistics and ensuring efficient transportation.", "tasks": "Interns will learn how to schedule deliveries, manage fleet operations, and solve real-world logistics problems. They will gain experience in route planning, vehicle tracking, and communication with drivers. The role requires strong organizational skills, attention to detail, and the ability to handle time-sensitive tasks.", "tasksShort": "Interns will learn how to schedule deliveries, manage fleet operations, and solve real-world logistics problems.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/5223d786-20e7-4e97-b743-c3939f58cbed/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1}, "priority": 0, "isTestSlug": false}, {"id": 9, "title": "Junior Project Planner", "url": "https://www.letspupa.com/simulations/junior-project-planner", "overview": "A career as a Junior Project Planner is ideal for individuals who enjoy organizing, coordinating, and supporting project delivery. In this role, you’ll work closely with project managers and teams to plan schedules, track progress, and ensure deadlines are met. Junior Project Planners help manage documentation, resources, and communication, building strong organizational and analytical skills. This role provides a pathway into project management, offering experience", "overviewShort": "A career as a Junior Project Planner is ideal for individuals who enjoy organizing, coordinating, and supporting project delivery.", "tasks": "As a Junior Project Planner, students will learn how to develop project schedules, allocate resources, and monitor progress using tools like MS Project, Excel, or online project dashboards. They will practice reporting project status, coordinating tasks, and supporting risk and issue tracking. The role requires attention to detail, communication skills, and the ability to manage multiple priorities. Students will gain skills in teamwork, time management, and structured project planning that are essential for delivering successful projects.", "tasksShort": "As a Junior Project Planner, students will learn how to develop project schedules, allocate resources, and monitor progress using tools like MS Project, Excel, or online project…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/614b226b-8b92-4622-903e-520b38c6035d/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1}, "priority": 7, "isTestSlug": false}, {"id": 10, "title": "Market Research Assistant", "url": "https://www.letspupa.com/simulations/market-research-assistant", "overview": "A career as a Market Research Assistant is perfect for individuals who enjoy analysing trends, understanding consumer behaviour, and supporting marketing decisions. In this role, you'll work with data, conduct surveys, and assist in strategy development. The job offers hands-on experience in interpreting market dynamics and consumer needs. This is an ideal entry point into the exciting world of research and marketing strategy.", "overviewShort": "A career as a Market Research Assistant is perfect for individuals who enjoy analysing trends, understanding consumer behaviour, and supporting marketing decisions.", "tasks": "As a Market Research Assistant, you will gather and interpret data from various sources to understand market trends and customer preferences. You’ll explore tools for competitor analysis, survey creation, consumer profiling, and report writing. The job requires attention to detail, analytical thinking, and clear communication. You will also gain practical experience in contributing to real-world marketing strategies.", "tasksShort": "As a Market Research Assistant, you will gather and interpret data from various sources to understand market trends and customer preferences.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/23970aa6-fc72-4142-8103-b0aad626f4bd/cover.jpg", "family": "marketingCreative", "tags": {"creative": 3, "persuasion": 3, "analysis": 2, "service": 1}, "priority": 5, "isTestSlug": false}, {"id": 11, "title": "Publishing & Editorial Assistant", "url": "https://www.letspupa.com/simulations/publishing--editorial-assistant", "overview": "A career as a Publishing & Editorial Assistant is ideal for individuals passionate about content, detail, and teamwork. In this role, you’ll be part of the process that shapes manuscripts into polished works for publication. You’ll assist with editing, proofreading, coordinating between authors and designers, and supporting deadlines. This opportunity offers insight into the fast-paced world of publishing while developing communication, organizational, and technical skills essential to growing within the creative and editorial industries.", "overviewShort": "A career as a Publishing & Editorial Assistant is ideal for individuals passionate about content, detail, and teamwork.", "tasks": "As a Publishing & Editorial Assistant, you’ll learn to navigate the publishing workflow, from manuscript acquisition to distribution. You’ll develop skills in editing, proofreading, fact-checking, and research while supporting communication across authors, editors, and designers. Assignments will help you practise project coordination, time management, and the use of common digital publishing tools. You’ll also gain experience in handling feedback, adapting to industry changes, and understanding publishing ethics. This role requires attention to detail, organisation, and enthusiasm for producing high-quality content.", "tasksShort": "As a Publishing & Editorial Assistant, you’ll learn to navigate the publishing workflow, from manuscript acquisition to distribution.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/94174eee-050a-4a69-a994-d5985582b6dc/cover.jpg", "family": "marketingCreative", "tags": {"creative": 3, "persuasion": 3, "analysis": 1, "service": 1}, "priority": 5, "isTestSlug": false}, {"id": 12, "title": "Data Analyst", "url": "https://www.letspupa.com/simulations/data-analyst", "overview": "A career as a Data Analyst is ideal for individuals who enjoy working with numbers, patterns, and problem-solving. In this role, you’ll collect, clean, and interpret data to uncover insights that drive smarter business decisions. Data Analysts work across industries to improve efficiency, identify trends, and support growth. This role offers the opportunity to develop technical expertise in analytics tools, improve communication skills, and play a critical part in shaping how organizations respond to challenges and opportunities.", "overviewShort": "A career as a Data Analyst is ideal for individuals who enjoy working with numbers, patterns, and problem-solving.", "tasks": "As a Data Analyst, students will learn how to gather and prepare raw data, perform analysis, and create reports and visualizations that clearly communicate insights. They will use tools like Excel, SQL, Python, and Power BI to organize large datasets, identify trends, and provide recommendations. The role requires attention to detail, logical thinking, and the ability to translate complex information into actionable insights. Students will practice both technical data skills and effective communication to add value in real-world business contexts.", "tasksShort": "As a Data Analyst, students will learn how to gather and prepare raw data, perform analysis, and create reports and visualizations that clearly communicate insights.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d3cd83bd-34d7-41f4-86a4-9538c5bdac4d/cover.jpg", "family": "techData", "tags": {"tech": 3, "analysis": 3, "execution": 1, "service": 1}, "priority": 10, "isTestSlug": false}, {"id": 13, "title": "Library and Archival Assistant", "url": "https://www.letspupa.com/simulations/library-and-archival-assistant-", "overview": "A career as a Library or Archival Assistant is ideal for detail-oriented individuals who value information preservation and organization. In this role, you’ll manage catalogues, assist patrons, and help digitize collections. Whether working in a library, museum, or archive, you will support access to knowledge while learning key skills in information management, research, and preservation that form the foundation for careers in information services and cultural heritage.", "overviewShort": "A career as a Library or Archival Assistant is ideal for detail-oriented individuals who value information preservation and organization.", "tasks": "As a Library or Archival Assistant, you will learn how to organize and manage collections, digitize records, assist with cataloguing, and support research requests. You’ll gain skills in attention to detail, database use, and public service. Interns will be required to complete assignments that involve both practical tasks (such as cataloguing or indexing) and written work to demonstrate understanding of archival and library practices.", "tasksShort": "As a Library or Archival Assistant, you will learn how to organize and manage collections, digitize records, assist with cataloguing, and support research requests.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/16c0bf32-05f7-4be7-94f3-3857f8713bac/cover.jpg", "family": "impactResearch", "tags": {"mission": 4, "analysis": 2, "people": 2, "service": 2}, "priority": -5, "isTestSlug": false}, {"id": 14, "title": "Sales Development Rep", "url": "https://www.letspupa.com/simulations/sales-development-representative", "overview": "A career as a Sales Development Representative is ideal for individuals who enjoy connecting with people, building relationships, and driving opportunities. In this role, you will research prospects, craft outreach strategies, and qualify leads for the sales team. SDRs are the front line of customer engagement, using communication skills, persistence, and strategic tools to identify opportunities and create momentum in the sales pipeline. This is a fast-paced and rewarding role with excellent growth potential.", "overviewShort": "A career as a Sales Development Representative is ideal for individuals who enjoy connecting with people, building relationships, and driving opportunities.", "tasks": "As a Sales Development Representative, you will learn how to research and target prospects, craft effective outreach messages, and confidently engage through email, LinkedIn, and cold calls. You will practice qualification techniques like BANT, manage data in a CRM, and respond to objections with empathy and professionalism. You’ll also develop time management, collaboration, and performance tracking skills that are essential for building a strong sales pipeline and preparing for advanced roles in sales.", "tasksShort": "As a Sales Development Representative, you will learn how to research and target prospects, craft effective outreach messages, and confidently engage through email, LinkedIn, and…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/ab7b77aa-7a35-46f1-b658-1e2f726aa172/cover.jpg", "family": "salesGrowth", "tags": {"persuasion": 4, "people": 3, "execution": 1, "analysis": 1, "service": 1}, "priority": 7, "isTestSlug": false}, {"id": 15, "title": "Renewable Energy Outreach Coordinator", "url": "https://www.letspupa.com/simulations/renewable-energy-outreach-coordinator", "overview": "A career as a Renewable Energy Outreach Coordinator is a chance to lead community-driven change by promoting clean and sustainable energy. In this role, you’ll organize awareness campaigns, host events, and work with stakeholders to increase adoption of renewable energy solutions. Outreach Coordinators combine communication, planning, and advocacy skills to inspire individuals and communities. This is an exciting opportunity for young professionals who are passionate about sustainability and eager to make a measurable impact on the future.", "overviewShort": "A career as a Renewable Energy Outreach Coordinator is a chance to lead community-driven change by promoting clean and sustainable energy.", "tasks": "As a Renewable Energy Outreach Coordinator, you’ll gain practical skills in event planning, campaign design, stakeholder communication, and data-driven evaluation. You will be tasked with creating awareness materials, drafting advocacy briefs, running social media campaigns, and managing community events. The role requires creativity, adaptability, and a passion for renewable energy. By the end, you will be able to plan and deliver impactful outreach initiatives that encourage sustainable practices and demonstrate the social, economic, and environmental benefits of clean energy.", "tasksShort": "As a Renewable Energy Outreach Coordinator, you’ll gain practical skills in event planning, campaign design, stakeholder communication, and data-driven evaluation.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/790c9f02-0b98-475c-9d84-b8b47366d379/cover.jpg", "family": "impactResearch", "tags": {"mission": 4, "analysis": 1, "people": 2, "coordination": 1, "persuasion": 1, "service": 1}, "priority": 6, "isTestSlug": false}, {"id": 16, "title": "AI Prompt Engineer", "url": "https://www.letspupa.com/simulations/ai-prompt-engineer-", "overview": "A career as an AI Prompt Engineer is perfect for individuals passionate about AI and language technology. In this role, you’ll learn how to design, test, and optimize prompts to improve AI performance for various applications. You’ll work with real-world projects that involve creativity, problem-solving, and data-driven thinking. This jobkit builds practical skills in prompt design, AI model understanding, and effective communication with AI systems, opening opportunities in the rapidly growing AI industry.", "overviewShort": "A career as an AI Prompt Engineer is perfect for individuals passionate about AI and language technology.", "tasks": "Interns will learn to craft, refine, and evaluate AI prompts for different use cases. They will practice optimizing outputs, debugging responses, and collaborating on AI-driven projects. The role requires creativity, analytical thinking, and clear communication skills. Interns will be expected to work with AI tools, test prompts for quality and relevance, and adapt techniques for specific goals.", "tasksShort": "Interns will learn to craft, refine, and evaluate AI prompts for different use cases.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d21d8a61-e6e8-45a5-afaf-e604624947e6/cover.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 3, "execution": 1, "design": 1, "creative": 1}, "priority": 8, "isTestSlug": false}, {"id": 17, "title": "Research Technician", "url": "https://www.letspupa.com/simulations/research-technician-environmental-science", "overview": "A career as a Research Technician in Environmental Science is an exciting path for individuals passionate about nature and sustainability. In this role, you’ll collect and prepare soil, water, and air samples, run basic environmental tests, manage data, and ensure results support scientific decision-making. Research Technicians play a vital part in monitoring ecosystems and providing evidence for environmental protection, making this an opportunity to apply science to real-world challenges.", "overviewShort": "A career as a Research Technician in Environmental Science is an exciting path for individuals passionate about nature and sustainability.", "tasks": "As a Research Technician, you will collect, prepare, and test environmental samples, record observations, manage data, and create simple visualizations. You’ll also practice safety protocols, troubleshooting anomalies, and drafting research summaries. Interns will be expected to follow strict procedures, think critically, and apply problem-solving skills to ensure reliable, accurate, and actionable environmental data for supervisors and stakeholders.", "tasksShort": "As a Research Technician, you will collect, prepare, and test environmental samples, record observations, manage data, and create simple visualizations.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/688dff55-82b2-45ab-8a10-d0440d92fae0/cover.jpg", "family": "impactResearch", "tags": {"mission": 4, "analysis": 2, "people": 1, "service": 1}, "priority": 0, "isTestSlug": false}, {"id": 18, "title": "Junior Business Analyst", "url": "https://www.letspupa.com/simulations/test-slug-1", "overview": "A career as a Junior Business Analyst is ideal for individuals who enjoy working with data, solving problems, and supporting strategic decisions. In this role, you’ll collaborate with stakeholders, analyze financial and operational data, and help improve business processes. Junior Business Analysts play a key role in driving efficiency, ensuring compliance, and supporting digital transformation across the bank. This is a dynamic opportunity to build analytical skills and grow in the fast-paced world of banking and finance.", "overviewShort": "A career as a Junior Business Analyst is ideal for individuals who enjoy working with data, solving problems, and supporting strategic decisions.", "tasks": "As a Junior Business Analyst intern, you will develop essential skills in business analysis, data interpretation, and stakeholder engagement. You will learn to use tools like Excel, SQL, and data visualization software to present insights and contribute to decision-making processes. Assignments include market research, process improvement, and report development — helping build experience for a career in data-driven banking roles.", "tasksShort": "As a Junior Business Analyst intern, you will develop essential skills in business analysis, data interpretation, and stakeholder engagement.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/0bfe689f-f50b-4bf2-bd13-e230fbf1f076/what-you-will-do/img2.jpg", "family": "opsProject", "tags": {"coordination": 3, "execution": 2, "compliance": 2, "analysis": 2}, "priority": -10, "isTestSlug": true}, {"id": 19, "title": "Underwriting Assistant", "url": "https://www.letspupa.com/simulations/underwriting-assistant", "overview": "A career as an Underwriting Assistant is ideal for detail-oriented individuals who enjoy organization, communication, and supporting decision-making. In this role, you’ll review policy applications, check compliance, summarize client data, and prepare files for underwriters. Underwriting Assistants play a key part in keeping the insurance process accurate, efficient, and compliant. This is an excellent starting point for those entering the insurance industry and building skills for future underwriting careers.", "overviewShort": "A career as an Underwriting Assistant is ideal for detail-oriented individuals who enjoy organization, communication, and supporting decision-making.", "tasks": "As an Underwriting Assistant, interns will learn to check insurance applications for accuracy, verify compliance documents, and communicate professionally with brokers. They will develop skills in prioritizing tasks, analysing claims history, summarizing portfolio data, and preparing renewal files. The role requires attention to detail, strong organization, and clear communication. Students will gain practical experience in handling documents, supporting underwriters, and contributing to smooth and compliant workflows.", "tasksShort": "As an Underwriting Assistant, interns will learn to check insurance applications for accuracy, verify compliance documents, and communicate professionally with brokers.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/44e25d4e-7d98-4015-90e4-afe49b5ccd52/cover.jpg", "family": "financeRisk", "tags": {"compliance": 4, "analysis": 4, "coordination": 1, "mission": 1, "service": 1}, "priority": 4, "isTestSlug": false}, {"id": 20, "title": "Cloud Computing Engineer", "url": "https://www.letspupa.com/simulations/cloud-computing-engineer", "overview": "A career as a Cloud Computing Engineer is ideal for individuals passionate about cloud technology, IT infrastructure, and problem-solving. In this role, you’ll work with cloud platforms to design, deploy, and manage applications and services. You’ll ensure systems are secure, scalable, and efficient while collaborating with developers and IT teams. This role provides valuable experience in cloud architecture, networking, and cybersecurity, making it an exciting opportunity to grow in the fast-evolving tech industry.", "overviewShort": "A career as a Cloud Computing Engineer is ideal for individuals passionate about cloud technology, IT infrastructure, and problem-solving.", "tasks": "As a Cloud Computing Engineer, you’ll gain skills in cloud architecture, deployment, and management using platforms like AWS, Azure, or Google Cloud. You will learn how to configure virtual networks, manage storage, optimize performance, and ensure cloud security. The role requires analytical thinking, attention to detail, and the ability to work with development teams to create reliable cloud-based solutions. Interns will be expected to apply technical knowledge to real-world scenarios and deliver practical cloud solutions.", "tasksShort": "As a Cloud Computing Engineer, you’ll gain skills in cloud architecture, deployment, and management using platforms like AWS, Azure, or Google Cloud.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d21d8a61-e6e8-45a5-afaf-e604624947e6/cover.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 2, "execution": 1, "design": 1, "creative": 1}, "priority": 6, "isTestSlug": false}, {"id": 21, "title": "Health & Safety Compliance Officer", "url": "https://www.letspupa.com/simulations/health--safety-compliance-officer", "overview": "A career as a Health & Safety Compliance Officer is ideal for individuals who want to create safer workplaces and ensure legal compliance. In this role, you’ll assess hazards, review policies, and support teams in meeting safety standards. Compliance officers play a vital role in protecting employees, preventing accidents, and ensuring businesses follow regulations. It’s a meaningful career for those passionate about workplace safety, employee well-being, and regulatory adherence across different industries.", "overviewShort": "A career as a Health & Safety Compliance Officer is ideal for individuals who want to create safer workplaces and ensure legal compliance.", "tasks": "As a Health & Safety Compliance Officer, Interns will learn how to conduct risk assessments, write safety reports, and ensure compliance with workplace safety laws. They’ll gain skills in auditing, policy creation, and effective communication with staff and management. This role requires attention to detail, knowledge of regulations, and the ability to provide practical safety solutions. Interns will be expected to analyse hazards, recommend improvements, and help create a culture of safety in any organization.", "tasksShort": "As a Health & Safety Compliance Officer, Interns will learn how to conduct risk assessments, write safety reports, and ensure compliance with workplace safety laws.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/404fce4e-8b8f-46b7-acc0-899b6f758006/cover.jpg", "family": "financeRisk", "tags": {"compliance": 4, "analysis": 3, "coordination": 1, "service": 1}, "priority": 0, "isTestSlug": false}, {"id": 22, "title": "Cybersecurity Analyst", "url": "https://www.letspupa.com/simulations/cybersecurity-analyst", "overview": "A career as a Cybersecurity Analyst is ideal for individuals passionate about technology, problem-solving, and protecting digital assets. In this role, you’ll monitor systems, analyze threats, and strengthen defenses against cyberattacks. Cybersecurity Analysts are critical to ensuring the confidentiality, integrity, and availability of information in today’s digital economy. This jobkit equips students with practical skills to assess risks, respond to incidents, and contribute to securing organizations across diverse industries.", "overviewShort": "A career as a Cybersecurity Analyst is ideal for individuals passionate about technology, problem-solving, and protecting digital assets.", "tasks": "As a Cybersecurity Analyst, students will gain hands-on skills in threat detection, vulnerability assessment, incident response, and security monitoring. They’ll learn to analyze logs, identify anomalies, and implement security measures using industry tools. The role requires strong analytical thinking, attention to detail, and knowledge of network and information security principles. Students will practice safeguarding systems, supporting compliance, and working collaboratively to mitigate risks and protect organizations against evolving cyber threats.", "tasksShort": "As a Cybersecurity Analyst, students will gain hands-on skills in threat detection, vulnerability assessment, incident response, and security monitoring.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/2aac0b56-d409-449f-8c61-ca39b6a49100/what-you-will-do/img2.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 3, "execution": 1}, "priority": 8, "isTestSlug": false}, {"id": 23, "title": "Junior Project Coordinator", "url": "https://www.letspupa.com/simulations/junior-project-coordinator", "overview": "A career as a Junior Project Coordinator is a great entry point into project management for individuals who enjoy organization, teamwork, and problem-solving. In this role, you’ll assist project managers with scheduling, reporting, risk tracking, and communication. Junior Project Coordinators help ensure projects run smoothly, deadlines are met, and stakeholders stay informed. This role builds a strong foundation for future growth into senior project roles while developing essential skills in planning, collaboration, and leadership.", "overviewShort": "A career as a Junior Project Coordinator is a great entry point into project management for individuals who enjoy organization, teamwork, and problem-solving.", "tasks": "As a Junior Project Coordinator, interns will learn to manage schedules, track resources, report progress, and support communication between stakeholders. They will practice using project management tools, compiling status reports, and monitoring risks and budgets. The role requires organization, attention to detail, and strong teamwork. Interns will gain experience that prepares them for future leadership roles in project management.", "tasksShort": "As a Junior Project Coordinator, interns will learn to manage schedules, track resources, report progress, and support communication between stakeholders.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/adb4366d-74a7-470e-a286-731c7f72f935/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1}, "priority": 6, "isTestSlug": false}, {"id": 24, "title": "Management Consulting Analyst", "url": "https://www.letspupa.com/simulations/management-consulting-analyst", "overview": "A career as a Management Consulting Analyst is ideal for problem-solvers who enjoy analyzing businesses, improving efficiency, and supporting strategic decisions. In this role, you’ll research markets, evaluate company performance, and deliver recommendations to enhance growth and competitiveness. Consulting analysts work with diverse clients, providing actionable insights and supporting major business transformations. This opportunity is perfect for those looking to develop analytical skills and gain exposure to high-impact projects in various industries.", "overviewShort": "A career as a Management Consulting Analyst is ideal for problem-solvers who enjoy analyzing businesses, improving efficiency, and supporting strategic decisions.", "tasks": "As a Management Consulting Analyst, Interns will build expertise in data analysis, market research, process improvement, and client communication. They will learn to evaluate business problems, identify key challenges, and propose actionable recommendations. Assignments will involve preparing reports, developing presentations, and working with case study scenarios. The role requires critical thinking, attention to detail, and the ability to communicate insights clearly. Interns will be expected to manage tasks independently and deliver professional-quality outputs.", "tasksShort": "As a Management Consulting Analyst, Interns will build expertise in data analysis, market research, process improvement, and client communication.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/614b226b-8b92-4622-903e-520b38c6035d/cover.jpg", "family": "opsProject", "tags": {"coordination": 3, "execution": 2, "compliance": 1, "analysis": 1}, "priority": 7, "isTestSlug": false}, {"id": 25, "title": "NGO Nonprofit Program Assistant", "url": "https://www.letspupa.com/simulations/ngo-nonprofit-program-assistant", "overview": "A career as an NGO Nonprofit Program Assistant is perfect for those passionate about making a difference through community programs. In this role, you’ll support project planning, assist with outreach activities, and help coordinate events and fundraising efforts. This position is ideal for individuals starting out in the nonprofit sector who enjoy teamwork, organization, and meaningful social impact. It’s a great opportunity to gain experience in program management while contributing to positive change.", "overviewShort": "A career as an NGO Nonprofit Program Assistant is perfect for those passionate about making a difference through community programs.", "tasks": "As an NGO Nonprofit Program Assistant, you will learn essential skills in project coordination, stakeholder communication, and event organization. Interns will assist in planning community programs, preparing reports, and supporting fundraising activities. They will also gain experience in teamwork, problem-solving, and time management while working on real-world non-profit initiatives. Assignments will require research, writing, and basic administrative tasks to help programs succeed.", "tasksShort": "As an NGO Nonprofit Program Assistant, you will learn essential skills in project coordination, stakeholder communication, and event organization.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/82aa09f5-bb81-4b5f-9f9d-aee0e815cd31/cover.jpg", "family": "impactResearch", "tags": {"mission": 4, "analysis": 1, "people": 2, "coordination": 1, "persuasion": 1, "service": 2}, "priority": 8, "isTestSlug": false}, {"id": 26, "title": "E-Commerce Operations Associate", "url": "https://www.letspupa.com/simulations/e-commerce-operations-associate", "overview": "A career as an E-Commerce Operations Associate is ideal for individuals who enjoy working in fast-paced online retail environments. In this role, you’ll manage order processing, track inventory, update product listings, and support customer fulfillment. You’ll play a key role in ensuring smooth operations, collaborating with marketing, logistics, and customer service teams. This role builds practical skills in digital retail, supply chain coordination, and e-commerce platform management—perfect for those looking to grow in the online business industry.", "overviewShort": "A career as an E-Commerce Operations Associate is ideal for individuals who enjoy working in fast-paced online retail environments.", "tasks": "As an E-Commerce Operations Associate, students will learn essential skills in online order processing, inventory tracking, and customer support for digital sales. They will gain hands-on experience with e-commerce platforms, spreadsheets, and order management tools. The role requires attention to detail, time management, and the ability to coordinate across teams to ensure smooth operations. Students will be expected to process and track orders, update product details, manage basic analytics, and support marketing and logistics tasks.", "tasksShort": "As an E-Commerce Operations Associate, students will learn essential skills in online order processing, inventory tracking, and customer support for digital sales.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/daeb031b-3189-4715-9071-468c522fbf20/what-you-will-do/img2.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1, "creative": 1, "persuasion": 1, "people": 1, "service": 2}, "priority": 0, "isTestSlug": false}, {"id": 27, "title": "Junior Digital Marketing Manager", "url": "https://www.letspupa.com/simulations/junior-digital-marketing-manager", "overview": "A career as a Junior Digital Marketing Campaign Manager offers an exciting opportunity for creative, analytical individuals who enjoy crafting and executing marketing strategies. In this role, you will manage online campaigns, track performance metrics, and optimize results to support brand growth. You’ll collaborate with teams to create impactful digital content, learn key marketing tools, and gain insights into consumer behavior in a fast-paced, data-driven environment.", "overviewShort": "A career as a Junior Digital Marketing Campaign Manager offers an exciting opportunity for creative, analytical individuals who enjoy crafting and executing marketing strategies.", "tasks": "As a Junior Digital Marketing Campaign Manager, students will learn to plan, execute, and optimize digital campaigns using tools like Google Ads, social media platforms, and analytics dashboards. They will develop skills in content creation, SEO, paid advertising, and performance reporting. The role requires creativity, problem-solving, and data analysis to achieve marketing goals while collaborating with team members on real-world projects.", "tasksShort": "As a Junior Digital Marketing Campaign Manager, students will learn to plan, execute, and optimize digital campaigns using tools like Google Ads, social media platforms, and…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/23970aa6-fc72-4142-8103-b0aad626f4bd/what-you-will-do/img1.jpg", "family": "marketingCreative", "tags": {"creative": 3, "persuasion": 3, "analysis": 2, "coordination": 1, "service": 1}, "priority": 8, "isTestSlug": false}, {"id": 28, "title": "Game Tester", "url": "https://www.letspupa.com/simulations/game-tester", "overview": "A career as a Game Tester offers an exciting opportunity for individuals passionate about gaming and technology. In this role, you will test pre-release games for errors, bugs, and functionality issues, ensuring a smooth player experience. Game Testers bridge the gap between developers and players by documenting problems and providing feedback. This position is perfect for detail-oriented individuals who enjoy problem-solving, quality assurance, and working in a fast-paced, creative environment where every detail matters for overall game play success.", "overviewShort": "A career as a Game Tester offers an exciting opportunity for individuals passionate about gaming and technology.", "tasks": "As a Game Tester, you will learn how to evaluate game mechanics, user interfaces, and story elements for functionality and enjoyment. You will practice documenting bugs and glitches, preparing clear reports, and collaborating with developers to improve the final product. This jobkit will also teach you skills in quality assurance, attention to detail, communication, and critical thinking. Interns will be required to test games methodically, identify inconsistencies, and recommend improvements to create a polished user experience.", "tasksShort": "As a Game Tester, you will learn how to evaluate game mechanics, user interfaces, and story elements for functionality and enjoyment.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/14d9681f-ef80-45bf-9e36-6ea0d652626d/cover.jpg", "family": "designProduct", "tags": {"design": 4, "creative": 3, "tech": 2}, "priority": 3, "isTestSlug": false}, {"id": 29, "title": "Software Developer", "url": "https://www.letspupa.com/simulations/software-developer", "overview": "A career as a Software Developer is ideal for those who enjoy problem-solving and technology. In this role, you will design, build, and test software solutions for various applications. Software developers collaborate with teams, write efficient code, and ensure programs meet user needs. This jobkit equips you with practical coding, debugging, and project skills essential for success in the fast-paced tech industry.", "overviewShort": "A career as a Software Developer is ideal for those who enjoy problem-solving and technology.", "tasks": "Students will gain skills in coding, debugging, and software design while working on real-world assignments. They will learn programming fundamentals, version control, and testing methods. The jobkit will require students to write code, collaborate on projects, and solve technical problems to meet project requirements.", "tasksShort": "Students will gain skills in coding, debugging, and software design while working on real-world assignments.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/14d9681f-ef80-45bf-9e36-6ea0d652626d/what-you-will-do/img1.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 2, "execution": 1, "coordination": 1, "design": 1, "creative": 1}, "priority": 6, "isTestSlug": false}, {"id": 30, "title": "Project Manager", "url": "https://www.letspupa.com/simulations/project-manager", "overview": "A career as a Project Manager offers a dynamic opportunity for individuals who enjoy organizing, leading, and delivering results. In this role, you’ll oversee planning, execution, and closing of projects across industries. Project Managers ensure teams stay on track, budgets are maintained, and goals are met. It’s a strategic position that requires communication, leadership, and problem-solving. This jobkit helps students develop the core skills needed to confidently manage projects, align stakeholders, and deliver measurable business outcomes.", "overviewShort": "A career as a Project Manager offers a dynamic opportunity for individuals who enjoy organizing, leading, and delivering results.", "tasks": "As a Project Manager, you will gain essential skills in project planning, task prioritization, resource allocation, and risk management. You will learn to use tools like Gantt charts, task boards, and project dashboards to organize and track work. Assignments will focus on stakeholder analysis, project documentation, communication, budgeting, and reporting. You will need to coordinate virtual teams, manage timelines, and adapt to real-world constraints while demonstrating leadership and decision-making throughout a project lifecycle.", "tasksShort": "As a Project Manager, you will gain essential skills in project planning, task prioritization, resource allocation, and risk management.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/614b226b-8b92-4622-903e-520b38c6035d/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1}, "priority": 8, "isTestSlug": false}, {"id": 31, "title": "Event Coordinator", "url": "https://www.letspupa.com/simulations/event-coordinator", "overview": "A career as an Event Coordinator is ideal for individuals who enjoy planning, organizing, and bringing ideas to life. In this role, you will manage logistics, budgets, vendors, and schedules to ensure events run smoothly and meet client expectations. Event Coordinators work across a variety of industries, from corporate functions to social gatherings, requiring creativity, attention to detail, and strong communication skills. This role offers opportunities to develop project management expertise and build a portfolio of successful events.", "overviewShort": "A career as an Event Coordinator is ideal for individuals who enjoy planning, organizing, and bringing ideas to life.", "tasks": "As an Event Coordinator, Interns will learn essential skills in event planning, vendor management, budgeting, and scheduling. They will practice creating event proposals, coordinating logistics, and managing on-site execution. The role requires strong organizational skills, creativity, and communication. Interns will gain experience working with timelines, budgets, and stakeholders to deliver successful events.", "tasksShort": "As an Event Coordinator, Interns will learn essential skills in event planning, vendor management, budgeting, and scheduling.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/21904e0f-9cff-40c0-a6ec-28c24a430cdd/cover.jpg", "family": "peopleService", "tags": {"people": 3, "service": 3, "coordination": 2}, "priority": 6, "isTestSlug": false}, {"id": 32, "title": "Content Marketing Specialist", "url": "https://www.letspupa.com/simulations/content-marketing-specialist", "overview": "You will learn to create, optimize, and analyze content that drives engagement and supports digital marketing strategies across platforms.", "overviewShort": "You will learn to create, optimize, and analyze content that drives engagement and supports digital marketing strategies across platforms.", "tasks": "As a Junior Content Marketing Specialist, you will learn how to research, write, and edit digital content tailored to specific audiences and platforms. You will build core skills in content strategy, SEO optimization, social media management, and basic analytics. Assignments include creating blog posts, email copy, and social media content while using tools like Google Docs, Canva, and content management systems. You will be expected to follow brand guidelines, analyze engagement metrics, adapt tone and format to different channels, and collaborate with marketing teams to support campaign goals.", "tasksShort": "As a Junior Content Marketing Specialist, you will learn how to research, write, and edit digital content tailored to specific audiences and platforms.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/36e77c41-d751-43cc-8b15-62089ea63bca/what-you-will-do/img2.jpg", "family": "marketingCreative", "tags": {"creative": 3, "persuasion": 3, "analysis": 1}, "priority": 8, "isTestSlug": false}, {"id": 33, "title": "Logistics & Supply Chain Coordinator", "url": "https://www.letspupa.com/simulations/logistics--supply-chain-coordinator", "overview": "A career as a Logistics & Supply Chain Coordinator is ideal for individuals who excel at organization, communication, and problem-solving. In this role, you’ll oversee supply chain operations, manage inventory, coordinate with vendors, and optimize transportation routes. Coordinators play a vital role in ensuring goods reach customers on time and cost-effectively, while maintaining quality and compliance standards. This is a dynamic opportunity to gain skills in operations management, logistics technology, and global trade, preparing you for a rewarding career in the supply chain industry.", "overviewShort": "A career as a Logistics & Supply Chain Coordinator is ideal for individuals who excel at organization, communication, and problem-solving.", "tasks": "As a Logistics & Supply Chain Coordinator, students will develop skills in supply chain planning, logistics optimization, and vendor management. They will learn to use tools such as spreadsheets, ERP systems, and logistics software to track shipments, analyze performance data, and resolve delays. The role requires strong attention to detail, problem-solving abilities, and effective communication with suppliers, carriers, and internal teams. Students will be expected to balance efficiency, cost control, and customer satisfaction while adapting to challenges in a fast-paced, global environment.", "tasksShort": "As a Logistics & Supply Chain Coordinator, students will develop skills in supply chain planning, logistics optimization, and vendor management.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/5223d786-20e7-4e97-b743-c3939f58cbed/cover.jpg", "family": "financeRisk", "tags": {"compliance": 4, "analysis": 3, "coordination": 2, "tech": 1}, "priority": 6, "isTestSlug": false}, {"id": 34, "title": "UX/UI Designer", "url": "https://www.letspupa.com/simulations/uxui-designer", "overview": "A career as a UX UI Designer is perfect for individuals who enjoy creativity, problem-solving, and technology. In this role, you’ll research user needs, design wireframes, and build intuitive interfaces that improve user experience across digital platforms. UX UI Designers play a critical role in shaping the way users interact with products, ensuring accessibility, usability, and aesthetic appeal. This is a fast-growing career path for those passionate about blending design with functionality.", "overviewShort": "A career as a UX UI Designer is perfect for individuals who enjoy creativity, problem-solving, and technology.", "tasks": "As a UX UI Designer, students will gain skills in user research, wireframing, prototyping, and interface design. They’ll learn to use tools like Figma, Adobe XD, and Sketch while applying design principles to real-world projects. The role requires creativity, empathy, and technical know-how, as students will balance user needs with business goals. They will be expected to analyze feedback, test designs, and deliver polished interfaces that enhance digital user experiences.", "tasksShort": "As a UX UI Designer, students will gain skills in user research, wireframing, prototyping, and interface design.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d21d8a61-e6e8-45a5-afaf-e604624947e6/cover.jpg", "family": "designProduct", "tags": {"design": 4, "creative": 3, "tech": 2, "analysis": 1}, "priority": 8, "isTestSlug": false}, {"id": 35, "title": "Graphic Designer", "url": "https://www.letspupa.com/simulations/graphic-designer", "overview": "A career as a Graphic Designer offers an opportunity to combine creativity with technical skill to produce compelling visuals. Designers work on branding, marketing materials, digital content, and user-focused projects. This role is ideal for individuals who enjoy visual storytelling, problem-solving through design, and bringing ideas to life. With strong demand across industries, graphic design provides both creative freedom and career growth in today’s digital-first world.", "overviewShort": "A career as a Graphic Designer offers an opportunity to combine creativity with technical skill to produce compelling visuals.", "tasks": "As a Graphic Designer, students will learn to apply design principles, use industry tools such as Adobe Creative Suite or Canva, and create projects ranging from logos and posters to digital marketing assets. They will develop skills in layout, typography, color theory, and branding. Assignments will require creativity, attention to detail, and the ability to meet client briefs while producing professional-quality design work.", "tasksShort": "As a Graphic Designer, students will learn to apply design principles, use industry tools such as Adobe Creative Suite or Canva, and create projects ranging from logos and posters…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/94174eee-050a-4a69-a994-d5985582b6dc/what-you-will-do/img1.jpg", "family": "designProduct", "tags": {"design": 4, "creative": 4, "tech": 1, "persuasion": 1}, "priority": 6, "isTestSlug": false}, {"id": 36, "title": "Accounts Assistant – Bookkeeper", "url": "https://www.letspupa.com/simulations/accounts-assistant--bookkeeper", "overview": "A career as an Accounts Assistant or Bookkeeper is perfect for individuals who enjoy working with numbers, organizing financial data, and supporting business operations. In this role, you will manage records, process transactions, and assist in preparing reports. It offers a solid foundation for careers in accounting, finance, or business administration, providing practical skills in bookkeeping and financial management.", "overviewShort": "A career as an Accounts Assistant or Bookkeeper is perfect for individuals who enjoy working with numbers, organizing financial data, and supporting business operations.", "tasks": "As an Accounts Assistant or Bookkeeper, Interns will develop skills in bookkeeping, data entry, bank reconciliation, and financial reporting. They will learn to use spreadsheet and accounting software to record transactions accurately and support business accounts. The role requires attention to detail, organizational skills, and basic knowledge of financial documents. Interns will complete practical assignments to simulate real-world finance tasks.", "tasksShort": "As an Accounts Assistant or Bookkeeper, Interns will develop skills in bookkeeping, data entry, bank reconciliation, and financial reporting.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/0e164252-16a5-43b0-81af-bf6e5077098e/what-you-will-do/img1.jpg", "family": "financeRisk", "tags": {"compliance": 4, "analysis": 4, "coordination": 2, "service": 1}, "priority": 6, "isTestSlug": false}, {"id": 37, "title": "Human Resources Associate", "url": "https://www.letspupa.com/simulations/human-resources-associate", "overview": "A career as a Human Resources Associate is ideal for individuals who enjoy working with people and supporting organizational success. In this role, you’ll assist in recruitment, employee onboarding, benefits administration, and workplace compliance. HR Associates are vital for ensuring a positive employee experience, maintaining records, and supporting company policies. This position offers a great foundation for advancing into HR management and strategic people operations, making it a strong entry point for a career in human resources.", "overviewShort": "A career as a Human Resources Associate is ideal for individuals who enjoy working with people and supporting organizational success.", "tasks": "As a Human Resources Associate, interns will develop skills in recruitment, employee relations, onboarding, and HR administration. They will learn to manage employee records, support compliance processes, and assist in creating a positive workplace culture. Interns will be required to handle confidential information responsibly, communicate effectively with staff, and complete tasks like drafting job descriptions, scheduling interviews, and preparing on-boarding materials. This role builds a strong foundation for future growth in human resources and people management.", "tasksShort": "As a Human Resources Associate, interns will develop skills in recruitment, employee relations, onboarding, and HR administration.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/f31e23bc-dd4a-4285-aca9-cacfd6423861/cover.jpg", "family": "peopleService", "tags": {"people": 3, "service": 3, "coordination": 2, "compliance": 1, "analysis": 1}, "priority": 7, "isTestSlug": false}, {"id": 38, "title": "AI Machine Learning Engineer", "url": "https://www.letspupa.com/simulations/ai-machine-learning-engineer", "overview": "A career as an AI Machine Learning Engineer is ideal for individuals passionate about technology, data, and innovation. In this role, you’ll design, build, and deploy AI systems that solve complex problems, from predictive analytics to natural language processing. Engineers work with large datasets, train machine learning models, and optimize algorithms to enhance performance. This job offers exciting opportunities to shape the future of AI and work on projects that have real-world impact across industries.", "overviewShort": "A career as an AI Machine Learning Engineer is ideal for individuals passionate about technology, data, and innovation.", "tasks": "As an AI Machine Learning Engineer, students will learn to clean and analyze datasets, design and train machine learning models, and deploy AI solutions. They will gain experience with Python, TensorFlow, PyTorch, and cloud platforms. Students will practice problem-solving, algorithm optimization, and working with real-world datasets to build impactful AI applications. Attention to detail, analytical thinking, and coding proficiency are essential for success in this role.", "tasksShort": "As an AI Machine Learning Engineer, students will learn to clean and analyze datasets, design and train machine learning models, and deploy AI solutions.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/20014660-984f-478c-a40b-8b155f5e2f26/what-you-will-do/img1.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 3, "execution": 1, "design": 1, "creative": 1}, "priority": 7, "isTestSlug": false}, {"id": 39, "title": "Facilities Management Assistant", "url": "https://www.letspupa.com/simulations/facilities-management-assistant", "overview": "A career as a Facilities Management Assistant is a great fit for individuals who enjoy organization, problem-solving, and supporting smooth workplace operations. In this role, you’ll help log and prioritize repair requests, prepare meeting spaces, assist with safety walkthroughs, and coordinate with contractors. Facilities Management Assistants are essential in ensuring a safe, efficient, and comfortable environment for staff. This opportunity provides hands-on exposure to workplace management and builds foundational skills for growth in facilities and operations.", "overviewShort": "A career as a Facilities Management Assistant is a great fit for individuals who enjoy organization, problem-solving, and supporting smooth workplace operations.", "tasks": "As a Facilities Management Assistant, you will develop skills in logging and tracking facility requests, scheduling preventive maintenance, documenting operations, and supporting safety activities. You’ll learn how to prioritize multiple requests, troubleshoot issues under pressure, and communicate effectively with staff, managers, and contractors. This role requires organization, attention to detail, and a proactive mindset. By completing the assignments, you’ll gain practical knowledge of workplace safety, maintenance coordination, and reporting—all critical to supporting smooth business operations.", "tasksShort": "As a Facilities Management Assistant, you will develop skills in logging and tracking facility requests, scheduling preventive maintenance, documenting operations, and supporting…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/a034bcab-6043-4bee-bdfd-12dab73247f9/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1, "service": 1}, "priority": -3, "isTestSlug": false}, {"id": 40, "title": "Hospitality and Front Desk Associate", "url": "https://www.letspupa.com/simulations/hospitality-and-front-desk-associate", "overview": "A career as a Hospitality and Front Desk Associate offers hands-on experience in guest services, reservations, and hotel operations. In this role, you’ll interact with guests, manage bookings, and support daily hotel functions to ensure excellent customer experiences. The position requires strong communication, multitasking, and problem-solving skills, making it ideal for individuals who enjoy working with people and creating positive guest interactions. This jobkit provides practical assignments to build confidence in hospitality service and front desk operations.", "overviewShort": "A career as a Hospitality and Front Desk Associate offers hands-on experience in guest services, reservations, and hotel operations.", "tasks": "Interns will learn essential hospitality skills, including managing guest check-ins and check-outs, handling reservations, and resolving guest issues professionally. They will gain experience in customer service, communication, and teamwork within a hotel environment. Assignments will simulate real-world hospitality scenarios, teaching Interns how to handle guest inquiries, coordinate with other departments, and provide exceptional service to ensure positive guest experiences.", "tasksShort": "Interns will learn essential hospitality skills, including managing guest check-ins and check-outs, handling reservations, and resolving guest issues professionally.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/a3e7e7d5-61de-4254-ba0e-88f1856c0106/cover.jpg", "family": "peopleService", "tags": {"people": 3, "service": 4, "coordination": 2}, "priority": -3, "isTestSlug": false}, {"id": 41, "title": "Junior Helpdesk Analyst", "url": "https://www.letspupa.com/simulations/junior-helpdesk-analyst-", "overview": "A career as a Junior Helpdesk Analyst in telecom is an ideal start for individuals who enjoy problem-solving and helping customers. In this role, you’ll be on the front line of customer support—resolving connectivity issues, documenting tickets, and providing professional communication. Analysts play a critical role in keeping customers connected while building strong technical and communication skills in a fast-paced environment.", "overviewShort": "A career as a Junior Helpdesk Analyst in telecom is an ideal start for individuals who enjoy problem-solving and helping customers.", "tasks": "As a Junior Helpdesk Analyst, you will practice skills in troubleshooting, ticket logging, customer communication, and escalation management. You will navigate CRM and ticketing systems, follow troubleshooting scripts, identify outages, and handle multiple tickets with professionalism. This role requires attention to detail, patience, and clear communication to ensure customer issues are resolved quickly and accurately while building a foundation for future technical roles.", "tasksShort": "As a Junior Helpdesk Analyst, you will practice skills in troubleshooting, ticket logging, customer communication, and escalation management.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/549eb5c9-da22-4dd0-b0b1-726a246323ff/cover.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 3, "execution": 1, "people": 1, "service": 2}, "priority": -8, "isTestSlug": false}, {"id": 42, "title": "Junior Travel Advisor", "url": "https://www.letspupa.com/simulations/junior-travel-advisor--booking-agent", "overview": "A career as a Junior Travel Advisor or Booking Agent in the travel and tourism industry offers an exciting path for those who enjoy planning and organizing trips. This role focuses on helping clients arrange travel itineraries, book flights and accommodations, and offer personalized travel recommendations. As a frontline service provider, you'll gain key customer service and logistical planning experience while working in a dynamic, client-facing environment. It's a great stepping stone into travel coordination or hospitality careers.", "overviewShort": "A career as a Junior Travel Advisor or Booking Agent in the travel and tourism industry offers an exciting path for those who enjoy planning and organizing trips.", "tasks": "You will gain experience in using booking systems, communicating professionally with clients, creating customized travel itineraries, and resolving common booking issues. You'll build your organizational and research experience, upsell travel services, and become familiar with managing bookings and handling travel-related documents. This internship prepares you to assist travel clients confidently and deliver excellent service across digital platforms.", "tasksShort": "You will gain experience in using booking systems, communicating professionally with clients, creating customized travel itineraries, and resolving common booking issues.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/a3e7e7d5-61de-4254-ba0e-88f1856c0106/cover.jpg", "family": "peopleService", "tags": {"people": 3, "service": 4, "coordination": 1}, "priority": -2, "isTestSlug": false}, {"id": 43, "title": "Recruitment Coordinator", "url": "https://www.letspupa.com/simulations/recruitment-coordinator", "overview": "A career as a Recruitment Coordinator is perfect for detail-oriented individuals who enjoy connecting people with opportunities. In this role, you’ll support hiring managers, schedule interviews, manage candidate communications, and assist with onboarding processes. Recruitment Coordinators play a key part in building strong teams by ensuring a smooth and professional hiring experience for both candidates and the organization.", "overviewShort": "A career as a Recruitment Coordinator is perfect for detail-oriented individuals who enjoy connecting people with opportunities.", "tasks": "As a Recruitment Coordinator, you’ll develop skills in applicant tracking, interview scheduling, and candidate communication. You will learn how to manage job postings, screen applications, and coordinate with hiring managers to ensure smooth recruitment processes. Interns will also gain experience with onboarding procedures, HR tools, and maintaining organized candidate records. The role requires attention to detail, communication skills, and strong organizational abilities.", "tasksShort": "As a Recruitment Coordinator, you’ll develop skills in applicant tracking, interview scheduling, and candidate communication.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/bfc50e26-238d-4255-9b0a-59fad0a6333f/cover.jpg", "family": "peopleService", "tags": {"people": 3, "service": 4, "coordination": 2, "creative": 1, "persuasion": 1}, "priority": 6, "isTestSlug": false}, {"id": 44, "title": "Corporate Communications Assistant", "url": "https://www.letspupa.com/simulations/corporate-communications-assistant", "overview": "A career as a Corporate Communications Assistant offers a dynamic entry point into brand management and public relations. You'll support campaigns, help shape internal messaging, and work closely with digital content and media relations teams. This role is perfect for strong communicators who enjoy storytelling, attention to detail, and helping organizations maintain a positive public image. It's a fast-paced, high-impact role ideal for young professionals with a passion for media and messaging.", "overviewShort": "A career as a Corporate Communications Assistant offers a dynamic entry point into brand management and public relations.", "tasks": "As a Corporate Communications Assistant, interns will experience how to support media outreach, assist with press releases, manage digital and print materials, coordinate internal communication, and maintain consistent brand messaging. You will work on practical tasks including tone of voice documents, media lists, brand guidelines, event messaging, and more. This role strengthens skills in collaboration, strategy, written communication, and digital platforms.", "tasksShort": "As a Corporate Communications Assistant, interns will experience how to support media outreach, assist with press releases, manage digital and print materials, coordinate internal…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/bfc50e26-238d-4255-9b0a-59fad0a6333f/cover.jpg", "family": "marketingCreative", "tags": {"creative": 3, "persuasion": 3, "analysis": 1, "service": 1}, "priority": 6, "isTestSlug": false}, {"id": 45, "title": "Junior Auditor", "url": "https://www.letspupa.com/simulations/junior-auditor", "overview": "A Junior Auditor role is ideal for detail-oriented individuals who enjoy working with numbers and ensuring financial integrity. In this role, you'll examine company records, evaluate internal controls, and contribute to risk assessment and compliance. Junior Auditors work alongside senior audit teams to support internal and external audit functions. This position offers a hands-on introduction to the world of corporate governance, financial accuracy, and accountability within organizations.", "overviewShort": "A Junior Auditor role is ideal for detail-oriented individuals who enjoy working with numbers and ensuring financial integrity.", "tasks": "As a Junior Auditor, interns will develop key skills in analysing financial data, evaluating internal controls, performing audit testing, and drafting reports. They will learn to use tools such as Excel and auditing software to assess compliance with regulations and identify risks. Assignments will require attention to detail, ethical reasoning, and an understanding of auditing principles. interns will work through realistic scenarios involving audit planning, evidence gathering, and recommendations for financial improvements.", "tasksShort": "As a Junior Auditor, interns will develop key skills in analysing financial data, evaluating internal controls, performing audit testing, and drafting reports.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/0e164252-16a5-43b0-81af-bf6e5077098e/cover.jpg", "family": "financeRisk", "tags": {"compliance": 4, "analysis": 3, "coordination": 1, "service": 1}, "priority": 6, "isTestSlug": false}, {"id": 46, "title": "AI Ethics & Policy Analyst", "url": "https://www.letspupa.com/simulations/ai-ethics--policy-analyst", "overview": "A career as an AI Ethics & Policy Analyst is ideal for individuals passionate about the intersection of technology, law, and society. In this role, you will analyse the impact of artificial intelligence on people and institutions, ensuring ethical principles such as fairness, transparency, and accountability are applied in real-world contexts. Analysts work closely with government agencies, private companies, and research institutions to shape responsible AI practices and protect against risks, bias, and misuse of emerging technologies.", "overviewShort": "A career as an AI Ethics & Policy Analyst is ideal for individuals passionate about the intersection of technology, law, and society.", "tasks": "As an Intern, you will explore ethical frameworks, legal guidelines, and international standards for AI use. You’ll learn how to assess algorithmic risks, draft policy recommendations, and evaluate the social impacts of AI technologies. Assignments will challenge you to apply critical thinking to real-world issues, including privacy, bias, and accountability. By the end, you have experience in balancing innovation with responsibility and able to support organizations in implementing trustworthy AI practices.", "tasksShort": "As an Intern, you will explore ethical frameworks, legal guidelines, and international standards for AI use.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d21d8a61-e6e8-45a5-afaf-e604624947e6/cover.jpg", "family": "impactResearch", "tags": {"mission": 4, "analysis": 2, "people": 1, "tech": 1}, "priority": 6, "isTestSlug": false}, {"id": 47, "title": "Corporate Social Responsibility Assistant", "url": "https://www.letspupa.com/simulations/corporate-social-responsibility-assistant", "overview": "A career as a Corporate Social Responsibility Assistant is a great starting point for young professionals passionate about social impact and sustainability. In this role, you’ll help plan and promote CSR initiatives, track volunteer hours, create reports, and engage employees in company-wide programs. CSR Assistants ensure projects align with global standards while fostering positive change in both communities and the workplace. This is a meaningful opportunity to learn core CSR skills and grow in a socially responsible career path.", "overviewShort": "A career as a Corporate Social Responsibility Assistant is a great starting point for young professionals passionate about social impact and sustainability.", "tasks": "As a Corporate Social Responsibility Assistant, interns will develop skills in communication, reporting, event planning, and data tracking. You will design engaging newsletters, create impact reports, track volunteer hours, and build partnerships with non-profits. The role requires strong organization, creativity, and attention to detail. Interns will gain practical experience supporting CSR initiatives, from planning campaigns to presenting results to leadership, while ensuring initiatives align with company values and global standards.", "tasksShort": "As a Corporate Social Responsibility Assistant, interns will develop skills in communication, reporting, event planning, and data tracking.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/bfc50e26-238d-4255-9b0a-59fad0a6333f/cover.jpg", "family": "impactResearch", "tags": {"mission": 4, "analysis": 1, "people": 1, "service": 1}, "priority": 7, "isTestSlug": false}, {"id": 48, "title": "Junior Digital Product Designer", "url": "https://www.letspupa.com/simulations/junior-digital-product-designer", "overview": "A career as a Junior Digital Product Designer blends creativity with technology. In this role, you’ll focus on designing user-friendly digital products that solve real problems. You'll collaborate with product managers and developers, use design software to create wireframes and prototypes, and apply design thinking to improve the user experience. This internship offers an exciting opportunity to gain industry-relevant design skills and build a strong digital portfolio.", "overviewShort": "A career as a Junior Digital Product Designer blends creativity with technology.", "tasks": "As a Junior Digital Product Designer, you will apply design thinking, conduct user research, develop wireframes and prototypes, and use popular design tools like Figma or Adobe XD. You’ll explore branding, usability, and UI/UX design while working through creative challenges. This role requires curiosity, creativity, and an understanding of how people interact with digital interfaces.", "tasksShort": "As a Junior Digital Product Designer, you will apply design thinking, conduct user research, develop wireframes and prototypes, and use popular design tools like Figma or Adobe XD.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d21d8a61-e6e8-45a5-afaf-e604624947e6/cover.jpg", "family": "designProduct", "tags": {"design": 4, "creative": 3, "tech": 2}, "priority": 7, "isTestSlug": false}, {"id": 49, "title": "IT Support Technician", "url": "https://www.letspupa.com/simulations/it-support-technician", "overview": "A career as an IT Support Technician is ideal for problem solvers passionate about technology. In this role, you’ll assist users, troubleshoot issues, maintain systems, and ensure secure and efficient operations. IT Support Technicians are essential for keeping organizations connected and productive. This jobkit provides foundational experience in customer service, networking, hardware, and cybersecurity, giving interns hands-on experience to prepare for real-world IT roles in diverse industries.", "overviewShort": "A career as an IT Support Technician is ideal for problem solvers passionate about technology.", "tasks": "As an IT Support Technician, you’ll explore how to resolve technical issues, set up workstations, manage help desk systems, and support network and software operations. You will practice diagnosing hardware faults, responding to user requests, installing software, and assisting in cybersecurity practices. You’ll also practice customer service skills, documentation habits, and troubleshooting logic essential for effective technical support.", "tasksShort": "As an IT Support Technician, you’ll explore how to resolve technical issues, set up workstations, manage help desk systems, and support network and software operations.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d21d8a61-e6e8-45a5-afaf-e604624947e6/cover.jpg", "family": "techData", "tags": {"tech": 4, "analysis": 2, "execution": 1, "coordination": 1, "people": 1, "service": 2}, "priority": -6, "isTestSlug": false}, {"id": 50, "title": "Real Estate Administrative Assistant", "url": "https://www.letspupa.com/simulations/real-estate-administrative-assistant", "overview": "A career as a Real Estate Administrative Assistant is a dynamic opportunity for individuals who thrive in fast-paced, detail-driven environments. In this role, you will provide critical support to agents and brokers, ensuring smooth operations from property listings to closings. This position requires strong organizational skills, professional communication, and adaptability to shifting priorities. Real Estate Administrative Assistants play a vital part in client satisfaction and office efficiency, making them indispensable to successful agencies and brokerages.", "overviewShort": "A career as a Real Estate Administrative Assistant is a dynamic opportunity for individuals who thrive in fast-paced, detail-driven environments.", "tasks": "As a Real Estate Administrative Assistant, you will learn to manage listings, contracts, and compliance documents while supporting agents and brokers. You will develop skills in client communication, scheduling, and office coordination. This role trains you to navigate real estate platforms, maintain transaction accuracy, and adapt to changing priorities. Interns will practice balancing administrative efficiency with excellent client service, preparing them for success in professional real estate offices.", "tasksShort": "As a Real Estate Administrative Assistant, you will learn to manage listings, contracts, and compliance documents while supporting agents and brokers.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/d6dc3b6e-ac6e-4208-a669-14e849735e26/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1, "service": 1}, "priority": -5, "isTestSlug": false}, {"id": 51, "title": "Retail Operations Associate", "url": "https://www.letspupa.com/simulations/retail-operations-associate", "overview": "A career as a Retail Operations Associate is ideal for individuals who enjoy working in fast-paced, customer-facing environments. In this role, you will manage inventory, interact with customers, and ensure smooth day-to-day store operations. Retail Operations Associates are essential to delivering excellent service, maintaining product displays, and supporting sales performance in dynamic retail settings. This opportunity is perfect for those eager to learn operational workflows and gain practical, front line experience.", "overviewShort": "A career as a Retail Operations Associate is ideal for individuals who enjoy working in fast-paced, customer-facing environments.", "tasks": "As a Retail Operations Associate, interns will learn essential skills such as customer service, inventory control, merchandising, point-of-sale operations, and retail communication. They will complete assignments that simulate real retail challenges, such as creating shift plans, handling customer complaints, analysing sales data, and executing in-store promotions. The course develops decision-making, time management, and communication skills required in busy retail settings.", "tasksShort": "As a Retail Operations Associate, interns will learn essential skills such as customer service, inventory control, merchandising, point-of-sale operations, and retail…", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/e43fbbb4-c945-4d20-8e21-50651b16ca86/cover.jpg", "family": "opsProject", "tags": {"coordination": 4, "execution": 2, "compliance": 1, "persuasion": 1, "people": 1, "service": 2}, "priority": -4, "isTestSlug": false}, {"id": 52, "title": "Video Editing Assistant", "url": "https://www.letspupa.com/simulations/video-editing-assistant", "overview": "A career as a Video Editing Assistant is perfect for creative individuals looking to break into the film, media, or content creation industry. In this role, you will support editors with organizing footage, trimming video clips, adding basic effects or transitions, and ensuring smooth post-production workflows. It’s a stepping stone to more advanced roles in digital media, helping you build both technical and creative skills in a fast-paced environment.", "overviewShort": "A career as a Video Editing Assistant is perfect for creative individuals looking to break into the film, media, or content creation industry.", "tasks": "As a Video Editing Assistant, interns will learn the basics of video editing software, organizing digital assets, applying visual transitions, and understanding timelines. You will practice editing short clips, following creative briefs, and contributing to larger video projects. This jobkit builds skills in collaboration, file management, and creative storytelling—perfect for anyone exploring content production, marketing, or multimedia careers.", "tasksShort": "As a Video Editing Assistant, interns will learn the basics of video editing software, organizing digital assets, applying visual transitions, and understanding timelines.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/a9b45313-5457-4c17-8fcb-8d0b7d1e210d/cover.jpg", "family": "designProduct", "tags": {"design": 4, "creative": 4, "tech": 1, "persuasion": 1, "service": 1}, "priority": 5, "isTestSlug": false}, {"id": 53, "title": "Field Sales Assistant", "url": "https://www.letspupa.com/simulations/field-sales-assistant-", "overview": "A career as a Field Sales Assistant (B2B Telecom) is ideal for individuals who enjoy supporting client interactions, preparing proposals, and managing sales data. In this role, you’ll help sales teams deliver telecom solutions by keeping records accurate, organizing meetings, and supporting client communication. Field Sales Assistants play a vital role in ensuring smooth processes, enabling sales reps to focus on closing deals and building stronger client relationships.", "overviewShort": "A career as a Field Sales Assistant (B2B Telecom) is ideal for individuals who enjoy supporting client interactions, preparing proposals, and managing sales data.", "tasks": "As a Field Sales Assistant, interns will practice skills in CRM management, client communication, competitor research, event planning, and proposal drafting. They will learn to organize data, prepare client-facing documents, and support the sales team in delivering B2B telecom solutions. The role requires attention to detail, clear communication, and proactive organization. Interns will practice summarizing client needs, scheduling activities, and producing accurate reports that help sales teams succeed in a competitive telecom environment.", "tasksShort": "As a Field Sales Assistant, interns will practice skills in CRM management, client communication, competitor research, event planning, and proposal drafting.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/83c07fd5-615f-4ee2-b2c6-3e7d4827e7e8/cover.jpg", "family": "salesGrowth", "tags": {"persuasion": 4, "people": 2, "execution": 1, "analysis": 1, "service": 1}, "priority": 2, "isTestSlug": false}, {"id": 54, "title": "Junior Insurance Compliance Officer", "url": "https://www.letspupa.com/simulations/junior-insurance-compliance-officer", "overview": "A career as a Junior Insurance Compliance Officer is ideal for individuals who are detail-oriented, organized, and passionate about upholding industry regulations. In this role, you’ll help ensure that insurance companies operate within legal frameworks by monitoring compliance, updating policies, conducting risk assessments, and reviewing documentation. You’ll also support audits and regulatory reporting, making this a vital position in protecting both clients and the company from non-compliance risks.", "overviewShort": "A career as a Junior Insurance Compliance Officer is ideal for individuals who are detail-oriented, organized, and passionate about upholding industry regulations.", "tasks": "As a Junior Insurance Compliance Officer, you’ll gain skills in regulatory monitoring, risk evaluation, document review, and audit preparation. You’ll learn how to apply industry-specific regulations like FAIS, POPIA, and FICA while working with legal teams and operational staff to maintain compliance. Tools like Excel and compliance dashboards will help you track and report issues, while attention to detail and a sense of integrity will drive your success.", "tasksShort": "As a Junior Insurance Compliance Officer, you’ll gain skills in regulatory monitoring, risk evaluation, document review, and audit preparation.", "image": "https://cyebriwnfizkkbvzupyx.supabase.co/storage/v1/object/public/public-sim-files/0e164252-16a5-43b0-81af-bf6e5077098e/cover.jpg", "family": "financeRisk", "tags": {"compliance": 4, "analysis": 3, "coordination": 1, "service": 1}, "priority": 5, "isTestSlug": false}];
+  const PROFILE_TAG_MODIFIERS = {"animals": {"lion": {"persuasion": 2, "execution": 2, "coordination": 1}, "wolf": {"people": 2, "coordination": 2, "service": 1, "execution": 1}, "fox": {"analysis": 2, "creative": 1, "tech": 1, "execution": 1}, "elephant": {"compliance": 2, "coordination": 1, "analysis": 1, "service": 1}, "monkey": {"creative": 2, "design": 1, "tech": 1, "persuasion": 1}, "hawk": {"analysis": 2, "coordination": 1, "mission": 1, "tech": 1}, "dolphin": {"people": 2, "service": 2, "mission": 1, "persuasion": 1}}, "energies": {"igniter": {"persuasion": 2, "creative": 1, "execution": 1}, "anchor": {"coordination": 2, "compliance": 1, "service": 1}, "empath": {"people": 2, "service": 2}, "finisher": {"execution": 2, "coordination": 1, "compliance": 1}, "clarifier": {"analysis": 2, "tech": 1, "compliance": 1}, "grower": {"people": 2, "mission": 1, "service": 1, "creative": 1}}};
+  const TAG_LABELS = {"tech": "solving technical problems", "analysis": "spotting patterns and making sense of information", "coordination": "bringing order to moving parts", "execution": "getting work over the line", "persuasion": "opening doors and moving people to action", "creative": "turning ideas into stories or content", "design": "shaping how things look and feel", "people": "supporting people and relationships", "service": "helping real human needs in the moment", "mission": "doing work with clear purpose", "compliance": "working carefully and responsibly"};
 
-  const QUIZZES = [
-    {
-      id: 'career-animal',
-      kind: 'animal',
-      number: '01',
-      title: 'Career Animal',
-      image: 'https://static.wixstatic.com/media/d1daaa_825b37bd3bbc41d2bee78bc42da8d5d7~mv2.png',
-      landingTitle: 'Find out what people don’t tell you about yourself.',
-      landingSub: 'This might surprise you.',
-      introTitle: 'What kind of person are you at work? 🐾',
-      introSub: 'Be honest. Don’t overthink.',
-      cta: 'Start',
-      transitionTitle: 'But this is just you.',
-      transitionSub: 'Want to see how people actually experience you?',
-      transitionButton: 'Show me my team energy ⚡',
-      transitionSkip: 'Maybe later',
-      mailchimpTags: {
-        lion: '',
-        wolf: '',
-        fox: '',
-        elephant: '',
-        monkey: '',
-        hawk: '',
-        dolphin: ''
-      },
-      questions: [
-        {
-          q: 'Something unexpected comes up at work. What do you do?',
-          image: 'https://static.wixstatic.com/media/d1daaa_6cc58846f2654efcb536a0d795ab65ea~mv2.jpg',
-          options: [
-            { key: 'A', text: 'I step up and handle it.', scores: { lion: 3, wolf: 2, fox: 1 } },
-            { key: 'B', text: 'I slow down and think of the best plan.', scores: { hawk: 3, elephant: 2, fox: 1 } },
-            { key: 'C', text: 'I get curious and explore different ideas.', scores: { monkey: 3, dolphin: 2, wolf: 1 } }
-          ]
-        },
-        {
-          q: 'In a team, what do people usually rely on you for?',
-          image: 'https://static.wixstatic.com/media/d1daaa_4ec1d4ce7ebf4b29aacd45443255258a~mv2.jpg',
-          options: [
-            { key: 'A', text: 'Leading, deciding, and keeping things on track.', scores: { wolf: 3, lion: 2, dolphin: 1 } },
-            { key: 'B', text: 'Thinking ahead and finding smart solutions.', scores: { hawk: 3, fox: 2, elephant: 1 } },
-            { key: 'C', text: 'Supporting people and keeping the team connected.', scores: { dolphin: 3, monkey: 2, wolf: 1 } }
-          ]
-        },
-        {
-          q: 'What kind of job feels most exciting to you?',
-          image: 'https://static.wixstatic.com/media/d1daaa_41ddede8fcd14fb0acd64c49e965cb5c~mv2.png',
-          options: [
-            { key: 'A', text: 'A high-pressure role where my decisions matter.', scores: { lion: 3, fox: 2, wolf: 1 } },
-            { key: 'B', text: 'A stable role where I can build deep expertise.', scores: { elephant: 3, hawk: 2, fox: 1 } },
-            { key: 'C', text: 'A people-focused role with variety and learning.', scores: { dolphin: 3, monkey: 2, elephant: 1 } }
-          ]
-        },
-        {
-          q: 'Your team hits a big setback. What do you do?',
-          image: 'https://static.wixstatic.com/media/d1daaa_3ec2a3232bc94416a70e03b9013dce7e~mv2.jpg',
-          options: [
-            { key: 'A', text: 'I take charge and lead through it.', scores: { lion: 3, wolf: 2, fox: 1 } },
-            { key: 'B', text: 'I find a smart new way forward.', scores: { fox: 3, hawk: 2, elephant: 1 } },
-            { key: 'C', text: 'I make sure the team stays together first.', scores: { dolphin: 3, elephant: 2, monkey: 1 } }
-          ]
-        },
-        {
-          q: 'What makes work feel meaningful to you?',
-          image: 'https://static.wixstatic.com/media/d1daaa_261c0d0b1c654237a6b1d8ce0e0baf7c~mv2.png',
-          options: [
-            { key: 'A', text: 'Winning, making an impact, and being recognised.', scores: { lion: 3, wolf: 2, hawk: 1 } },
-            { key: 'B', text: 'Learning, discovering, and solving hard problems.', scores: { monkey: 3, fox: 2, hawk: 1 } },
-            { key: 'C', text: 'Helping people and making the team better.', scores: { dolphin: 3, elephant: 2, wolf: 1 } }
-          ]
-        },
-        {
-          q: 'How would your friends describe you?',
-          image: 'https://static.wixstatic.com/media/d1daaa_0248a881b6874420a2fa55cf499f1430~mv2.png',
-          options: [
-            { key: 'A', text: 'Someone who gets things done and leads naturally.', scores: { wolf: 3, lion: 2, fox: 1 } },
-            { key: 'B', text: 'Someone thoughtful, careful, and smart.', scores: { elephant: 3, hawk: 2, fox: 1 } },
-            { key: 'C', text: 'Someone kind who makes people feel comfortable.', scores: { dolphin: 3, monkey: 2, elephant: 1 } }
-          ]
-        },
-        {
-          q: 'At the end of a hard week, what feels most rewarding?',
-          image: 'https://static.wixstatic.com/media/d1daaa_29fcef40c0ce46a5a83c64cc7a2f0c56~mv2.jpg',
-          options: [
-            { key: 'A', text: 'I reached my goal and proved I could do it.', scores: { lion: 3, wolf: 2, fox: 1 } },
-            { key: 'B', text: 'I made a smart move that will matter later.', scores: { hawk: 3, elephant: 2, fox: 1 } },
-            { key: 'C', text: 'I helped someone feel stronger or more included.', scores: { dolphin: 3, monkey: 2, wolf: 1 } }
-          ]
-        }
-      ],
-      tieLabel: 'Blend',
-      results: {
-        lion: {
-          title: 'The Lion',
-          emoji: '🦁',
-          image: 'https://static.wixstatic.com/media/d1daaa_efd7275a198b4a7ebabcfd16885ca227~mv2.png',
-          subtitle: 'You are confident, brave, and naturally take charge. When something needs to get done, you do not wait around for someone else to step in. You are the kind of person who likes action, responsibility, and real results. People often look to you when decisions need to be made or when things feel uncertain.',
-          details: [
-            { text: '“I’ll handle it.”', emphasis: true },
-            { text: 'You bring: leadership, courage, strong decisions' },
-            { text: 'Career sweet spot: leadership, entrepreneurship, sales, high-pressure roles' },
-            { text: 'Level up by: remembering that great leaders also support and grow others' }
-          ]
-        },
-        wolf: {
-          title: 'The Wolf',
-          emoji: '🐺',
-          image: 'https://static.wixstatic.com/media/d1daaa_fedc120c0a884337a083ebd67b94e5b7~mv2.png',
-          subtitle: 'You are loyal, steady, and strong in teams. You may not always lead in a loud way, but people trust you and respect your instincts. You know how to bring people together, build trust, and help a group move in the same direction. You care about teamwork and connection, and that makes your leadership powerful.',
-          details: [
-            { text: '“We do this together.”', emphasis: true },
-            { text: 'You bring: loyalty, trust, teamwork, strong instincts' },
-            { text: 'Career sweet spot: team leadership, project management, community-building roles' },
-            { text: 'Level up by: stepping forward more often and trusting your voice' }
-          ]
-        },
-        fox: {
-          title: 'The Fox',
-          emoji: '🦊',
-          image: 'https://static.wixstatic.com/media/d1daaa_c7d8e24df61049759c6eeff6e22064ef~mv2.png',
-          subtitle: 'You are smart, flexible, and quick at solving problems. When others feel stuck, you usually spot a new path forward. You think fast, adapt easily, and often come up with ideas that others did not see. You bring creative thinking and resourcefulness into every space you enter.',
-          details: [
-            { text: '“There’s always another way.”', emphasis: true },
-            { text: 'You bring: problem-solving, creativity, adaptability' },
-            { text: 'Career sweet spot: innovation, consulting, technology, creative strategy' },
-            { text: 'Level up by: remembering that simple solutions can sometimes work best' }
-          ]
-        },
-        elephant: {
-          title: 'The Elephant',
-          emoji: '🐘',
-          image: 'https://static.wixstatic.com/media/d1daaa_f3f7f2aaaef54537b8053a512d712cea~mv2.png',
-          subtitle: 'You are calm, wise, and dependable. You do not rush, panic, or make careless choices. Instead, you think carefully and build things that last. People trust you because you are steady, thoughtful, and reliable. Even if you are not always the loudest person, your presence makes others feel safe and supported.',
-          details: [
-            { text: '“Let’s do it properly.”', emphasis: true },
-            { text: 'You bring: patience, stability, wisdom, reliability' },
-            { text: 'Career sweet spot: research, education, law, medicine, finance' },
-            { text: 'Level up by: being more open to change when needed' }
-          ]
-        },
-        monkey: {
-          title: 'The Monkey',
-          emoji: '🐒',
-          image: 'https://static.wixstatic.com/media/d1daaa_7598151e096e410da871eeb774ae6156~mv2.png',
-          subtitle: 'You are curious, energetic, and full of ideas. You learn quickly, ask great questions, and bring fresh energy into a team. You enjoy exploring, testing, and trying new things. Your excitement can lift the people around you and make work feel more interesting and alive.',
-          details: [
-            { text: '“What if we try this instead?”', emphasis: true },
-            { text: 'You bring: curiosity, creativity, fast learning, energy' },
-            { text: 'Career sweet spot: media, design, tech, startups, research' },
-            { text: 'Level up by: focusing deeply on one skill or area and growing it fully' }
-          ]
-        },
-        hawk: {
-          title: 'The Hawk',
-          emoji: '🦅',
-          image: 'https://static.wixstatic.com/media/d1daaa_9f3e663833b04a5f95bb95c164a5448e~mv2.png',
-          subtitle: 'You are a big-picture thinker. You notice patterns, spot future problems, and understand direction better than most people. While others focus only on what is happening now, you are already thinking ahead. Your ideas help people see the bigger goal and understand what really matters.',
-          details: [
-            { text: '“I can see where this is going.”', emphasis: true },
-            { text: 'You bring: vision, strategy, pattern recognition' },
-            { text: 'Career sweet spot: strategy, data, policy, systems thinking, architecture' },
-            { text: 'Level up by: staying connected to the people and details on the ground' }
-          ]
-        },
-        dolphin: {
-          title: 'The Dolphin',
-          emoji: '🐬',
-          image: 'https://static.wixstatic.com/media/d1daaa_0d446c4670284418ae233a3702f095b7~mv2.png',
-          subtitle: 'You are caring, emotionally aware, and naturally good with people. You notice how others feel, you build trust easily, and you help teams feel connected. You are often the person who makes others feel included, understood, and supported. In many ways, you are the heart of the group.',
-          details: [
-            { text: '“How is everyone doing?”', emphasis: true },
-            { text: 'You bring: empathy, connection, emotional intelligence' },
-            { text: 'Career sweet spot: HR, counselling, teaching, community work, social impact' },
-            { text: 'Level up by: speaking up more confidently for your own ideas' }
-          ]
-        }
-      }
-    },
-    {
-      id: 'team-energy',
-      kind: 'energy',
-      number: '02',
-      title: 'Team Energy',
-      image: 'https://static.wixstatic.com/media/d1daaa_c49b11689454474f96c70bc9235adbf4~mv2.png',
-      introTitle: 'What energy do you bring to a team? ⚡',
-      introSub: 'Be real. This is how people experience you.',
-      cta: 'Start',
-      finalTitle: 'This is just the surface.',
-      finalSub: 'We can show you exactly where this leads — your strengths, your path, and what to do next.',
-      finalButton: 'Show me my path 🚀',
-      finalSkip: 'Maybe later',
-      mailchimpTags: {
-        igniter: '',
-        anchor: '',
-        empath: '',
-        finisher: '',
-        clarifier: '',
-        grower: ''
-      },
-      questions: [
-        {
-          q: 'Your team starts a new project, but the energy is unsure. What do you do first?',
-          image: 'https://static.wixstatic.com/media/d1daaa_5b6f387bc37c498c90c7f76e738458ea~mv2.png',
-          options: [
-            { key: 'A', text: 'I get people excited and motivated.', scores: { igniter: 3, finisher: 2, anchor: 1 } },
-            { key: 'B', text: 'I make sure there is a clear plan.', scores: { anchor: 3, clarifier: 2, finisher: 1 } },
-            { key: 'C', text: 'I read the room and see who needs support.', scores: { empath: 3, grower: 2, clarifier: 1 } }
-          ]
-        },
-        {
-          q: 'The team has had a rough few weeks. What do you do?',
-          image: 'https://static.wixstatic.com/media/d1daaa_1c8c2964a1e94e6ba06051a1e074d413~mv2.png',
-          options: [
-            { key: 'A', text: 'I lift the mood and change the energy.', scores: { igniter: 3, empath: 2, anchor: 1 } },
-            { key: 'B', text: 'I stay steady and consistent.', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
-            { key: 'C', text: 'I check on the people struggling most.', scores: { empath: 3, grower: 2, anchor: 1 } }
-          ]
-        },
-        {
-          q: 'There is conflict in the team. What do you do?',
-          image: 'https://static.wixstatic.com/media/d1daaa_cf4d65f252cd40c08f147e0bee580d7f~mv2.png',
-          options: [
-            { key: 'A', text: 'I push for a decision and resolution.', scores: { finisher: 3, igniter: 2, anchor: 1 } },
-            { key: 'B', text: 'I stay calm and keep things from getting worse.', scores: { anchor: 3, clarifier: 2, finisher: 1 } },
-            { key: 'C', text: 'I make sure everyone feels heard.', scores: { grower: 3, empath: 2, clarifier: 1 } }
-          ]
-        },
-        {
-          q: 'What does your team rely on you for most?',
-          image: 'https://static.wixstatic.com/media/d1daaa_44f13c91e32445bab22fafb41d99b86e~mv2.png',
-          options: [
-            { key: 'A', text: 'Keeping hope and energy alive.', scores: { igniter: 3, empath: 2, grower: 1 } },
-            { key: 'B', text: 'Being dependable and consistent.', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
-            { key: 'C', text: 'Making sure no one is left out.', scores: { clarifier: 3, empath: 2, grower: 1 } }
-          ]
-        },
-        {
-          q: 'A teammate is falling behind and feeling stressed. What do you do?',
-          image: 'https://static.wixstatic.com/media/d1daaa_8fe2a4cf8d58463593c13c9052dec4fe~mv2.png',
-          options: [
-            { key: 'A', text: 'I help them focus and break things into steps.', scores: { finisher: 3, igniter: 2, anchor: 1 } },
-            { key: 'B', text: 'I try to understand what is really going on.', scores: { grower: 3, empath: 2, clarifier: 1 } },
-            { key: 'C', text: 'I listen and make sure they feel heard.', scores: { clarifier: 3, anchor: 2, empath: 1 } }
-          ]
-        },
-        {
-          q: 'After a successful team project, what are you most proud of?',
-          image: 'https://static.wixstatic.com/media/d1daaa_65bdc83d80b04072b419efe4e81c5028~mv2.png',
-          options: [
-            { key: 'A', text: 'I helped lift the team at the right moment.', scores: { igniter: 3, empath: 2, grower: 1 } },
-            { key: 'B', text: 'I delivered exactly what I promised.', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
-            { key: 'C', text: 'Someone grew more confident because of the experience.', scores: { grower: 3, empath: 2, clarifier: 1 } }
-          ]
-        },
-        {
-          q: 'What would your teammates say you bring to a team?',
-          image: 'https://static.wixstatic.com/media/d1daaa_9692e11a01aa4f1589d12f684c5842d9~mv2.png',
-          options: [
-            { key: 'A', text: '“They keep us going.”', scores: { igniter: 3, finisher: 2, anchor: 1 } },
-            { key: 'B', text: '“They are always reliable.”', scores: { anchor: 3, finisher: 2, clarifier: 1 } },
-            { key: 'C', text: '“They make sure no one gets left behind.”', scores: { empath: 3, grower: 2, clarifier: 1 } }
-          ]
-        }
-      ],
-      tieLabel: 'Blend',
-      results: {
-        igniter: {
-          title: 'The Igniter',
-          emoji: '⚡',
-          image: 'https://static.wixstatic.com/media/d1daaa_0a949f0441ee4b80b8305fecc103624f~mv2.png',
-          subtitle: 'You bring excitement, momentum, and belief. When energy is low or a team feels stuck, you help people move again. You make things feel possible and help others feel motivated to take action. Your energy is powerful, and it can completely change the mood of a team.',
-          details: [
-            { text: '“Let’s go for it.”', emphasis: true },
-            { text: 'You bring: momentum, belief, motivation' },
-            { text: 'Dream team combo: Anchor + Finisher' },
-            { text: 'Level up by: following through all the way to the finish' }
-          ]
-        },
-        anchor: {
-          title: 'The Anchor',
-          emoji: '🧱',
-          image: 'https://static.wixstatic.com/media/d1daaa_1dfdcb345c3f44a39e4fd4077c01152a~mv2.png',
-          subtitle: 'You are steady, calm, and dependable. You help teams feel secure because people know they can count on you. You may not always be the loudest person in the room, but your consistency is a huge strength. You are often the reason things do not fall apart under pressure.',
-          details: [
-            { text: '“I said I’d do it, so I will.”', emphasis: true },
-            { text: 'You bring: reliability, calm, stability' },
-            { text: 'Dream team combo: Igniter + Clarifier' },
-            { text: 'Level up by: sharing your thoughts more, because your voice matters' }
-          ]
-        },
-        empath: {
-          title: 'The Empath',
-          emoji: '🫀',
-          image: 'https://static.wixstatic.com/media/d1daaa_4f80469237304f9ba752ab7f2a070c66~mv2.png',
-          subtitle: 'You bring care, trust, and emotional awareness. You notice when someone is struggling, when tension is rising, or when something feels off. You help people feel seen and understood, which makes teams healthier and stronger. You remind everyone that people matter, not just results.',
-          details: [
-            { text: '“Is everyone okay?”', emphasis: true },
-            { text: 'You bring: empathy, trust, human connection' },
-            { text: 'Dream team combo: Finisher + Clarifier' },
-            { text: 'Level up by: protecting your own energy while caring for others' }
-          ]
-        },
-        finisher: {
-          title: 'The Finisher',
-          emoji: '🎯',
-          image: 'https://static.wixstatic.com/media/d1daaa_f261053389a540d4a31fd7660901d41b~mv2.png',
-          subtitle: 'You bring focus, discipline, and action. You help teams move from ideas to real results. While others may keep talking, you make sure things actually happen. You are driven, reliable under pressure, and often the reason a team delivers what it promised.',
-          details: [
-            { text: '“Let’s get it done.”', emphasis: true },
-            { text: 'You bring: execution, accountability, results' },
-            { text: 'Dream team combo: Empath + Clarifier' },
-            { text: 'Level up by: slowing down just enough to bring others with you' }
-          ]
-        },
-        clarifier: {
-          title: 'The Clarifier',
-          emoji: '💡',
-          image: 'https://static.wixstatic.com/media/d1daaa_96afcb787cff46059e3c17e002af7d65~mv2.png',
-          subtitle: 'You bring understanding and direction. When things feel messy, confusing, or too complicated, you help people see the real issue. You ask smart questions, cut through the noise, and help the team focus on what really matters. Your clarity can save people a lot of wasted time and effort.',
-          details: [
-            { text: '“Let’s make this clear first.”', emphasis: true },
-            { text: 'You bring: insight, clarity, strong questions' },
-            { text: 'Dream team combo: Igniter + Grower' },
-            { text: 'Level up by: moving into action a little sooner' }
-          ]
-        },
-        grower: {
-          title: 'The Grower',
-          emoji: '🌱',
-          image: 'https://static.wixstatic.com/media/d1daaa_840446dabcaf48a18355f193cebe3c06~mv2.png',
-          subtitle: 'You bring growth, encouragement, and belief in others. You notice potential in people and help them build confidence. Teams with you do not just complete tasks — they improve over time. You have a quiet but powerful impact because you help others become stronger, better, and more capable.',
-          details: [
-            { text: '“I want to help people become better.”', emphasis: true },
-            { text: 'You bring: development, confidence, growth' },
-            { text: 'Dream team combo: Finisher + Clarifier' },
-            { text: 'Level up by: giving yourself the same care and growth you give to others' }
-          ]
-        }
-      }
-    }
-  ];
+  const ANIMAL_ORDER = ['lion','wolf','fox','elephant','monkey','hawk','dolphin'];
+  const ENERGY_ORDER = ['igniter','anchor','empath','finisher','clarifier','grower'];
+  const PROFILE_COMBO_LINES = {
+    igniter: 'roles that reward initiative and visible momentum',
+    anchor: 'roles that need steadiness, trust, and consistency',
+    empath: 'roles where people need care, patience, and connection',
+    finisher: 'roles where execution and accountability matter',
+    clarifier: 'roles where judgement, pattern-spotting, and clear thinking matter',
+    grower: 'roles where people or teams can improve over time'
+  };
 
   const $ = (selector, root=document) => root.querySelector(selector);
   const $$ = (selector, root=document) => Array.from(root.querySelectorAll(selector));
@@ -1006,7 +791,9 @@
     consent: false,
     completedQuizIds: [],
     hasSubmittedMailchimp: false,
-    finalCtaClicked: false
+    finalCtaClicked: false,
+    profileResult: null,
+    matchResult: null
   };
 
   function getOrCreateSessionId() {
@@ -1072,6 +859,9 @@
     const isFirstQuiz = currentQuizIndex === 0;
     const heading = isFirstQuiz ? quiz.landingTitle : quiz.introTitle;
     const sub = isFirstQuiz ? quiz.landingSub : quiz.introSub;
+    const secondQuizNote = journey.profileResult
+      ? ('You got ' + journey.profileResult.animal.title + ' + ' + journey.profileResult.energy.title + '. Now let\'s match that to real roles.')
+      : (quiz.introNote || '6 quick picks. Real matches. No guesswork.');
 
     screenIntro.innerHTML = '' +
       '<div class="intro-stack">' +
@@ -1090,7 +880,7 @@
           '<div class="grow">' +
             (isFirstQuiz
               ? '<input id="nameInput" class="field" type="text" placeholder="First name (optional)" autocomplete="given-name" value="' + escapeHTML(journey.firstName) + '" />'
-              : '<div class="tiny-note">Quick. Honest. Done in under a minute.</div>') +
+              : '<div class="tiny-note">' + escapeHTML(secondQuizNote) + '</div>') +
           '</div>' +
           '<button id="startBtn" class="btn primary" type="button">' + escapeHTML(quiz.cta) + '</button>' +
         '</div>' +
@@ -1127,7 +917,7 @@
     const selected = answers[index];
     stepNum.textContent = String(index + 1);
     qText.textContent = question.q;
-    quizMetaNote.textContent = currentQuizIndex === 0 ? 'Go with your first instinct.' : 'Pick what feels most like you.';
+    quizMetaNote.textContent = currentQuiz().kind === 'profile' ? 'Go with your first instinct.' : 'Pick the one that feels most natural.';
     questionImageWrap.innerHTML = question.image
       ? '<div class="question-media"><img src="' + escapeHTML(question.image) + '" alt="' + escapeHTML(question.q) + '" loading="lazy" /></div>'
       : '';
@@ -1137,7 +927,11 @@
     }).join('');
 
     nextBtn.disabled = !selected;
-    nextBtn.textContent = index === currentQuiz().questions.length - 1 ? 'Finish' : 'Next';
+    if (index === currentQuiz().questions.length - 1) {
+      nextBtn.textContent = currentQuiz().kind === 'profile' ? 'See my result' : 'See my matches';
+    } else {
+      nextBtn.textContent = 'Next';
+    }
 
     $$('.option', choicesWrap).forEach(function(button) {
       button.addEventListener('click', function() {
@@ -1177,11 +971,15 @@
   }
 
   function finishQuestionFlow() {
-    if (journey.email && journey.consent) {
-      showResult();
+    if (currentQuiz().kind === 'profile') {
+      if (journey.email && journey.consent) {
+        showResult();
+        return;
+      }
+      showEmailGate();
       return;
     }
-    showEmailGate();
+    showResult();
   }
 
   function showEmailGate() {
@@ -1202,171 +1000,344 @@
     return question.options.find(function(option) { return option.key === answerKey; }) || null;
   }
 
-  function getSortedScoreEntries(scores) {
-    return Object.entries(scores || {}).sort(function(a, b) {
-      if (b[1] !== a[1]) return b[1] - a[1];
-      return a[0].localeCompare(b[0]);
+  function initScoreMap(source) {
+    const out = {};
+    Object.keys(source || {}).forEach(function(key) {
+      out[key] = 0;
+    });
+    return out;
+  }
+
+  function addScores(target, scores) {
+    Object.keys(scores || {}).forEach(function(key) {
+      target[key] = (target[key] || 0) + Number(scores[key] || 0);
     });
   }
 
-  function getTopScoreKeys(scores) {
-    const entries = getSortedScoreEntries(scores);
+  function getTopKeysFromScores(scores, order) {
+    const entries = Object.keys(scores || {}).map(function(key) {
+      return { key: key, value: Number(scores[key] || 0), order: order.indexOf(key) };
+    }).sort(function(a, b) {
+      if (b.value !== a.value) return b.value - a.value;
+      return a.order - b.order;
+    });
+
     if (!entries.length) return [];
-    const max = entries[0][1];
+    const max = entries[0].value;
     return entries.filter(function(entry) {
-      return entry[1] === max;
+      return entry.value === max;
     }).map(function(entry) {
-      return entry[0];
+      return entry.key;
     });
   }
 
-  function computeResult() {
+  function rankDimension(totals, wins, order) {
+    return Object.keys(totals || {}).map(function(key) {
+      return {
+        key: key,
+        total: Number(totals[key] || 0),
+        wins: Number(wins[key] || 0),
+        order: order.indexOf(key)
+      };
+    }).sort(function(a, b) {
+      if (b.total !== a.total) return b.total - a.total;
+      if (b.wins !== a.wins) return b.wins - a.wins;
+      return a.order - b.order;
+    });
+  }
+
+  function getOptionalBlendLine(ranking, profiles, lineType) {
+    if (!ranking || ranking.length < 2) return '';
+    const first = ranking[0];
+    const second = ranking[1];
+    if (first.total - second.total > 1) return '';
+    const profile = profiles[second.key];
+    if (!profile) return '';
+    return lineType === 'animal'
+      ? 'There is also a little ' + profile.title + ' energy in how you operate.'
+      : 'You also show some ' + profile.title + ' energy depending on the room you are in.';
+  }
+
+  function computeProfileResult() {
     if (lastComputedResult) return lastComputedResult;
 
-    const totals = {};
-    Object.keys(currentQuiz().results).forEach(function(resultKey) {
-      totals[resultKey] = 0;
-    });
+    const animalTotals = initScoreMap(ANIMAL_PROFILES);
+    const energyTotals = initScoreMap(ENERGY_PROFILES);
+    const animalWins = initScoreMap(ANIMAL_PROFILES);
+    const energyWins = initScoreMap(ENERGY_PROFILES);
 
     answers.forEach(function(answerKey, index) {
       const selected = getSelectedOption(index, answerKey);
-      if (!selected || !selected.scores) return;
+      const question = currentQuiz().questions[index];
+      if (!selected || !question || !selected.scores) return;
 
-      Object.keys(selected.scores).forEach(function(resultKey) {
-        if (!Object.prototype.hasOwnProperty.call(totals, resultKey)) {
-          totals[resultKey] = 0;
-        }
-        totals[resultKey] += Number(selected.scores[resultKey] || 0);
-      });
+      if (question.dimension === 'animal') {
+        addScores(animalTotals, selected.scores);
+        getTopKeysFromScores(selected.scores, ANIMAL_ORDER).forEach(function(key) {
+          animalWins[key] = (animalWins[key] || 0) + 1;
+        });
+      } else {
+        addScores(energyTotals, selected.scores);
+        getTopKeysFromScores(selected.scores, ENERGY_ORDER).forEach(function(key) {
+          energyWins[key] = (energyWins[key] || 0) + 1;
+        });
+      }
     });
 
-    const sortedEntries = getSortedScoreEntries(totals);
-    const max = sortedEntries.length ? sortedEntries[0][1] : 0;
-    const winners = sortedEntries.filter(function(entry) {
-      return entry[1] === max;
-    }).map(function(entry) {
-      return entry[0];
-    });
+    const animalRanking = rankDimension(animalTotals, animalWins, ANIMAL_ORDER);
+    const energyRanking = rankDimension(energyTotals, energyWins, ENERGY_ORDER);
+
+    const animalId = animalRanking[0] ? animalRanking[0].key : 'fox';
+    const energyId = energyRanking[0] ? energyRanking[0].key : 'clarifier';
+    const animal = Object.assign({ id: animalId }, ANIMAL_PROFILES[animalId]);
+    const energy = Object.assign({ id: energyId }, ENERGY_PROFILES[energyId]);
 
     lastComputedResult = {
-      counts: totals,
-      winners: winners,
-      sortedEntries: sortedEntries,
-      single: winners.length === 1,
-      primaryId: winners[0] || '',
-      primary: winners.length ? currentQuiz().results[winners[0]] : null,
-      title: winners.length === 1 && currentQuiz().results[winners[0]] ? currentQuiz().results[winners[0]].title : currentQuiz().tieLabel,
-      resultKey: winners.join('+')
+      kind: 'profile',
+      animal: animal,
+      energy: energy,
+      animalScores: animalTotals,
+      energyScores: energyTotals,
+      animalRanking: animalRanking,
+      energyRanking: energyRanking,
+      resultKey: animalId + '|' + energyId
     };
 
     return lastComputedResult;
   }
 
-  function buildAnswerPayload() {
-    const payload = { answers_json: JSON.stringify(answers) };
-    answers.forEach(function(answerKey, index) {
-      const selected = getSelectedOption(index, answerKey);
-      payload['answer_' + (index + 1) + '_key'] = answerKey || '';
-      payload['answer_' + (index + 1) + '_text'] = selected ? selected.text : '';
-      payload['answer_' + (index + 1) + '_weights'] = selected ? JSON.stringify(selected.scores || {}) : '';
-      payload['answer_' + (index + 1) + '_top_match'] = selected ? getTopScoreKeys(selected.scores || {}).join('+') : '';
+  function getTagPreferenceTemplate() {
+    const out = {};
+    Object.keys(TAG_LABELS).forEach(function(key) {
+      out[key] = 0;
+    });
+    return out;
+  }
+
+  function scoreInternship(item, preferences) {
+    let score = Number(item.priority || 0);
+    Object.keys(item.tags || {}).forEach(function(tag) {
+      score += Number(item.tags[tag] || 0) * Number(preferences[tag] || 0);
+    });
+    return score;
+  }
+
+  function pickRecommendations(scored, count) {
+    const picks = [];
+    const seenTitles = new Set();
+
+    scored.forEach(function(item) {
+      if (picks.length >= count) return;
+      if (seenTitles.has(item.title)) return;
+      picks.push(item);
+      seenTitles.add(item.title);
     });
 
-    const resultInfo = answers.length > 0 && answers.every(function(answer) { return !!answer; }) ? computeResult() : null;
-    payload.result_totals = resultInfo ? JSON.stringify(resultInfo.counts || {}) : '';
-    return payload;
+    return picks;
   }
 
-  function buildBasePayload(extra) {
-    const hasCompletedAnswers = answers.length > 0 && answers.every(function(answer) { return !!answer; });
-    const resultInfo = hasCompletedAnswers ? computeResult() : null;
+  function computeMatchResult() {
+    if (lastComputedResult) return lastComputedResult;
 
-    return Object.assign({
-      session_id: journey.sessionId,
-      quiz_id: currentQuiz().id,
-      quiz_title: currentQuiz().title,
-      quiz_number: currentQuiz().number,
-      flow_stage: !screenResult.classList.contains('hidden') ? 'result' : (!screenEmail.classList.contains('hidden') ? 'email_gate' : (!screenQuestion.classList.contains('hidden') ? 'question' : 'intro')),
-      result_key: resultInfo ? resultInfo.resultKey : '',
-      result_label: resultInfo ? resultInfo.title : '',
-      email: journey.email || '',
-      first_name: journey.firstName || '',
-      consent: journey.consent ? 'Yes' : 'No',
-      page_url: window.location.href,
-      referrer: document.referrer || '',
-      user_agent: navigator.userAgent || ''
-    }, extra || {});
-  }
+    const preferenceScores = getTagPreferenceTemplate();
+    answers.forEach(function(answerKey, index) {
+      const selected = getSelectedOption(index, answerKey);
+      if (!selected || !selected.scores) return;
+      addScores(preferenceScores, selected.scores);
+    });
 
-  function markQuizCompleted() {
-    if (journey.completedQuizIds.indexOf(currentQuiz().id) === -1) {
-      journey.completedQuizIds.push(currentQuiz().id);
+    if (journey.profileResult) {
+      addScores(preferenceScores, (PROFILE_TAG_MODIFIERS.animals || {})[journey.profileResult.animal.id] || {});
+      addScores(preferenceScores, (PROFILE_TAG_MODIFIERS.energies || {})[journey.profileResult.energy.id] || {});
     }
-    logEvent('quiz_completed', Object.assign(buildBasePayload({ flow_stage: 'completed' }), buildAnswerPayload()));
+
+    const scored = INTERNSHIPS.map(function(item) {
+      return Object.assign({}, item, { score: scoreInternship(item, preferenceScores) });
+    }).sort(function(a, b) {
+      if (b.score !== a.score) return b.score - a.score;
+      if (Number(b.priority || 0) !== Number(a.priority || 0)) return Number(b.priority || 0) - Number(a.priority || 0);
+      return a.title.localeCompare(b.title);
+    });
+
+    const recommendations = pickRecommendations(scored, 2);
+    const topTags = Object.keys(preferenceScores).sort(function(a, b) {
+      if (preferenceScores[b] !== preferenceScores[a]) return preferenceScores[b] - preferenceScores[a];
+      return a.localeCompare(b);
+    }).filter(function(key) {
+      return Number(preferenceScores[key] || 0) > 0;
+    }).slice(0, 3);
+
+    const primaryFamilyId = recommendations[0] ? recommendations[0].family : '';
+
+    lastComputedResult = {
+      kind: 'match',
+      preferenceScores: preferenceScores,
+      topTags: topTags,
+      topTagPhrases: topTags.map(function(key) { return TAG_LABELS[key]; }).filter(Boolean),
+      primaryFamilyId: primaryFamilyId,
+      primaryFamily: ROLE_FAMILIES[primaryFamilyId] || null,
+      recommendations: recommendations,
+      resultKey: recommendations.map(function(item) { return item.title; }).join(' | ')
+    };
+
+    return lastComputedResult;
   }
 
-  function renderProfileDetails(profile) {
-    return (profile.details || []).map(function(item) {
-      const text = typeof item === 'string' ? item : item.text;
-      const emphasis = typeof item === 'object' && !!item.emphasis;
-      return '<div class="result-line' + (emphasis ? ' emphasis' : '') + '">' + escapeHTML(text) + '</div>';
-    }).join('');
+  function computeResult() {
+    return currentQuiz().kind === 'profile' ? computeProfileResult() : computeMatchResult();
   }
 
-  function renderSingleResult(profile) {
+  function joinPhrases(items) {
+    const cleaned = (items || []).filter(Boolean);
+    if (!cleaned.length) return '';
+    if (cleaned.length === 1) return cleaned[0];
+    if (cleaned.length === 2) return cleaned[0] + ' and ' + cleaned[1];
+    return cleaned.slice(0, -1).join(', ') + ', and ' + cleaned[cleaned.length - 1];
+  }
+
+  function getCombinedCareerLine(animal, energy) {
+    return animal.careerLine + ' You are especially strong in ' + (PROFILE_COMBO_LINES[energy.id] || 'roles that feel aligned with how you naturally work') + '.';
+  }
+
+  function renderProfileResult(resultInfo) {
+    const animal = resultInfo.animal;
+    const energy = resultInfo.energy;
+    const heading = journey.firstName
+      ? journey.firstName + ', your result is ' + animal.title + ' with ' + energy.title + ' energy.'
+      : 'Your result is ' + animal.title + ' with ' + energy.title + ' energy.';
+    const quoteLine = animal.details && animal.details[0] ? animal.details[0].text : animal.hook;
+    const blendNote = [getOptionalBlendLine(resultInfo.animalRanking, ANIMAL_PROFILES, 'animal'), getOptionalBlendLine(resultInfo.energyRanking, ENERGY_PROFILES, 'energy')].filter(Boolean).join(' ');
+
     return '' +
       '<div class="result-card">' +
-        '<div class="result-eyebrow">Your result</div>' +
-        '<h2 class="result-title">' + escapeHTML(profile.emoji + ' ' + profile.title) + '</h2>' +
-        '<p class="result-sub">' + escapeHTML(profile.subtitle || 'This feels true for more people than they admit.') + '</p>' +
-        (profile.image ? '<div class="result-media"><img src="' + escapeHTML(profile.image) + '" alt="' + escapeHTML(profile.title) + '" loading="lazy" /></div>' : '') +
+        '<div class="result-eyebrow">Your profile</div>' +
+        '<h2 class="result-title">' + escapeHTML(heading) + '</h2>' +
+        '<p class="result-sub">' + escapeHTML(animal.hook + ' ' + energy.hook) + '</p>' +
+        (animal.image ? '<div class="result-media"><img src="' + escapeHTML(animal.image) + '" alt="' + escapeHTML(animal.title) + '" loading="lazy" /></div>' : '') +
+        '<div class="pair-grid">' +
+          '<div class="mini-card">' +
+            '<div class="mini-label">Personality</div>' +
+            '<h3 class="mini-title">' + escapeHTML(animal.emoji + ' ' + animal.title) + '</h3>' +
+            '<p class="mini-copy">' + escapeHTML(animal.subtitle) + '</p>' +
+          '</div>' +
+          '<div class="mini-card">' +
+            '<div class="mini-label">Team energy</div>' +
+            '<h3 class="mini-title">' + escapeHTML(energy.emoji + ' ' + energy.title) + '</h3>' +
+            '<p class="mini-copy">' + escapeHTML(energy.subtitle) + '</p>' +
+          '</div>' +
+        '</div>' +
         '<div class="result-lines">' +
-          renderProfileDetails(profile) +
+          '<div class="result-line emphasis">' + escapeHTML(quoteLine) + '</div>' +
+          '<div class="result-line">How you naturally work: ' + escapeHTML(animal.hook) + '</div>' +
+          '<div class="result-line">How people experience you: ' + escapeHTML(energy.hook) + '</div>' +
+          '<div class="result-line">Where you usually shine: ' + escapeHTML(getCombinedCareerLine(animal, energy)) + '</div>' +
+        '</div>' +
+        (blendNote ? '<div class="summary-note">' + escapeHTML(blendNote) + '</div>' : '') +
+      '</div>';
+  }
+
+  function getRecommendationReason(item, resultInfo) {
+    const profile = journey.profileResult || computeProfileResult();
+    const family = ROLE_FAMILIES[item.family] || {};
+    const topFocus = resultInfo.topTagPhrases.slice(0, 2).map(function(phrase) {
+      return String(phrase || '').toLowerCase();
+    });
+    const focusLine = topFocus.length ? ' Your second quiz also leaned toward ' + joinPhrases(topFocus) + '.' : '';
+    return 'This fits because your result was ' + profile.animal.title + ' with ' + profile.energy.title + ' energy, and you usually do best when you can ' + (family.matchLine || 'work in a way that feels natural to you') + '.' + focusLine;
+  }
+
+  function getRecommendationSummary(resultInfo) {
+    const top = resultInfo.recommendations[0];
+    const profile = journey.profileResult || computeProfileResult();
+    const family = ROLE_FAMILIES[resultInfo.primaryFamilyId] || {};
+    const tagLine = resultInfo.topTagPhrases.length
+      ? 'Your answers leaned toward ' + joinPhrases(resultInfo.topTagPhrases.map(function(phrase) { return String(phrase || '').toLowerCase(); })) + '. '
+      : '';
+    return '' +
+      '<div class="result-card">' +
+        '<div class="result-eyebrow">Your internship matches</div>' +
+        '<h2 class="result-title">' + escapeHTML(top ? 'Your top match is ' + top.title + '.' : 'Your best matches are ready.') + '</h2>' +
+        '<p class="result-sub">' + escapeHTML(tagLine + 'Based on your ' + profile.animal.title + ' result and ' + profile.energy.title + ' energy, these are the roles that feel most aligned right now.') + '</p>' +
+        '<div class="result-lines">' +
+          '<div class="result-line emphasis">' + escapeHTML(family.description || 'These matches fit the way you think, move, and work with other people.') + '</div>' +
+          '<div class="result-line">Your lane right now: ' + escapeHTML(family.title || 'Best-fit path') + '</div>' +
+          '<div class="result-line">Why these showed up: ' + escapeHTML((family.matchLine || 'they fit the way you naturally work') + '.') + '</div>' +
         '</div>' +
       '</div>';
   }
 
-  function renderBlendResult(winners) {
+  function renderRecommendationCard(item, rank, resultInfo) {
+    const family = ROLE_FAMILIES[item.family] || {};
+    const badge = rank === 1 ? 'Best first fit' : 'Strong second fit';
+    const buttonText = rank === 1 ? 'Explore this role' : 'See this role';
+
     return '' +
-      '<div class="result-card">' +
-        '<div class="result-eyebrow">Your result</div>' +
-        '<h2 class="result-title">You&rsquo;re a blend.</h2>' +
-        '<p class="result-sub">You don&rsquo;t fit in one box — and that&rsquo;s the point.</p>' +
-        '<div class="blend-grid">' +
-          winners.map(function(resultKey) {
-            const profile = currentQuiz().results[resultKey];
-            return '' +
-              '<div class="blend-card">' +
-                '<h3 class="blend-title">' + escapeHTML(profile.emoji + ' ' + profile.title) + '</h3>' +
-                '<p class="result-sub">' + escapeHTML(profile.subtitle || '') + '</p>' +
-                (profile.image ? '<div class="result-media"><img src="' + escapeHTML(profile.image) + '" alt="' + escapeHTML(profile.title) + '" loading="lazy" /></div>' : '') +
-                '<div class="result-lines">' +
-                  renderProfileDetails(profile) +
-                '</div>' +
-              '</div>';
-          }).join('') +
+      '<article class="recommend-card">' +
+        (item.image ? '<div class="recommend-media"><img src="' + escapeHTML(item.image) + '" alt="' + escapeHTML(item.title) + '" loading="lazy" /></div>' : '') +
+        '<div class="recommend-body">' +
+          '<div class="recommend-badge">' + escapeHTML(badge) + '</div>' +
+          '<div class="pill small">' + escapeHTML(family.title || 'Internship match') + '</div>' +
+          '<h3 class="recommend-title">' + escapeHTML(item.title) + '</h3>' +
+          '<p class="recommend-copy">' + escapeHTML(getRecommendationReason(item, resultInfo)) + '</p>' +
+          '<div class="result-lines">' +
+            '<div class="result-line emphasis">' + escapeHTML(item.overviewShort) + '</div>' +
+            '<div class="result-line">You’ll practise: ' + escapeHTML(item.tasksShort) + '</div>' +
+            '<div class="result-line">Good if you enjoy: ' + escapeHTML(family.bestFor || 'work that feels aligned with how you think and move') + '</div>' +
+          '</div>' +
+          '<div class="recommend-actions">' +
+            '<a class="btn ' + (rank === 1 ? 'primary' : 'secondary') + ' js-outbound-link" href="' + escapeHTML(item.url) + '" target="_blank" rel="noopener noreferrer" data-role-title="' + escapeHTML(item.title) + '" data-role-rank="' + escapeHTML(String(rank)) + '" data-role-url="' + escapeHTML(item.url) + '">' + escapeHTML(buttonText) + '</a>' +
+          '</div>' +
         '</div>' +
-      '</div>';
+      '</article>';
+  }
+
+  function renderMatchResult(resultInfo) {
+    const cards = resultInfo.recommendations.map(function(item, index) {
+      return renderRecommendationCard(item, index + 1, resultInfo);
+    }).join('');
+
+    return getRecommendationSummary(resultInfo) +
+      '<div class="recommend-grid">' + cards + '</div>';
   }
 
   function showResult() {
     hidePanels();
     screenResult.classList.remove('hidden');
+
     const resultInfo = computeResult();
+    if (currentQuiz().kind === 'profile') {
+      journey.profileResult = resultInfo;
+      resultContainer.innerHTML = renderProfileResult(resultInfo);
+    } else {
+      journey.matchResult = resultInfo;
+      resultContainer.innerHTML = renderMatchResult(resultInfo);
+    }
 
-    resultContainer.innerHTML = resultInfo.single
-      ? renderSingleResult(resultInfo.primary)
-      : renderBlendResult(resultInfo.winners);
-
-    markQuizCompleted();
-    renderResultActions();
+    markQuizCompleted(resultInfo);
+    renderResultActions(resultInfo);
     updateProgress();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function renderResultActions() {
-    if (currentQuizIndex === 0) {
-      const nextQuiz = QUIZZES[1];
+  function attachOutboundTracking(root) {
+    $$('.js-outbound-link', root).forEach(function(link) {
+      link.addEventListener('click', function() {
+        journey.finalCtaClicked = true;
+        const destinationUrl = link.getAttribute('data-role-url') || link.href || '';
+        const destinationTitle = link.getAttribute('data-role-title') || '';
+        const recommendationRank = link.getAttribute('data-role-rank') || '';
+        logEvent('website_click', buildBasePayload({
+          note: 'Clicked simulation CTA',
+          destination_url: destinationUrl,
+          destination_title: destinationTitle,
+          recommendation_rank: recommendationRank
+        }));
+      });
+    });
+  }
+
+  function renderResultActions(resultInfo) {
+    if (currentQuiz().kind === 'profile') {
       resultActionArea.innerHTML = '' +
         '<div class="cta-card">' +
           '<div class="cta-eyebrow">Next</div>' +
@@ -1374,41 +1345,41 @@
           '<p class="cta-sub">' + escapeHTML(currentQuiz().transitionSub) + '</p>' +
           '<div class="dual-actions">' +
             '<button id="goToNextQuizBtn" class="btn primary" type="button">' + escapeHTML(currentQuiz().transitionButton) + '</button>' +
-            '<a class="btn secondary" href="' + escapeHTML(PUPA_WEBSITE_QUIZ_URL) + '" target="_blank" rel="noopener noreferrer" id="skipToPupaBtn">' + escapeHTML(currentQuiz().transitionSkip) + '</a>' +
           '</div>' +
+          '<div class="tiny-note">' + escapeHTML(currentQuiz().transitionNote || "6 quick picks. You'll stay right here.") + '</div>' +
         '</div>';
 
       $('#goToNextQuizBtn', resultActionArea).addEventListener('click', function() {
-        logEvent('next_quiz_clicked', buildBasePayload({ note: 'Moved from quiz 1 to quiz 2', prompt_target_quiz_id: nextQuiz.id }));
+        logEvent('next_quiz_clicked', buildBasePayload({ note: 'Moved from quiz 1 to quiz 2', prompt_target_quiz_id: QUIZZES[1].id }));
         currentQuizIndex = 1;
         resetQuizState();
         renderIntro();
       });
-
-      $('#skipToPupaBtn', resultActionArea).addEventListener('click', function() {
-        journey.finalCtaClicked = true;
-        logEvent('website_click', buildBasePayload({ note: 'Skipped quiz 2 and clicked to Pupa' }));
-      });
-
       return;
     }
 
-    const quiz = currentQuiz();
+    const top = resultInfo.recommendations[0];
+    const second = resultInfo.recommendations[1];
     resultActionArea.innerHTML = '' +
       '<div class="cta-card">' +
-        '<div class="cta-eyebrow">What next</div>' +
-        '<h3 class="cta-title">' + escapeHTML(quiz.finalTitle) + '</h3>' +
-        '<p class="cta-sub">' + escapeHTML(quiz.finalSub) + '</p>' +
+        '<div class="cta-eyebrow">Best next step</div>' +
+        '<h3 class="cta-title">' + escapeHTML(top ? 'Your best match right now: ' + top.title + '.' : currentQuiz().finalTitle) + '</h3>' +
+        '<p class="cta-sub">' + escapeHTML(top ? 'Open it to see the tasks, the vibe, and whether it feels right for you.' : currentQuiz().finalSub) + '</p>' +
         '<div class="dual-actions">' +
-          '<a id="finalCtaBtn" class="btn primary" href="' + escapeHTML(PUPA_WEBSITE_QUIZ_URL) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(quiz.finalButton) + '</a>' +
-          '<button id="restartBtn" class="btn secondary" type="button">Restart</button>' +
+          (top
+            ? '<a id="finalCtaBtn" class="btn primary js-outbound-link" href="' + escapeHTML(top.url) + '" target="_blank" rel="noopener noreferrer" data-role-title="' + escapeHTML(top.title) + '" data-role-rank="1" data-role-url="' + escapeHTML(top.url) + '">' + escapeHTML(currentQuiz().finalButton) + '</a>'
+            : '') +
+          (second
+            ? '<a id="secondCtaBtn" class="btn secondary js-outbound-link" href="' + escapeHTML(second.url) + '" target="_blank" rel="noopener noreferrer" data-role-title="' + escapeHTML(second.title) + '" data-role-rank="2" data-role-url="' + escapeHTML(second.url) + '">' + escapeHTML(currentQuiz().finalSecondaryButton || 'Show option 2') + '</a>'
+            : '') +
+        '</div>' +
+        (top ? '<div class="tiny-note">' + escapeHTML(currentQuiz().finalNote || 'No pressure - open it first and see how it feels.') + '</div>' : '') +
+        '<div class="dual-actions" style="margin-top:12px;">' +
+          '<button id="restartBtn" class="btn ghost" type="button">Restart</button>' +
         '</div>' +
       '</div>';
 
-    $('#finalCtaBtn', resultActionArea).addEventListener('click', function() {
-      journey.finalCtaClicked = true;
-      logEvent('website_click', buildBasePayload({ note: 'Clicked final Pupa CTA' }));
-    });
+    attachOutboundTracking(resultActionArea);
 
     $('#restartBtn', resultActionArea).addEventListener('click', function() {
       restartFlow();
@@ -1416,9 +1387,9 @@
   }
 
   function getMailchimpTagForResult(resultInfo) {
+    if (!resultInfo || resultInfo.kind !== 'profile') return '';
     const tags = currentQuiz().mailchimpTags || {};
-    if (!resultInfo.single) return '';
-    return tags[resultInfo.primaryId] || '';
+    return tags[resultInfo.animal.id] || '';
   }
 
   function flattenPayload(payload) {
@@ -1493,6 +1464,76 @@
     }
   }
 
+  function buildBasePayload(extra) {
+    return Object.assign({
+      session_id: journey.sessionId,
+      quiz_id: currentQuiz().id,
+      quiz_title: currentQuiz().title,
+      quiz_number: currentQuiz().number,
+      flow_stage: !screenResult.classList.contains('hidden') ? 'result' : (!screenEmail.classList.contains('hidden') ? 'email_gate' : (!screenQuestion.classList.contains('hidden') ? 'question' : 'intro')),
+      profile_animal: journey.profileResult ? journey.profileResult.animal.id : '',
+      profile_energy: journey.profileResult ? journey.profileResult.energy.id : '',
+      email: journey.email || '',
+      first_name: journey.firstName || '',
+      consent: journey.consent ? 'Yes' : 'No',
+      page_url: window.location.href,
+      referrer: document.referrer || '',
+      user_agent: navigator.userAgent || ''
+    }, extra || {});
+  }
+
+  function buildAnswerPayload(resultInfo) {
+    const payload = { answers_json: JSON.stringify(answers) };
+
+    answers.forEach(function(answerKey, index) {
+      const selected = getSelectedOption(index, answerKey);
+      payload['answer_' + (index + 1) + '_key'] = answerKey || '';
+      payload['answer_' + (index + 1) + '_text'] = selected ? selected.text : '';
+      payload['answer_' + (index + 1) + '_weights'] = selected ? JSON.stringify(selected.scores || {}) : '';
+    });
+
+    if (!resultInfo) return payload;
+
+    if (resultInfo.kind === 'profile') {
+      payload.result_key = resultInfo.resultKey;
+      payload.primary_animal = resultInfo.animal.id;
+      payload.primary_energy = resultInfo.energy.id;
+      payload.animal_scores = JSON.stringify(resultInfo.animalScores || {});
+      payload.energy_scores = JSON.stringify(resultInfo.energyScores || {});
+    } else {
+      payload.result_key = resultInfo.resultKey;
+      payload.top_tags = (resultInfo.topTags || []).join('|');
+      payload.preference_scores = JSON.stringify(resultInfo.preferenceScores || {});
+      payload.recommendation_1_title = resultInfo.recommendations[0] ? resultInfo.recommendations[0].title : '';
+      payload.recommendation_1_url = resultInfo.recommendations[0] ? resultInfo.recommendations[0].url : '';
+      payload.recommendation_2_title = resultInfo.recommendations[1] ? resultInfo.recommendations[1].title : '';
+      payload.recommendation_2_url = resultInfo.recommendations[1] ? resultInfo.recommendations[1].url : '';
+      payload.primary_family = resultInfo.primaryFamilyId || '';
+    }
+
+    return payload;
+  }
+
+  function markQuizCompleted(resultInfo) {
+    if (journey.completedQuizIds.indexOf(currentQuiz().id) === -1) {
+      journey.completedQuizIds.push(currentQuiz().id);
+    }
+
+    logEvent('quiz_completed', Object.assign(
+      buildBasePayload({
+        flow_stage: 'completed',
+        result_key: resultInfo ? resultInfo.resultKey : ''
+      }),
+      buildAnswerPayload(resultInfo)
+    ));
+
+    if (resultInfo && resultInfo.kind === 'match') {
+      logEvent('recommendations_viewed', Object.assign(buildBasePayload({
+        note: 'Viewed internship recommendations'
+      }), buildAnswerPayload(resultInfo)));
+    }
+  }
+
   function submitMailchimpJSONP(params, timeoutMs) {
     return new Promise(function(resolve, reject) {
       const callbackName = 'mc_cb_' + Math.random().toString(36).slice(2);
@@ -1544,6 +1585,8 @@
     journey.completedQuizIds = [];
     journey.hasSubmittedMailchimp = false;
     journey.finalCtaClicked = false;
+    journey.profileResult = null;
+    journey.matchResult = null;
 
     emailInput.value = '';
     consent.checked = false;
@@ -1605,7 +1648,7 @@
     seeResultsBtn.setAttribute('disabled', 'true');
     mcMsg.textContent = 'Saving...';
 
-    const resultInfo = computeResult();
+    const resultInfo = computeProfileResult();
     const tagId = getMailchimpTagForResult(resultInfo);
     const params = {
       EMAIL: journey.email,
@@ -1624,7 +1667,7 @@
         mcMsg.className = 'msg success';
         mcMsg.textContent = 'You may already be subscribed. Showing your result now.';
       }
-      logEvent('email_captured', Object.assign(buildBasePayload({ note: 'Email captured at gate' }), { email: journey.email, consent: 'Yes' }));
+      logEvent('email_captured', Object.assign(buildBasePayload({ note: 'Email captured at gate', result_key: resultInfo.resultKey }), { email: journey.email, consent: 'Yes' }));
       showResult();
     } catch (error) {
       try {
@@ -1636,7 +1679,7 @@
       } catch (fallbackError) {}
 
       journey.hasSubmittedMailchimp = true;
-      logEvent('email_captured', Object.assign(buildBasePayload({ note: 'Email captured via fallback path' }), { email: journey.email, consent: 'Yes' }));
+      logEvent('email_captured', Object.assign(buildBasePayload({ note: 'Email captured via fallback path', result_key: resultInfo.resultKey }), { email: journey.email, consent: 'Yes' }));
       mcMsg.className = 'msg muted';
       mcMsg.textContent = 'Connection was spotty — proceeding anyway.';
       setTimeout(function() {
